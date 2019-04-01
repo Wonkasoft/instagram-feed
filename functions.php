@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Instagram Shop Feed Extension for WooCommerce
+ * Plugin Name: Wonkasoft Instagram Shop Feed Extension for WooCommerce
  * Plugin URI: https://store.webkul.com/instagram-shop-feed.html
  * Description: Instagram Shop Feed Extension for WooCommerce will add instagram images on product shop and dedicated pages on woocommerce store by use of instagram hashtags
  * Version: 1.0.0

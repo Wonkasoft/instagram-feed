@@ -1,0 +1,26 @@
+{
+  "name": "instagram-shop-feed",
+  "version": "1.0.0",
+  "description": "=== Instagram Shop Feed Extension for WooCommerce ===",
+  "main": "gulp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wonkasoft",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "json-file": "^0.1.0",
+    "node-sass": "^4.11.0"
+  },
+  "siteName": "aperabags.com"
+}
