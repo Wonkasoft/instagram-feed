@@ -66,6 +66,15 @@
 .instagram-settings h2{
 	padding: 0px 20px;
 }
+
+.wp-list-table {
+
+	th#preview,
+	th#status {
+		width: 10%;
+	}
+}
+
 #dashboard_right_now.instagram li>span:before{
 	content: none;
 }

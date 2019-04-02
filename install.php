@@ -92,7 +92,7 @@ if (! class_exists('Insta_Feed_Install_Schema')) {
 
             $inst_tag_media = $wpdb->prefix.'instagram_tags_media';
 
-            $inst_tag_media_table="CREATE TABLE IF NOT EXISTS ".$inst_tag_media." (id int(11) NOT NULL AUTO_INCREMENT, tag_id int(11) NOT NULL, image_id varchar(255) NOT NULL, insta_username varchar(255) NOT NULL, images longtext NOT NULL, insta_message varchar(255) NOT NULL, priority int(10) NOT NULL, visiblity longtext NOT NULL, status boolean NOT NULL, PRIMARY KEY (id)) $charset_collate;";
+            $inst_tag_media_table="CREATE TABLE IF NOT EXISTS ".$inst_tag_media." (id int(11) NOT NULL AUTO_INCREMENT, tag_id int(11) NOT NULL, image_id varchar(255) NOT NULL, insta_username varchar(255) NOT NULL, images longtext NOT NULL, insta_message longtext NOT NULL, priority int(10) NOT NULL, visiblity longtext NOT NULL, status boolean NOT NULL, PRIMARY KEY (id)) $charset_collate;";
 
             dbDelta($inst_tag_media_table);
 

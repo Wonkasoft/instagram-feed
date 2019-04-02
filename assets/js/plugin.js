@@ -1,24 +1,24 @@
 
-var $wk = jQuery.noConflict();
+var $ws = jQuery.noConflict();
 
-(function ($wk) {
+(function ($ws) {
 
-    $wk(document).ready( () => {
+    $ws(document).ready( () => {
 
-        $wk(".popup-open").on("click", function() {
+        $ws(".box-head").on("click", function() {
 
-            var tag_id = $wk(this).closest('.insta-box').attr('id');
+            var tag_id = $ws(this).closest('.insta-box').attr('id');
             tag_id = parseInt( tag_id );
 
             if( tag_id ) {
                 var slideTemp = '';
-                var sliderHolder = $wk("#sliderHolder");
-                var slidertemplate = $wk("#screenSliderTemplate").html();
+                var sliderHolder = $ws("#sliderHolder");
+                var slidertemplate = $ws("#screenSliderTemplate").html();
                 slideTemp += slidertemplate.replace( "{{id}}", tag_id);
 
-                $wk(sliderHolder).empty().html(slideTemp);
+                $ws(sliderHolder).empty().html(slideTemp);
 
-                $wk.ajax({
+                $ws.ajax({
                     url: insta_script.insta_admin_ajax,
                     type: 'GET',
                     data: {
@@ -27,7 +27,7 @@ var $wk = jQuery.noConflict();
                         nonce : insta_script.insta_api_nonce,
                     },
                     beforeSend : function() {
-                        $wk(document).find(".wkgrid-squeezy .wk-loader").addClass('preload').empty().append("<div class='cp-spinner cp-round'></div>");
+                        $ws(document).find(".wsgrid-squeezy .ws-loader").addClass('preload').empty().append("<div class='cp-spinner cp-round'></div>");
                     },
                     success: function(result) {
 
@@ -43,7 +43,7 @@ var $wk = jQuery.noConflict();
 
                             if( data.insta_pic != undefined && data.insta_pic.length > 0 ) {
 
-                                $wk.each( data.insta_pic, ( i, val ) => {
+                                $ws.each( data.insta_pic, ( i, val ) => {
 
                                     content += val.preview;
                                 });
@@ -51,17 +51,18 @@ var $wk = jQuery.noConflict();
 
                             if( data.insta_products != undefined && data.insta_products ) {
 
-                                $wk(".info-part .insta-tag-products").empty().html(data.insta_products);
-
+                                $ws(".info-part .insta-tag-products").empty().html(data.insta_products);
+                                document.querySelector(".info-part").classList.add( 'loaded' );
+                                document.querySelector(".slider-part").classList.add( 'loaded' );
                             }
 
-                            $wk(".insta-modal.slider-wrapper").empty().html(content);
-                            $wk(".insta-modal.owl-carousel").owlCarousel({
+                            $ws(".insta-modal.slider-wrapper").empty().html(content);
+                            $ws(".insta-modal.owl-carousel").owlCarousel({
                                 navigation:true,
                                 singleItem : true,
                             });
 
-                            $wk(document).find(".wkgrid-squeezy .wk-loader").removeClass('preload').empty();
+                            $ws(document).find(".wsgrid-squeezy .ws-loader").removeClass('preload').empty();
 
                         }
 
@@ -72,16 +73,16 @@ var $wk = jQuery.noConflict();
             }
         });
 
-        $wk(".shop.owl-carousel").owlCarousel({
+        $ws(".shop.owl-carousel").owlCarousel({
             navigation:true,
             items : 3,
         });
 
-        $wk(".in-load-more").on("click", function() {
+        $ws(".in-load-more").on("click", function() {
 
-            var tag_id = $wk(this).attr('id');
-            var product_id = $wk(this).data('product-id');
-            var paged = $wk("input[name='paged']").val();
+            var tag_id = $ws(this).attr('id');
+            var product_id = $ws(this).data('product-id');
+            var paged = $ws("input[name='paged']").val();
 
             paged = parseInt(paged);
 
@@ -89,7 +90,7 @@ var $wk = jQuery.noConflict();
 
             if( tag_id && product_id && paged ) {
 
-                $wk.ajax({
+                $ws.ajax({
                     url: insta_script.insta_admin_ajax,
                     type: 'GET',
                     data: {
@@ -103,12 +104,12 @@ var $wk = jQuery.noConflict();
 
                         if( result && result.error != undefined && result.error == false ) {
 
-                            $wk(".instagram-wrap").append(result.message);
-                            $wk(".instabox-footer input[name='paged']").val(paged+1);
+                            $ws(".instagram-wrap").append(result.message);
+                            $ws(".instabox-footer input[name='paged']").val(paged+1);
 
                             if( result.message == '' ) {
 
-                                $wk(".instabox-footer button").attr("disabled", true);
+                                $ws(".instabox-footer button").attr("disabled", true);
 
                             }
 
@@ -119,13 +120,17 @@ var $wk = jQuery.noConflict();
             }
         });
 
-        $wk(document).on("click", ".close-icon", () => {
+        $ws(document).on("click", ".close-icon", () => {
 
-            $wk("#sliderHolder").empty();
+            setTimeout( function() {
+                $ws("#sliderHolder").empty();
+                document.querySelector(".info-part").classList.remove( 'loaded' );
+                document.querySelector(".slider-part").classList.remove( 'loaded' );
+            }, 500 );
 
         });
 
     });
 
 
-})($wk)
+})($ws)

@@ -85,6 +85,8 @@
 
                         $author   = $tag_media['insta_username'];
 
+                        $insta_message   = $tag_media['insta_message'];
+
                         $images   	= !empty( $tag_media['images'] ) ? maybe_unserialize( $tag_media['images'] ) : '';
 
                         $image = isset( $images ) ? $images : '';
@@ -98,6 +100,8 @@
                             'preview'  => $preview,
 
                             'author'   => $author,
+
+                            'insta_message'   => $insta_message,
 
                             'count'   => $count['count'],
 
@@ -233,8 +237,6 @@
                     <?php echo $data['preview']; ?>
 
                     <div class="box-head">
-                        <span class="count-pic"><?php echo $data['count']; ?></span>
-                        <button class="popup-open"><?php echo __('View Products', 'insta_feed'); ?></button>
                     </div>
                 </div>
 
@@ -277,7 +279,6 @@
                                 <div class="inner-content">
 
                                     <div class="info-part">
-                                        <h2><?php echo __('Products', 'insta_feed'); ?></h2>
                                         <div class="insta-tag-products">{{tagProducts}}</div>
                                     </div>
 

@@ -114,10 +114,6 @@ class Instagram
 
   			}
 
-        echo "<pre>\n";
-        print_r( $instagram );
-        echo "</pre>\n";
-
         return json_encode($instagram);
     }
 }

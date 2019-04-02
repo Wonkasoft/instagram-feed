@@ -18,6 +18,7 @@ $white: #ffffff;
       margin: 5px;
       height: 250px;
       width: 250px;
+      @include prefix( box-shadow, $box_shadow_4, o moz webkit );
 
       img{
         border-radius: 0px;
@@ -38,6 +39,11 @@ $white: #ffffff;
         height: 100%;
         top: 0;
         @include prefix( transition, $trans_25, o moz webkit );
+
+        &:hover {
+          background: rgba(0, 0, 0, 0);
+
+        }
 
         .pic-author{
           color: $white;
@@ -63,7 +69,7 @@ $white: #ffffff;
           padding-top: 0px;
           text-align: center;
         }
-        button{
+        button.wonka-btn {
           padding: .5rem 1rem;
           text-align: center;
           border-radius: 100px;
@@ -135,6 +141,7 @@ $white: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
+    @include prefix( transition, $trans_25, o moz webkit );
 
     .close-icon {
       width: 25px;
@@ -153,11 +160,12 @@ $white: #ffffff;
       }
     }
 
-    .wkgrid-squeezy {
+    .wsgrid-squeezy {
       width: 100%;
       height: 650px;
       margin: 0 auto;
       position: relative;
+
     }
 
     .content {
@@ -170,6 +178,7 @@ $white: #ffffff;
       border-radius: 8px;
       overflow: hidden;
       @include prefix( box-shadow, $box_shadow_4, o moz webkit );
+      @include prefix( transition, $trans_25, o moz webkit );
 
       .inner-content {
         position: relative;
@@ -187,6 +196,12 @@ $white: #ffffff;
           position: relative;
           height: 100%;
           max-width: 60%;
+          opacity: 0;
+          @include prefix( transition, $trans_25, o moz webkit );
+
+          &.loaded {
+            opacity: 1;
+          }
 
           .slider-wrapper{
             height: 100%;
@@ -244,11 +259,37 @@ $white: #ffffff;
         }
         .info-part {
           position: relative;
-          flex: 0 .3 35%;
+          flex: 0.5 0.5 39%;
           padding: 0px;
           height: 100%;
-          display: inline-block;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           overflow-y: auto;
+          opacity: 0;
+
+          &.loaded {
+            opacity: 1;
+          }
+
+          .wonka-row {
+            margin: 30px auto;
+          }
+
+          .wonka-insta-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            > div.col-12 {
+              text-align: center;
+
+              .wonka-insta-title {
+                margin: 15px auto;
+                @include font-size( 1.2 );
+              }
+            }
+          }
 
           .wonka-shop-img-wrap {
             height: 245px;
@@ -362,7 +403,7 @@ $white: #ffffff;
     }
   }
 }
-.wk-loader {
+.ws-loader {
   &.preload{
     background: #fff;
     position: absolute;

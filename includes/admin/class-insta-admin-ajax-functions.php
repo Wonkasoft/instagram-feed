@@ -86,7 +86,6 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                                     'username'          => $author,
                                     'images'            => $images,
                                     'profile_picture'   => '',
-                                    'profile_picture'   => '',
                                     'insta_message'     => $insta_message,
                                 );
 
@@ -220,12 +219,14 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                                     $author   = $mvalue['insta_username'];
 
-                                    $preview = !empty( $image ) ? '<img src="'.$image.'" alt="'.$author.'" >' : 'N/A';
+                                    $insta_message   = $mvalue['insta_message'];
+
+                                    $preview = !empty( $image ) ? '<img src="'.$image.'" alt="'.$author.'" data-message="' . $insta_message . '" >' : 'N/A';
 
 
                                     ?>
 
-                                    <div class="insta-box" id="<?php echo $mvalue['tag_id']; ?>" data-image-id="<?php echo $mvalue['image_id']; ?>">
+                                    <div class="insta-box" id="<?php echo $mvalue['tag_id']; ?>" data-image-id="<?php echo $mvalue['image_id']; ?>" data-message="<?php _e( $insta_message ); ?>">
 
                                         <?php echo $preview; ?>
 
@@ -320,6 +321,50 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                     $tag_products = !empty( $tag_products ) ? maybe_unserialize( $tag_products->linked_products ) : '';
 
+                        if ( ! empty( $tag_medias ) ) {
+
+                            $tagKey = 0;
+
+                            foreach ($tag_medias as $tkey => $tag_media) {
+
+                                if( isset( $tag_media['status'] )  &&  $tag_media['status'] == '0'){
+                                  continue;
+                                }
+
+                                $image_id = $tag_media['image_id'];
+
+                                $author  = $tag_media['insta_username'];
+
+                                $images  = !empty( $tag_media['images'] ) ? maybe_unserialize( $tag_media['images'] ) : '';
+
+                                $image   = isset( $images ) ? $images : '';
+
+                                $insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message']: '';
+
+                                $preview = !empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher">'.$author.'</span></div><img src="'.$image.'" alt="'.$author.'" data-message="' . $insta_message . '" ></div>' : 'N/A';
+
+                                $data['insta_pic'][$tagKey] = array(
+
+                                  'image_id' => $image_id,
+
+                                  'preview'  => $preview,
+
+                                  'insta_message'  => $insta_message,
+
+                                  'author'   => $author,
+
+                                  'tag_id'   =>  $tag_id
+
+                                );
+
+                                $tagKey++;
+
+                            }
+
+                        }
+
+                    }
+                    
                     if( !empty( $tag_products )) {
 
                         $args = array(
@@ -335,27 +380,43 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                             ob_start();
 
-                            $product_content .=  woocommerce_product_loop_start();
+                            // $product_content .=  woocommerce_product_loop_start();
 
                             while ( $the_query->have_posts() ) {
 
                                 $the_query->the_post();
 
                                 global $product;
-
+                                
                                 // Ensure visibility.
                                 if ( empty( $product ) || ! $product->is_visible() ) {
                                     return;
                                 }
+                                $product_content .= _e( '<div class="wonka-row">');
+                                $product_content .= _e( '<div class="col-12">');
+                                $product_content .= _e( $data['insta_pic'][0]['insta_message'] );
+                                $product_content .= _e( '</div>');
+                                $product_content .= _e( '</div>');
 
-                                echo '<li class="type-product status-publish product">';
+                                $product_content .= _e( '<div class="wonka-row wonka-insta-link">');
+                                $product_content .= _e( '<div class="col-12">');
+
+                                $product_title = get_the_title( $product->get_id() );
+                                $url = get_permalink( $product->get_id(), false );
+
+                                $product_content .= _e( '<h4 class="wonka-insta-title">' . $product_title . '</h4>' );
+                                $product_content .= _e( '<a href="' . $url . '" class="wonka-btn">');
+                                $product_content .= _e( 'Shop Our Instagram', 'wonka_insta_feed');
+                                $product_content .= _e( '</a>');
+
+                                // echo '<li class="type-product status-publish product">';
 
                                     /**
                                      * Hook: woocommerce_before_shop_loop_item.
                                      *
                                      * @hooked woocommerce_template_loop_product_link_open - 10
                                      */
-                                    $product_content .= do_action( 'woocommerce_before_shop_loop_item' );
+                                    // $product_content .= do_action( 'woocommerce_before_shop_loop_item' );
 
                                     /**
                                      * Hook: woocommerce_before_shop_loop_item_title.
@@ -363,14 +424,14 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                                      * @hooked woocommerce_show_product_loop_sale_flash - 10
                                      * @hooked woocommerce_template_loop_product_thumbnail - 10
                                      */
-                                    $product_content .= do_action( 'woocommerce_before_shop_loop_item_title' );
+                                    // $product_content .= do_action( 'woocommerce_before_shop_loop_item_title' );
 
                                     /**
                                      * Hook: woocommerce_shop_loop_item_title.
                                      *
                                      * @hooked woocommerce_template_loop_product_title - 10
                                      */
-                                    $product_content .= do_action( 'woocommerce_shop_loop_item_title' );
+                                    // $product_content .= do_action( 'woocommerce_shop_loop_item_title' );
 
                                     /**
                                      * Hook: woocommerce_after_shop_loop_item_title.
@@ -378,7 +439,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                                      * @hooked woocommerce_template_loop_rating - 5
                                      * @hooked woocommerce_template_loop_price - 10
                                      */
-                                    $product_content .= do_action( 'woocommerce_after_shop_loop_item_title' );
+                                    // $product_content .= do_action( 'woocommerce_after_shop_loop_item_title' );
 
                                     /**
                                      * Hook: woocommerce_after_shop_loop_item.
@@ -386,60 +447,20 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                                      * @hooked woocommerce_template_loop_product_link_close - 5
                                      * @hooked woocommerce_template_loop_add_to_cart - 10
                                      */
-                                    $product_content .= do_action( 'woocommerce_after_shop_loop_item' );
+                                    // $product_content .= do_action( 'woocommerce_after_shop_loop_item' );
 
-                                echo '</li>';
+                                // echo '</li>';
 
                             }
-                            $product_content .= woocommerce_product_loop_end();
+                            // $product_content .= woocommerce_product_loop_end();
+                            $product_content .= _e( '</div>');
+                            $product_content .= _e( '</div>');
 
                             $data['insta_products'] = ob_get_clean();
                         }
                     }
 
-                    if ( ! empty( $tag_medias ) ) {
-
-                        $tagKey = 0;
-
-                        foreach ($tag_medias as $tkey => $tag_media) {
-
-                            if( isset( $tag_media['status'] )  &&  $tag_media['status'] == '0'){
-                              continue;
-                            }
-
-                            $image_id = $tag_media['image_id'];
-
-                            $author  = $tag_media['insta_username'];
-
-                            $images  = !empty( $tag_media['images'] ) ? maybe_unserialize( $tag_media['images'] ) : '';
-
-                            $image   = isset( $images ) ? $images : '';
-
-                            $insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message']: '';
-
-                            $preview = !empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher">'.$author.'</span></div><img src="'.$image.'" alt="'.$author.'" data-message="' . $insta_message . '" ></div>' : 'N/A';
-
-                            $data['insta_pic'][$tagKey] = array(
-
-                              'image_id' => $image_id,
-
-                              'preview'  => $preview,
-
-                              'insta_message'  => $insta_message,
-
-                              'author'   => $author,
-
-                              'tag_id'   =>  $tag_id
-
-                            );
-
-                            $tagKey++;
-
-                        }
-
-                    }
-
-                }
+                    
 
                 if( !empty( $data ) ) {
 
@@ -499,7 +520,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
             $tag_id_array = !empty( $tag_id_array ) ? wp_list_pluck( $tag_id_array, 'image_id' ) : '';
 
-            $query = "INSERT INTO $this->insta_table_meta ( tag_id, image_id, insta_username, images, priority, visiblity, status ) VALUES ";
+            $query = "INSERT INTO $this->insta_table_meta ( tag_id, image_id, insta_username, images, insta_message, priority, visiblity, status ) VALUES ";
 
             $values = $tag_ids = $place_holders = array();
 

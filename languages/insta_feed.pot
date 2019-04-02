@@ -290,7 +290,7 @@ msgid ""
 msgstr ""
 
 #. URI of the plugin
-msgid "https://store.wonkasoft.com/instagram-shop-feed.html"
+msgid "https://store.wonkasoft.com/wonka-instagram-feed.html"
 msgstr ""
 
 #. Author of the plugin

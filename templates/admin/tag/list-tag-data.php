@@ -120,7 +120,7 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 
 				'preview'    => __( 'Preview', 'insta_feed' ),
 
-				'post_message'    => __( 'Post Message', 'insta_feed' ),
+				'insta_message'    => __( 'Post Message', 'insta_feed' ),
 
 				'status'    => __( 'Status', 'insta_feed' )
 
@@ -134,7 +134,7 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 
 				case 'preview':
 
-				case 'post_message':
+				case 'insta_message':
 
 				case 'status':
 
@@ -192,7 +192,7 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 
 					$preview = !empty( $image ) ? '<img src="'.$image.'" alt="image" height="75px">' : 'N/A';
 
-					$post_message = '';
+					$insta_message = $tag['insta_message'];
 
 					$status  	= $tag['status']== 0 ? 'disabled' : 'enabled';
 
@@ -202,7 +202,7 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 
 						'preview'   => $preview,
 
-						'post_message'   => $post_message,
+						'insta_message'   => $insta_message,
 
 						'status'   => $status,
 

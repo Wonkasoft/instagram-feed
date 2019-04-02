@@ -107,6 +107,8 @@
 
                         $author   = $tag_media['insta_username'];
 
+                        $insta_message   = $tag_media['insta_message'];
+
                         $images   	= !empty( $tag_media['images'] ) ? maybe_unserialize( $tag_media['images'] ) : '';
 
                         $image = isset( $images ) ? $images : '';
@@ -120,6 +122,8 @@
                             'preview'  => $preview,
 
                             'author'   => $author,
+
+                            'insta_message'   => $insta_message,
 
                             'count'   => $count['count'],
 
@@ -173,7 +177,7 @@
 
                 <div id="dashboard_right_now" class="instagram instagram-feeds <?php echo $this->view; ?>">
 
-                    <div class="inside  row wonka-row">
+                    <div class="inside row wonka-row">
 
                         <div class="instagram-wrap col-12">
 
@@ -220,11 +224,7 @@
                 <?php echo $data['preview']; ?>
 
                 <div class="box-head">
-
-                    <span class="count-pic"><?php echo $data['count']; ?></span>
-                    <button class="popup-open"><?php echo __('View Products', 'insta_feed'); ?></button>
                     <span class="pic-author" title="hashtag"><?php echo $data['tag_name']; ?></span>
-
                 </div>
             </div>
 
@@ -268,12 +268,11 @@
                     <div class="screen-template-wrap" active-client="{{id}}">
                         <span class="close-icon"></span>
                         <div class="content">
-                            <div class="wkgrid-squeezy">
-                                <div class="wk-loader"></div>
+                            <div class="wsgrid-squeezy">
+                                <div class="ws-loader"></div>
                                 <div class="inner-content">
 
                                     <div class="info-part">
-                                        <h2><?php echo __('Products', 'insta_feed'); ?></h2>
                                         <div class="insta-tag-products">{{tagProducts}}</div>
                                     </div>
 
