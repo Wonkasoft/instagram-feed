@@ -38,7 +38,7 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 
 			global $wpdb;
 
-      $tag_obj = new Tag\Wc_Tag_Data(intval($_GET['tag_id']));
+			$tag_obj = new Tag\Wc_Tag_Data(intval($_GET['tag_id']));
 
 			$error_obj = new Inc\WC_Insta_Errors();
 
@@ -120,7 +120,9 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 
 				'preview'    => __( 'Preview', 'insta_feed' ),
 
-        'status'    => __( 'Status', 'insta_feed' )
+				'post_message'    => __( 'Post Message', 'insta_feed' ),
+
+				'status'    => __( 'Status', 'insta_feed' )
 
 			);
 
@@ -132,13 +134,15 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 
 				case 'preview':
 
+				case 'post_message':
+
 				case 'status':
 
-					return $item[ $column_name ];
+				return $item[ $column_name ];
 
 				default:
 
-					return print_r( $item, true );
+				return print_r( $item, true );
 
 			}
 
@@ -149,26 +153,26 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 		 * @return array $sortable, the array of columns that can be sorted by the user
 		 */
 
-		 public function get_sortable_columns(){
+		public function get_sortable_columns(){
 
-			 return $sortable = array(
-				 'status' => array( 'status', true ),
-			 );
+			return $sortable = array(
+				'status' => array( 'status', true ),
+			);
 
-		 }
-		 public function get_hidden_columns(){
+		}
+		public function get_hidden_columns(){
 
-			 return array();
+			return array();
 
-		 }
+		}
 
-		 function column_cb( $item ){
+		function column_cb( $item ){
 
-			 return sprintf('<input type="checkbox" id="image_id_%s" name="image_id[]" value="%s" />', $item[ 'image_id' ], $item[ 'image_id' ]);
+			return sprintf('<input type="checkbox" id="image_id_%s" name="image_id[]" value="%s" />', $item[ 'image_id' ], $item[ 'image_id' ]);
 
-		 }
+		}
 
-		 private function table_data(){
+		private function table_data(){
 
 			global $wpdb;
 
@@ -176,48 +180,52 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 
 			$results = $this->tag_obj->insta_get_tag_media(300, 0);
 
-			 if ( ! empty( $results ) ) {
+			if ( ! empty( $results ) ) {
 
 				foreach ($results as $tag) {
 
 					$image_id  = $tag['image_id'];
 
-          $images   = !empty( $tag['images'] ) ? maybe_unserialize( $tag['images'] ) : '';
+					$images   = !empty( $tag['images'] ) ? maybe_unserialize( $tag['images'] ) : '';
 
 					$image = isset( $images ) ? $images : '';
 
 					$preview = !empty( $image ) ? '<img src="'.$image.'" alt="image" height="75px">' : 'N/A';
 
-          $status  	= $tag['status']== 0 ? 'disabled' : 'enabled';
+					$post_message = '';
+
+					$status  	= $tag['status']== 0 ? 'disabled' : 'enabled';
 
 					$data[] = array(
 
 						'image_id'   => $image_id,
 
-            'preview'   => $preview,
+						'preview'   => $preview,
+
+						'post_message'   => $post_message,
 
 						'status'   => $status,
 
 					);
 
-				 }
-			 }
+				}
+			}
 
-			 return $data;
+			return $data;
 
-		 }
+		}
 
 		 /**
 		 * Bulk actions on list.
 		 */
-		public function get_bulk_actions() {
-			$actions = array(
-				'enable'   => 'Enable',
-				'disable'  => 'Disable',
-				'delete'   => 'Delete',
-			);
-			return $actions;
-		}
+		 public function get_bulk_actions() {
+		 	$actions = array(
+		 		'enable'   => 'Enable',
+		 		'disable'  => 'Disable',
+		 		'delete'   => 'Delete',
+		 	);
+		 	return $actions;
+		 }
 
 		/**
 		 * Process bulk actions.
@@ -226,7 +234,7 @@ if( ! class_exists ( 'WC_List_Tag_Data' ) ){
 			$count = 0;
 			$delete = 0;
 
-	 		 if ( $this->current_action() === 'enable' ) {
+			if ( $this->current_action() === 'enable' ) {
 
 				if ( isset( $_POST['image_id'] ) && ! empty( $_POST['image_id'] ) ) {
 
@@ -332,7 +340,7 @@ $tag_data_list->prepare_items();
 
 		<?php
 
-			$tag_data_list->display();
+		$tag_data_list->display();
 
 		?>
 

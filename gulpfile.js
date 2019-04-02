@@ -54,12 +54,35 @@ gulp.task('sass', function () {
 
 });
 
+gulp.task('sass-admin', function () {
+
+	return gulp.src('./scss/admin-style.scss')
+
+	.pipe(sourcemaps.init())
+
+	.pipe(plumber(plumberErrorHandler))
+
+	.pipe(sass())
+
+	.pipe(cleanCSS())
+
+	.pipe(concat('admin.css'))
+
+	.pipe(sourcemaps.write('./maps'))
+
+	.pipe(gulp.dest('./assets/css/'))
+
+	.pipe(browserSync.stream());
+
+});
+
 
 
 gulp.task('watch', function() {
 
-	gulp.watch('./**/*.scss', gulp.series(gulp.parallel('sass'))).on('change', browserSync.reload);
+	gulp.watch('**/*.scss', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
+	gulp.watch('**/*.php', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
 
 });
 
-gulp.task('default', gulp.series(gulp.parallel('sass', 'watch', 'browser-sync')));
+gulp.task('default', gulp.series(gulp.parallel('sass', 'sass-admin', 'watch', 'browser-sync')));

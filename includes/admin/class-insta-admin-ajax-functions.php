@@ -64,7 +64,9 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                     $insta = new Api\Instagram();
 
+
                     $result = $insta->getTagMedia( $tag, 20 );
+                    
 
                     if( !empty( $result ) ) {
 
@@ -72,7 +74,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                         foreach($result as $item){
                             $image_link = $item->url;
-
+                            $insta_message = $item->insta_message;
                             $image_id = $item->id;
                             $author = $item->author;
                             if( !empty( $ids ) && in_array( $image_id, $ids ) ) {
@@ -81,10 +83,11 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                                 $insta_data[$image_id] =  array(
 
-                                    'username' => $author,
-                                    'images' => $images,
-                                    'profile_picture' => '',
-
+                                    'username'          => $author,
+                                    'images'            => $images,
+                                    'profile_picture'   => '',
+                                    'profile_picture'   => '',
+                                    'insta_message'     => $insta_message,
                                 );
 
                             }
@@ -412,13 +415,17 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                             $image   = isset( $images ) ? $images : '';
 
-                            $preview = !empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher">'.$author.'</span></div><img src="'.$image.'" alt="'.$author.'" ></div>' : 'N/A';
+                            $insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message']: '';
+
+                            $preview = !empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher">'.$author.'</span></div><img src="'.$image.'" alt="'.$author.'" data-message="' . $insta_message . '" ></div>' : 'N/A';
 
                             $data['insta_pic'][$tagKey] = array(
 
                               'image_id' => $image_id,
 
                               'preview'  => $preview,
+
+                              'insta_message'  => $insta_message,
 
                               'author'   => $author,
 
@@ -508,13 +515,15 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                     array_push( $values, maybe_serialize( $vdata['images'] ) );
 
+                    array_push( $values, $vdata['insta_message'] );
+
                     array_push( $values, 1 );
 
                     array_push( $values, maybe_serialize( array(0,1,2) ) );
 
                     array_push( $values, 1 );
 
-                    $place_holders[] = "( '%d', '%s', '%s', '%s', '%d', '%s', '%d' )";
+                    $place_holders[] = "( '%d', '%s', '%s', '%s', '%s', '%d', '%s', '%d' )";
 
                     $tag_ids[] = $kdata;
 

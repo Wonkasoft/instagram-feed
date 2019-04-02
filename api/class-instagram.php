@@ -81,6 +81,7 @@ class Instagram
         if ( ! $content_array ) {
   				return;
   			}
+
   			if ( isset( $content_array['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'] ) ) {
   				$insta_info = $content_array['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'];
   			} elseif ( isset( $content_array['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'] ) ) {
@@ -108,9 +109,14 @@ class Instagram
   					'id' => $id,
             'author'=> $hashtag,
   					'url'=> preg_replace( '/^https?\:/i', '', $insta_value['node']['display_url'] ),
+            'insta_message'=> $insta_value['node']['edge_media_to_caption']['edges'][0]['node']['text'],
   				);
 
   			}
+
+        echo "<pre>\n";
+        print_r( $instagram );
+        echo "</pre>\n";
 
         return json_encode($instagram);
     }
