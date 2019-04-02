@@ -27,7 +27,7 @@ var $ws = jQuery.noConflict();
                         nonce : insta_script.insta_api_nonce,
                     },
                     beforeSend : function() {
-                        $ws(document).find(".wsgrid-squeezy .ws-loader").addClass('preload').empty().append("<div class='cp-spinner cp-round'></div>");
+                        $ws(document).find(".wsgrid-squeezy .ws-loader").addClass('preload').empty().append("<div class='wonka-spinner wonka-round'></div>");
                     },
                     success: function(result) {
 
