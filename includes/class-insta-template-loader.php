@@ -5,7 +5,7 @@
  *
  * General core functions available on both the front-end and admin.
  *
- * @author 		webkul
+ * @author 		Wonkasoft
  * @category 	Core
  * @package 	woo-pos/Functions
  * @version     1.0.0

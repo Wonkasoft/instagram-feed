@@ -290,7 +290,7 @@ msgid ""
 msgstr ""
 
 #. URI of the plugin
-msgid "https://store.webkul.com/instagram-shop-feed.html"
+msgid "https://store.wonkasoft.com/instagram-shop-feed.html"
 msgstr ""
 
 #. Author of the plugin
@@ -298,5 +298,5 @@ msgid "WebKul"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://webkul.com"
+msgid "https://wonkasoft.com"
 msgstr ""

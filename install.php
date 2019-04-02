@@ -2,7 +2,7 @@
 
 /**
  * @package Insta_Feed_Install_Schema
- * @author Webkul
+ * @author Wonkasoft
  */
 
 if (! class_exists('Insta_Feed_Install_Schema')) {

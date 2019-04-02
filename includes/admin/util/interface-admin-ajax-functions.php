@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Webkul
+ * @author Wonkasoft
  * @version 2.0.0
  * This file handles Admin end ajax functions interface.
  */

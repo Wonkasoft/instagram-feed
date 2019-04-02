@@ -118,19 +118,21 @@ $white: #ffffff;
   padding: 60px 0;
   overflow-y: auto;
   .screen-template-wrap {
-    display: table;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
     height: 100%;
     width: 100%;
     .close-icon {
       width: 30px;
       height: 30px;
       display: inline-block;
-      position: absolute;
-      top: 40px;
-      right: 40px;
-      transform: scale(1.2);
+      position: relative;
       cursor: pointer;
-      transition: .2s ease-in-out;
+      z-index: 99999;
+      @include prefix( transition, $trans_25, o moz webkit );
+
       &:before {
         content: "\f00d";
         font: normal normal normal 14px/1 FontAwesome;

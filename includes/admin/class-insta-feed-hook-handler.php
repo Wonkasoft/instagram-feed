@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author Webkul
+ * @author Wonkasoft
  * @version 2.1.0
  * This file handles all admin end actions.
  */

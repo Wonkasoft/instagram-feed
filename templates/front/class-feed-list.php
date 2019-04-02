@@ -173,9 +173,9 @@
 
                 <div id="dashboard_right_now" class="instagram instagram-feeds <?php echo $this->view; ?>">
 
-                    <div class="inside">
+                    <div class="inside  row wonka-row">
 
-                        <div class="instagram-wrap">
+                        <div class="instagram-wrap col-12">
 
                             <?php
 

@@ -7,8 +7,8 @@ namespace Wc_Insta_Feed\Api;
  *
  * API Documentation: http://instagram.com/developer/
  *
- * @author Webkul
- * @copyright Webkul
+ * @author Wonkasoft
+ * @copyright Wonkasoft
  * @version 1.0
  */
 

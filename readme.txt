@@ -1,12 +1,12 @@
 === Instagram Shop Feed Extension for WooCommerce ===
 
-Contributors: Webkul
-Tags: Instagram, Post, hashtags, Social, webkul
+Contributors: Wonkasoft
+Tags: Instagram, Post, hashtags, Social, wonkasoft
 WordPress :
   * Requires at least: 4.4
   * Tested up to: 4.9.5
 WooCommerce: 3.3.x
-License URI: https://store.webkul.com/license.html
+License URI: https://store.wonkasoft.com/license.html
 
 Instagram Shop Feed Extension for WooCommerce will add instagram images on product shop and dedicated pages on woocommerce store by use of instagram hashtags
 
@@ -21,7 +21,7 @@ Instagram Shop Feed Extension for WooCommerce will add instagram images on produ
 
 == Frequently Asked Questions ==
 
-For any Query please generate a ticket at https://webkul.uvdesk.com/en/
+For any Query please generate a ticket at https://wonkasoft.com/
 
 
 = 1.0.0 =

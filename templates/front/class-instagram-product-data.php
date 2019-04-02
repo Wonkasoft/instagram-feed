@@ -151,7 +151,6 @@
                         <p><?php echo __('Bought this product? Great post a snapshot on instagram with <b>'.$tag_name.'</b> to get a chance to be featured here', 'insta_feed' ); ?></p>
 
                     </div>
-
                     <div class="instagram-wrap">
 
                         <?php

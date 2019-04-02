@@ -1,6 +1,6 @@
 SOFTWARE LICENCE AGREEMENT
 
-This AGREEMENT is made effective on the date of the purchase of the software between Webkul Software Pvt. Ltd.,Company incorporated under the Companies Act, 1956 (hereinafter referred to as “Licensor"), and the purchaser of the software/ product (hereinafter referred to as "Licensee").
+This AGREEMENT is made effective on the date of the purchase of the software between Wonkasoft Software Pvt. Ltd.,Company incorporated under the Companies Act, 1956 (hereinafter referred to as “Licensor"), and the purchaser of the software/ product (hereinafter referred to as "Licensee").
 
 Preamble
 
@@ -173,11 +173,11 @@ The Licensor may amend any of the terms and conditions contained in this Agreeme
 All such communications shall be sent to the following addresses or numbers, or to such other addresses or numbers as any party may inform the others by giving five days' prior notice:
 
 
-If to Webkul Software Pvt. Ltd.:
+If to Wonkasoft Software Pvt. Ltd.:
 
  
 
-Webkul Software Pvt. Ltd.
+Wonkasoft Software Pvt. Ltd.
 
 A-67, Sector 63, NOIDA – 201301,
 
