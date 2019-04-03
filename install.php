@@ -21,7 +21,7 @@ if (! class_exists('Insta_Feed_Install_Schema')) {
 
         public function create_pages() {
 
-           register_post_type('instagram_tags');
+           register_post_type( 'instagram_tags' );
 
            $pages = apply_filters( 'instagram_create_pages',array(
                'instagram' => array(
@@ -82,19 +82,40 @@ if (! class_exists('Insta_Feed_Install_Schema')) {
 
             $charset_collate = $wpdb->get_charset_collate();
 
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-            $insta_tags = $wpdb->prefix.'instagram_tags';
+            $ws_insta_tags = $wpdb->prefix.'ws_instagram_tags';
 
-            $tag_table = "CREATE TABLE IF NOT EXISTS ".$insta_tags." (id int(11) NOT NULL AUTO_INCREMENT, tag_name varchar(255) NOT NULL, linked_products longtext NOT NULL, visiblity longtext NOT NULL, priority int(10) NOT NULL, status boolean NOT NULL, PRIMARY KEY (id)) $charset_collate;";
+            if ( $wpdb->get_var('SHOW TABLES LIKE ' . $ws_insta_tags ) != $ws_insta_tags ) :
+
+            $tag_table = "CREATE TABLE IF NOT EXISTS ".$ws_insta_tags." (id int(11) NOT NULL AUTO_INCREMENT, tag_name varchar(255) NOT NULL, linked_products longtext NOT NULL, visiblity longtext NOT NULL, priority int(10) NOT NULL, status boolean NOT NULL, PRIMARY KEY (id)) $charset_collate;";
+
+            dbDelta( $tag_table );
+
+            $ws_inst_tag_media = $wpdb->prefix.'ws_instagram_tags_media';
+
+            $inst_tag_media_table = "CREATE TABLE IF NOT EXISTS ".$ws_inst_tag_media." (id int(11) NOT NULL AUTO_INCREMENT, tag_id int(11) NOT NULL, image_id varchar(255) NOT NULL, insta_username varchar(255) NOT NULL, images longtext NOT NULL, insta_message longtext NOT NULL, priority int(10) NOT NULL, visiblity longtext NOT NULL, status boolean NOT NULL, PRIMARY KEY (id)) $charset_collate;";
+
+            dbDelta( $inst_tag_media_table ;
+
+            update_option( 'wonkasoft_instafeed_database_version', '1.0.0' );
+
+        else: 
+
+            $ws_insta_tags = $wpdb->prefix.'ws_instagram_tags';
+
+            if ( $wpdb->get_var('SHOW TABLES LIKE ' . $ws_insta_tags ) != $table_name ) :
+            $tag_table = "CREATE TABLE IF NOT EXISTS ".$ws_insta_tags." (id int(11) NOT NULL AUTO_INCREMENT, tag_name varchar(255) NOT NULL, linked_products longtext NOT NULL, visiblity longtext NOT NULL, priority int(10) NOT NULL, status boolean NOT NULL, PRIMARY KEY (id)) $charset_collate;";
 
             dbDelta($tag_table);
 
-            $inst_tag_media = $wpdb->prefix.'instagram_tags_media';
+            $inst_tag_media = $wpdb->prefix.'ws_instagram_tags_media';
 
-            $inst_tag_media_table="CREATE TABLE IF NOT EXISTS ".$inst_tag_media." (id int(11) NOT NULL AUTO_INCREMENT, tag_id int(11) NOT NULL, image_id varchar(255) NOT NULL, insta_username varchar(255) NOT NULL, images longtext NOT NULL, insta_message longtext NOT NULL, priority int(10) NOT NULL, visiblity longtext NOT NULL, status boolean NOT NULL, PRIMARY KEY (id)) $charset_collate;";
+            $inst_tag_media_table = "CREATE TABLE IF NOT EXISTS ".$inst_tag_media." (id int(11) NOT NULL AUTO_INCREMENT, tag_id int(11) NOT NULL, image_id varchar(255) NOT NULL, insta_username varchar(255) NOT NULL, images longtext NOT NULL, insta_message longtext NOT NULL, priority int(10) NOT NULL, visiblity longtext NOT NULL, status boolean NOT NULL, PRIMARY KEY (id)) $charset_collate;";
 
-            dbDelta($inst_tag_media_table);
+            dbDelta( $inst_tag_media_table );
+
+            update_option( 'wonkasoft_instafeed_database_version', '1.0.0' );
 
         }
     }
