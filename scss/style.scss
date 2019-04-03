@@ -145,11 +145,11 @@ $white: #ffffff;
 
     .close-icon {
       width: 25px;
-      height: 25px;
+      height: 35px;
       display: inline-block;
       position: absolute;
-      top: -35px;
-      right: -8px;
+      top: 6px;
+      right: -10px;
       cursor: pointer;
       z-index: 99999;
       @include prefix( transition, $trans_25, o moz webkit );
@@ -162,7 +162,7 @@ $white: #ffffff;
 
     .wsgrid-squeezy {
       width: 100%;
-      height: 650px;
+      height: 100%;
       margin: 0 auto;
       position: relative;
 
@@ -170,8 +170,10 @@ $white: #ffffff;
 
     .content {
       position: relative;
-      width: 1200px;
+      width: 950px;
+      height: 475px;
       max-width: 100%;
+      top: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -212,9 +214,12 @@ $white: #ffffff;
 
               .owl-wrapper {
                 height: 100%;
+                max-width: 100%;
 
                 .owl-item {
+                  width: 100% !important;
                   height: 100%;
+                  max-width: 100%;
 
                   .item {
                     height: 100%;
@@ -260,12 +265,13 @@ $white: #ffffff;
         .info-part {
           position: relative;
           flex: 0.5 0.5 39%;
+          // top: 60px;
           padding: 0px;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          overflow-y: auto;
+          // overflow-y: auto;
           opacity: 0;
 
           &.loaded {
@@ -274,13 +280,14 @@ $white: #ffffff;
 
           .insta-tag-products {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: center;
             flex-direction: column;
             height: 100%;
           }
 
           .wonka-row {
-            margin: 30px auto;
+            // margin: 30px auto;
           }
 
           .wonka-insta-link {
@@ -294,7 +301,7 @@ $white: #ffffff;
 
               .wonka-insta-title {
                 margin: 15px auto;
-                @include font-size( 1.2 );
+                font-size: 10px;
               }
             }
 
@@ -312,17 +319,6 @@ $white: #ffffff;
             }
           }
 
-          .star-rating {
-            display: none;
-          }
-
-          .insta-tag-products {
-            opacity: 1;
-          }
-
-          h2{
-            margin: 15px 0px;
-          }
           ul.products li.product{
             width: 45%;
             display: inline-block;
@@ -340,81 +336,6 @@ $white: #ffffff;
 
 }
 
-.owl-controls{
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  .owl-controls .owl-page, .owl-controls .owl-buttons div {
-    cursor: pointer;
-    position: absolute;
-  }
-  .owl-prev{
-    left: 10px;
-    position: absolute;
-    display: inline-block;
-    height: 32px;
-    width: 25px;
-    transform: rotate(-180deg);
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .owl-next{
-    right: 10px;
-    position: absolute;
-    height: 32px;
-    width: 25px;
-    display: inline-block;
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-
-  }}
-
-.instabox-footer{
-  text-align: center;
-  margin: 20px 0px;
-
-  button.popup-open {
-    padding: .5rem 1rem;
-    text-align: center;
-    border-radius: 100px;
-    background: rgba( #fff, .3 );
-    border: 3px solid #FFE6B2;
-    @include font-size( 1 );
-    @include prefix( box-shadow, $box_shadow_4, o moz webkit );
-    @include prefix( text-shadow, 1px 1px 3px rgba(#000, 0 ), o moz webkit );
-    @include prefix( transition, $trans_25, o moz webkit );
-
-    &:hover {
-    border: 3px solid #FFE6B2;
-    background: #FFE6B2;
-    color: rgba(255, 255, 255, .8);
-    @include prefix( text-shadow, 1px 1px 3px rgba(#000, .9 ), o moz webkit );
-    }
-  }
-}
-//instagram product page
-
-.insta-product-page{
-  .insta-box{
-    width: 19.2%;
-    position: relative;
-    height: 250px;
-
-    .box-head{
-
-      .pic-author{
-        color: $white;
-        font-size: 16px;
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        font-weight: bold;
-      }
-    }
-  }
-}
 
 @keyframes ws-round-animate{
   0%{
@@ -482,12 +403,29 @@ $white: #ffffff;
   }
 }
 
-@media only screen and (max-width: 1199px){
+@media only screen and (max-height: 550px){
+  .screens-template {
+    .screen-template-wrap {
+      .content {
+        display: inherit;
+        width: 950px;
+        height: 475px;
+        top: 40px;
+      }
+      .close-icon{
+        top: 10px;
+        right: 0px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1399px){
   .screens-template {
     .screen-template-wrap {
       .close-icon{
-        top: 15px;
-        right: 15px;
+        top: -6px;
+        right: 0px;
       }
     }
   }
@@ -501,8 +439,30 @@ $white: #ffffff;
   .screens-template {
     .screen-template-wrap{
       display: block;
-      .content{
+
+      .content {
         display: inherit;
+        width: 650px;
+        height: 400px;
+        top: 40px;
+      }
+
+      .close-icon{
+        top: 15px;
+        right: 0px;
+      }
+    }
+  }
+  .wonka-row {
+    div.col-12 {
+      font-size: 11px;
+
+      .wonka-insta-title {
+        font-size: 13px;
+      }
+      
+      a.wonka-btn {
+        font-size: 11px;
       }
     }
   }
@@ -530,8 +490,35 @@ $white: #ffffff;
       height: 250px;
     }
   }
+  .wonka-row {
+    div.col-12 {
+      font-size: 11px;
+
+      .wonka-insta-title {
+        font-size: 13px;
+      }
+      
+      a.wonka-btn {
+        font-size: 11px;
+      }
+    }
+  }
 }
 @media only screen and (max-width: 625px){
+  .wonka-row {
+    div.col-12 {
+      font-size: 12px;
+
+      .wonka-insta-title {
+        font-size: 12px;
+      }
+      
+      a.wonka-btn {
+        font-size: 10px;
+      }
+    }
+  }
+  
   .insta-product-page .insta-box{
     width: 100%;
     height: auto;
@@ -559,12 +546,25 @@ $white: #ffffff;
   .screens-template {
     .screen-template-wrap {
       .content {
+        width: 321px;
+        height: 350px;
+
         .inner-content {
           .info-part{
             width: 100%;
+            flex: auto;
+
+            a.wonka-btn {
+              margin: 0 !important;
+            }
           }
           .slider-part{
             width: 100%;
+            max-width: 50%;
+            
+            div.owl-item {
+              width: 100% !important;
+            }
           }
         }
       }
