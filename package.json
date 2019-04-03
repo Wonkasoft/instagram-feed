@@ -1,7 +1,7 @@
 {
-  "name": "instagram-shop-feed",
+  "name": "wonkasoft-instafeed",
   "version": "1.0.0",
-  "description": "=== Instagram Shop Feed Extension for WooCommerce ===",
+  "description": "=== Wonkasoft InstaFeed Extension for WooCommerce ===",
   "main": "gulp.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
