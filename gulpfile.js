@@ -82,6 +82,7 @@ gulp.task('watch', function() {
 
 	gulp.watch('**/*.scss', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
 	gulp.watch('**/*.php', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
+	gulp.watch('**/*.js', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
 
 });
 

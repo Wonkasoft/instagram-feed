@@ -54,6 +54,27 @@ var $ws = jQuery.noConflict();
                                 $ws(".info-part .insta-tag-products").empty().html(data.insta_products);
                                 document.querySelector(".info-part").classList.add( 'loaded' );
                                 document.querySelector(".slider-part").classList.add( 'loaded' );
+                                /*==========================================================
+                                =            adding span tags for the hash tags            =
+                                ==========================================================*/
+                                var message_el = $ws( '.wonka-row.wonka-insta-message p' );
+                                var message = $ws( '.wonka-row.wonka-insta-message p' ).text();
+                                var new_message = '';
+                                message = message.split( ' ' );
+                                message.forEach( function( item, i ) 
+                                    {
+                                        if ( ~item.indexOf('#') ) 
+                                        {
+                                            new_message += '<span class="wonka-insta-hash-tag">' + item + '</span> ';
+                                        }
+                                        else
+                                        {
+                                            new_message += item + ' ';
+                                        }
+                                    });
+                                
+                                message_el.html( new_message );
+                                /*=====  End of adding span tags for the hash tags  ======*/
                             }
 
                             $ws(".insta-modal.slider-wrapper").empty().html(content);

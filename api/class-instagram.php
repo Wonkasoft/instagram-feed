@@ -95,7 +95,6 @@ class Instagram
   			}
 
   			$instagram = array();
-
   			foreach ( $insta_info as $insta_value ) {
 
   				$id = '';

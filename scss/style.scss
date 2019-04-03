@@ -12,10 +12,11 @@ $white: #ffffff;
     font-size: 0px;
 
     .insta-box{
+      position: relative;
       display: inline-block;
       vertical-align: top;
       position: relative;
-      margin: 5px;
+      margin: 5px auto;
       height: 250px;
       width: 250px;
       @include prefix( box-shadow, $box_shadow_4, o moz webkit );
@@ -29,7 +30,7 @@ $white: #ffffff;
         object-position: top;
       }
 
-      .box-head{
+      .box-head {
         position: absolute;
         display: flex;
         align-items: center;
@@ -40,9 +41,30 @@ $white: #ffffff;
         top: 0;
         @include prefix( transition, $trans_25, o moz webkit );
 
-        &:hover {
-          background: rgba(0, 0, 0, 0);
+        &:after {
+          content: "Shop Now";
+          position: absolute;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #ffffff;
+          background: rgba( #4391af, .9 );
+          top: 0;
+          height: 0;
+          width: 100%;
+          opacity: 0;
+          @include font-size(1.2);
+          @include prefix( transition, $trans_25, o moz webkit );
 
+        }
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.5);
+
+          &:after {
+            height: 100%;
+            opacity: 1;
+          }
         }
 
         .pic-author{
@@ -134,24 +156,28 @@ $white: #ffffff;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  z-index: 99999;
+  z-index: 99999999;
   @include prefix( transition, $trans_25, o moz webkit );
+
   .screen-template-wrap {
     position: relative;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 15px;
     @include prefix( transition, $trans_25, o moz webkit );
 
     .close-icon {
       width: 25px;
-      height: 35px;
+      height: 25px;
       display: inline-block;
       position: absolute;
       top: -15px;
-      right: -10px;
+      right: 8px;
       cursor: pointer;
-      z-index: 99999;
+      z-index: 9999999;
       @include prefix( transition, $trans_25, o moz webkit );
 
       &:before {
@@ -170,10 +196,9 @@ $white: #ffffff;
 
     .content {
       position: relative;
-      width: 950px;
-      height: 475px;
-      max-width: 100%;
-      top: 20px;
+      width: 100%;
+      height: 500px;
+      max-width: 1200px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -187,17 +212,20 @@ $white: #ffffff;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        flex-direction: row-reverse;
+        flex-direction: column-reverse;
         height: 100%;
         width: 100%;
         background-color: $white;
 
         .slider-part {
           flex: .2 .6 65%;
-          display: inline-block;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           position: relative;
           height: 100%;
-          max-width: 60%;
+          width: 100%;
+          max-width: 100%;
           opacity: 0;
           @include prefix( transition, $trans_25, o moz webkit );
 
@@ -207,12 +235,15 @@ $white: #ffffff;
 
           .slider-wrapper{
             height: 100%;
+            width: 100%;
 
             .owl-wrapper-outer {
               height: 100%;
+              width: 100%;
               @include prefix( box-shadow, $box_shadow_5, o moz webkit );
 
               .owl-wrapper {
+                width: 100% !important;
                 height: 100%;
                 max-width: 100%;
 
@@ -220,15 +251,18 @@ $white: #ffffff;
                   width: 100% !important;
                   height: 100%;
                   max-width: 100%;
+                  @include prefix( transition, $trans_25, o moz webkit );
 
                   .item {
                     height: 100%;
+                    @include prefix( transition, $trans_25, o moz webkit );
 
                     .box-head{
                       position: absolute;
                       width: 100%;
                       top: 0;
                       height: 100%;
+                      @include prefix( transition, $trans_25, o moz webkit );
 
                       span.pic-author{
                         color: $white;
@@ -237,6 +271,7 @@ $white: #ffffff;
                         bottom: 15px;
                         left: 15px;
                         font-weight: 600;
+                        @include prefix( transition, $trans_25, o moz webkit );
                       }
                     }
                   }
@@ -245,6 +280,10 @@ $white: #ffffff;
             }
 
             .owl-controls{
+
+              .owl-buttons {
+
+              }
 
               .owl-prev{
                 background-image: url('../images/arrow.png');
@@ -264,15 +303,16 @@ $white: #ffffff;
         }
         .info-part {
           position: relative;
-          flex: 0.5 0.5 39%;
-          // top: 60px;
-          padding: 0px;
+          flex: 0 0.8 40%;
+          padding: 0;
           height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          // overflow-y: auto;
+          overflow-y: auto;
           opacity: 0;
+          background: #fafafa;
+          @include prefix( transition, $trans_25, o moz webkit );
 
           &.loaded {
             opacity: 1;
@@ -281,9 +321,44 @@ $white: #ffffff;
           .insta-tag-products {
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            justify-content: space-around;
+            flex-wrap: wrap;
             height: 100%;
+            @include prefix( transition, $trans_25, o moz webkit );
+
+            .wonka-insta-site-logo {
+              flex: 1 100%;
+              width: 100%;
+              margin: 15px auto;
+
+              > div {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                img.wonka-insta-logo-img {
+                  width: 35px;
+                  height: 35px;
+                  margin-left: 8px;
+                  border-radius: 50%;
+                  background: #ffffff;
+                  @include prefix( box-shadow, $box_shadow_3, o moz webkit );
+                }
+
+                div.wonka-insta-site-info {
+                  margin-left: 15px;
+                  font-weight: 500;
+                }
+              }
+            }
+
+            .wonka-insta-message {
+              flex: 1 100%;
+
+              .wonka-insta-hash-tag {
+                color: #8c8c8c;
+              }
+            }
           }
 
           .wonka-row {
@@ -291,10 +366,13 @@ $white: #ffffff;
           }
 
           .wonka-insta-link {
+            position: relative;
+            flex: 1 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             align-self: center;
+            margin: 15px auto;
             
             > div.col-12 {
               text-align: center;
@@ -328,14 +406,43 @@ $white: #ffffff;
             margin-bottom: 10px;
           }
         }
+
+        @include media-breakpoint-up( md ) {
+          flex-direction: row-reverse;
+
+          .info-part {
+            flex: 0.1 0.1 43%;
+
+            .wonka-insta-site-logo {
+              flex: 1 100%;
+              width: 100%;
+              margin: 15px auto;
+
+              > div {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                img.wonka-insta-logo-img {
+                  width: 60px;
+                  height: 60px;
+                }
+              }
+            }
+          }
+
+          .slider-part {
+            flex: 0.8 100%;
+
+            .slider-wrapper {
+
+            }
+          }
+        }
       }
     }
-
-
   }
-
 }
-
 
 @keyframes ws-round-animate{
   0%{
@@ -399,175 +506,6 @@ $white: #ffffff;
       top:0;
       left:0;
       animation:ws-round-animate 1s ease-in-out infinite;
-    }
-  }
-}
-
-@media only screen and (max-height: 550px){
-  .screens-template {
-    .screen-template-wrap {
-      .content {
-        display: inherit;
-        width: 950px;
-        height: 475px;
-        top: 40px;
-      }
-      .close-icon{
-        top: 10px;
-        right: 0px;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 1399px){
-  .screens-template {
-    .screen-template-wrap {
-      .close-icon{
-        top: -6px;
-        right: 0px;
-      }
-    }
-  }
-}
-@media only screen and (max-width: 991px){
-  .instagram-feeds{
-    .instagram-wrap{
-      text-align: center;
-    }
-  }
-  .screens-template {
-    .screen-template-wrap{
-      display: block;
-
-      .content {
-        display: inherit;
-        width: 650px;
-        height: 400px;
-        top: 40px;
-      }
-
-      .close-icon{
-        top: 15px;
-        right: 0px;
-      }
-    }
-  }
-  .wonka-row {
-    div.col-12 {
-      font-size: 11px;
-
-      .wonka-insta-title {
-        font-size: 13px;
-      }
-      
-      a.wonka-btn {
-        font-size: 11px;
-      }
-    }
-  }
-
-}
-@media only screen and (max-width: 800px){
-  .insta-product-page .insta-box{
-    width: 48%;
-  }
-  .instagram-feeds{
-    &.insta_feed{
-      .insta-box{
-        width: 48%;
-      }
-    }
-  }
-  .instagram-feeds.shop{
-    .insta-box{
-      width:48%;
-    }
-  }
-  .slider-wrapper.shop {
-    .insta-box{
-      width: auto;
-      height: 250px;
-    }
-  }
-  .wonka-row {
-    div.col-12 {
-      font-size: 11px;
-
-      .wonka-insta-title {
-        font-size: 13px;
-      }
-      
-      a.wonka-btn {
-        font-size: 11px;
-      }
-    }
-  }
-}
-@media only screen and (max-width: 625px){
-  .wonka-row {
-    div.col-12 {
-      font-size: 12px;
-
-      .wonka-insta-title {
-        font-size: 12px;
-      }
-      
-      a.wonka-btn {
-        font-size: 10px;
-      }
-    }
-  }
-  
-  .insta-product-page .insta-box{
-    width: 100%;
-    height: auto;
-  }
-  .instagram-feeds{
-    &.insta_feed{
-      .insta-box{
-        width: 100%;
-        height: auto;
-      }
-    }
-  }
-  .instagram-feeds.shop{
-    .insta-box{
-      width:100%;
-      height: auto;
-    }
-  }
-  .slider-wrapper.shop {
-    .insta-box{
-      width: auto;
-      height: 250px;
-    }
-  }
-  .screens-template {
-    .screen-template-wrap {
-      .content {
-        width: 321px;
-        height: 350px;
-
-        .inner-content {
-          .info-part{
-            width: 100%;
-            flex: auto;
-
-            a.wonka-btn {
-              margin: 0 !important;
-            }
-          }
-          .slider-part{
-            width: 100%;
-            max-width: 50%;
-            
-            div.owl-item {
-              width: 100% !important;
-            }
-          }
-        }
-      }
     }
   }
 }
