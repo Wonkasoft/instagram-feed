@@ -67,7 +67,7 @@ if (! function_exists('Insta_Feed_Install_Schema')) {
      */
     function Insta_Feed_Install_Schema()
     {
-        require_once(Insta_Feed_FILE . 'install.php');
+        require_once( Insta_Feed_FILE . 'install.php' );
         $obj = new Insta_Feed_Install_Schema();
         $obj->insta_feed_create_tables();
     }
