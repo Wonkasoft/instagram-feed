@@ -8,7 +8,7 @@
  * Author URI: https://wonkasoft.com
  * Domain Path: plugins/wonka-instagram-feed
  * License URI: https://store.wonkasoft.com/license.html
- * Text Domain: wonka_insta_feed
+ * Text Domain: wonkasoft_instafeed
  * WC requires at least: 3.0.0
  * WC tested up to: 3.3.x
  */

@@ -393,9 +393,9 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                                     return;
                                 }
                                 $product_content .= _e( '<div class="wonka-row">');
-                                $product_content .= _e( '<div class="col-12">');
+                                $product_content .= _e( '<div class="col-12"><p>');
                                 $product_content .= _e( $data['insta_pic'][0]['insta_message'] );
-                                $product_content .= _e( '</div>');
+                                $product_content .= _e( '</p></div>');
                                 $product_content .= _e( '</div>');
 
                                 $product_content .= _e( '<div class="wonka-row wonka-insta-link">');
@@ -406,7 +406,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                                 $product_content .= _e( '<h4 class="wonka-insta-title">' . $product_title . '</h4>' );
                                 $product_content .= _e( '<a href="' . $url . '" class="wonka-btn">');
-                                $product_content .= _e( 'Shop Our Instagram', 'wonka_insta_feed');
+                                $product_content .= _e( 'Shop Our Instagram', 'wonkasoft_instafeed');
                                 $product_content .= _e( '</a>');
 
                                 // echo '<li class="type-product status-publish product">';
