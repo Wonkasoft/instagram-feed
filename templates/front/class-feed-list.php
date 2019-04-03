@@ -177,9 +177,9 @@
 
                 <div id="dashboard_right_now" class="instagram instagram-feeds <?php echo $this->view; ?>">
 
-                    <div class="inside row wonka-row">
+                    <div class="inside">
 
-                        <div class="instagram-wrap col-12">
+                        <div class="instagram-wrap row wonka-row">
 
                             <?php
 
@@ -219,7 +219,7 @@
 
             ?>
 
-            <div class="insta-box" id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
+            <div class="insta-box col" id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
 
                 <?php echo $data['preview']; ?>
 

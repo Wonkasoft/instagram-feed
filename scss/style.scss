@@ -11,15 +11,14 @@ $white: #ffffff;
   .instagram-wrap{
     font-size: 0px;
 
-    .insta-box{
+    .insta-box {
       position: relative;
       display: inline-block;
       vertical-align: top;
       position: relative;
-      margin: 5px auto;
+      margin: 8px;
       height: 250px;
-      width: 250px;
-      @include prefix( box-shadow, $box_shadow_4, o moz webkit );
+      width: 49.3%;
 
       img{
         border-radius: 0px;
@@ -28,6 +27,7 @@ $white: #ffffff;
         height: 100%;
         object-fit: cover;
         object-position: top;
+        @include prefix( box-shadow, $box_shadow_4, o moz webkit );
       }
 
       .box-head {
@@ -118,6 +118,9 @@ $white: #ffffff;
             opacity: 1;
           }
         }
+      }
+      @include media-breakpoint-up( md ) {
+        width: 19.1%;
       }
     }
   }

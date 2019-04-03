@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Wonkasoft InstaFeed Extension for WooCommerce
- * Plugin URI: https://wonkasoft.com/wonkasoft-instafeed.html
+ * Plugin URI: https://wonkasoft.com/wonkasoft_instafeed.html
  * Description: Instagram Feed Extension for WooCommerce will add instagram images on product shop and dedicated pages on woocommerce store by use of instagram hashtags
  * Version: 1.0.0
  * Author: Wonkasoft
  * Author URI: https://wonkasoft.com
- * Domain Path: plugins/wonkasoft-instafeed
+ * Domain Path: plugins/wonkasoft_instafeed
  * License URI: https://wonkasoft.com/license.html
  * Text Domain: wonkasoft_instafeed
  * WC requires at least: 3.0.0

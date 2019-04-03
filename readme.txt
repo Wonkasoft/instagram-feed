@@ -16,7 +16,7 @@ Wonkasoft InstaFeed Extension for WooCommerce will add instagram images on produ
 
 == Installation ==
 
-1. Upload `wonkasoft-instafeed` folder to the `/wp-content/plugins/` directory
+1. Upload `wonkasoft_instafeed` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
