@@ -170,9 +170,12 @@
 
         function get_insta_tag_template()
         {
-
+            if( ! is_front_page() || ! is_home() ) :
           ?>
-          <h2 class="text-center">@Aperabags</h2>
+          <h2 class="text-center">#Aperabags</h2>
+          <?php
+            endif;
+          ?>
             <div id="wrapper">
 
                 <div id="dashboard_right_now" class="instagram instagram-feeds <?php echo $this->view; ?>">
