@@ -188,7 +188,7 @@
 
                                     <div class="box-head">
 
-                                        <span class="pic-author" title="publisher"><?php echo $author; ?></span>
+                                        <!-- <span class="pic-author" title="publisher"><?php echo $author; ?></span> -->
 
                                     </div>
 

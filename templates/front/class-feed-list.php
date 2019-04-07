@@ -226,7 +226,7 @@
                 <?php echo $data['preview']; ?>
 
                 <div class="box-head">
-                    <span class="pic-author" title="hashtag"><?php echo $data['tag_name']; ?></span>
+                    <!-- <span class="pic-author" title="hashtag"><?php echo $data['tag_name']; ?></span> -->
                 </div>
             </div>
 
