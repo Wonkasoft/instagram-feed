@@ -232,7 +232,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                                         <div class="box-head">
 
-                                            <span class="pic-author" title="publisher"><?php echo $author; ?></span>
+                                            <!-- <span class="pic-author" title="publisher"><?php echo $author; ?></span> -->
 
                                         </div>
 
@@ -341,7 +341,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                                 $insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message']: '';
 
-                                $preview = !empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher">'.$author.'</span></div><img src="'.$image.'" alt="'.$author.'" data-message="' . $insta_message . '" ></div>' : 'N/A';
+                                $preview = !empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher"></span></div><img src="'.$image.'" alt="'.$author.'" data-message="' . $insta_message . '" ></div>' : 'N/A';
 
                                 $data['insta_pic'][$tagKey] = array(
 

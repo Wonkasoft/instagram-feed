@@ -139,7 +139,7 @@
             }
 
 
-            if( !empty( $data ) ) {
+            if( ! empty( $data ) ) {
 
                 $shop_view = get_option('_insta_shop_view');
 
@@ -147,7 +147,7 @@
 
                     echo "<div class='slider-wrapper owl-carousel ".$this->view."'>";
 
-                        foreach ($data as $pdata) {
+                        foreach ( $data as $pdata ) {
 
                             $this->generate_media_list_html( $pdata );
 
@@ -170,9 +170,12 @@
 
         function get_insta_tag_template()
         {
-
+            if( ! is_front_page() || ! is_home() ) :
           ?>
-
+          <h2 class="text-center">#Aperabags</h2>
+          <?php
+            endif;
+          ?>
             <div id="wrapper">
 
                 <div id="dashboard_right_now" class="instagram instagram-feeds <?php echo $this->view; ?>">
@@ -187,9 +190,9 @@
 
                             $bool = $this->validate_tag_results( $results );
 
-                            if( $bool) {
+                            if( $bool ) {
 
-                                $this->setup_class_tag_data( $results);
+                                $this->setup_class_tag_data( $results );
 
                             } else {
 
@@ -212,7 +215,6 @@
 
            <?php
 
-
         }
 
         public function generate_media_list_html( $data ) {
@@ -224,7 +226,7 @@
                 <?php echo $data['preview']; ?>
 
                 <div class="box-head">
-                    <span class="pic-author" title="hashtag"><?php echo $data['tag_name']; ?></span>
+                    <!-- <span class="pic-author" title="hashtag"><?php echo $data['tag_name']; ?></span> -->
                 </div>
                 </div><!-- .img-wrap -->
             </div>
