@@ -221,7 +221,7 @@
 
             ?>
 
-            <div class="insta-box" id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
+            <div class="insta-box col-12 col-md-3" id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
                 <div class="img-wrap">
                 <?php echo $data['preview']; ?>
 
