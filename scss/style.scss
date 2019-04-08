@@ -20,61 +20,66 @@ $white: #ffffff;
       height: 250px;
       width: 49.3%;
 
-      img{
-        border-radius: 0px;
-        max-width: 100%;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top;
-        @include prefix( box-shadow, $box_shadow_4, o moz webkit );
-      }
+      .img-wrap {
+        position: relative;
 
-      .box-head {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.3);
-        width: 100%;
-        height: 100%;
-        top: 0;
-        @include prefix( transition, $trans_25, o moz webkit );
+        img{
+          border-radius: 0px;
+          max-width: 100%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top;
+          @include prefix( box-shadow, $box_shadow_4, o moz webkit );
+        }
 
-        &:after {
-          content: "Shop Now";
+        .box-head {
           position: absolute;
-          display: inline-flex;
+          display: flex;
           align-items: center;
           justify-content: center;
-          color: #ffffff;
-          background: rgba( #4391af, .9 );
-          top: 0;
-          height: 0;
+          background: rgba(0, 0, 0, 0.3);
           width: 100%;
-          opacity: 0;
-          @include font-size(1.2);
+          height: 100%;
+          top: 0;
           @include prefix( transition, $trans_25, o moz webkit );
 
-        }
-
-        &:hover {
-          background: rgba(0, 0, 0, 0.5);
-
           &:after {
-            height: 100%;
-            opacity: 1;
-          }
-        }
+            content: "Shop Now";
+            position: absolute;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            background: rgba( #4391af, .9 );
+            top: 0;
+            height: 0;
+            width: 100%;
+            opacity: 0;
+            @include font-size(1.2);
+            @include prefix( transition, $trans_25, o moz webkit );
 
-        .pic-author{
-          color: $white;
-          font-size: 16px;
-          position: absolute;
-          bottom: 10px;
-          left: 10px;
-          font-weight: bold;
-        }
+          }
+
+          &:hover {
+            background: rgba(0, 0, 0, 0.5);
+
+            &:after {
+              height: 100%;
+              opacity: 1;
+            }
+          }
+
+          .pic-author{
+            color: $white;
+            font-size: 16px;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-weight: bold;
+          }
+      }
+
         .count-pic{
           display: inline-block;
           font-size: 16px;

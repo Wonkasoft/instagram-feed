@@ -219,13 +219,14 @@
 
             ?>
 
-            <div class="insta-box col" id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
-
+            <div class="insta-box" id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
+                <div class="img-wrap">
                 <?php echo $data['preview']; ?>
 
                 <div class="box-head">
                     <span class="pic-author" title="hashtag"><?php echo $data['tag_name']; ?></span>
                 </div>
+                </div><!-- .img-wrap -->
             </div>
 
             <?php
