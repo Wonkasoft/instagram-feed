@@ -394,19 +394,19 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                                 if ( empty( $product ) || ! $product->is_visible() ) {
                                     return;
                                 }
-                                $product_content .= _e( '<div class="wonka-row wonka-insta-site-logo">');
+                                $product_content .= _e( '<div class="wonka-insta-row wonka-insta-site-logo">');
                                 $product_content .= _e( '<div class="col-12">');
                                 $product_content .= _e( '<img class="wonka-insta-logo-img" src="' . $logo . '" />');
                                 $product_content .= _e( '<div class="wonka-insta-site-info">@' . $site_name . '</div>');
                                 $product_content .= _e( '</div>');
                                 $product_content .= _e( '</div>');
-                                $product_content .= _e( '<div class="wonka-row wonka-insta-message">');
+                                $product_content .= _e( '<div class="wonka-insta-row wonka-insta-message">');
                                 $product_content .= _e( '<div class="col-12"><p>');
                                 $product_content .= _e( $data['insta_pic'][0]['insta_message'] );
                                 $product_content .= _e( '</p></div>');
                                 $product_content .= _e( '</div>');
 
-                                $product_content .= _e( '<div class="wonka-row wonka-insta-link">');
+                                $product_content .= _e( '<div class="wonka-insta-row wonka-insta-link">');
                                 $product_content .= _e( '<div class="col-12">');
 
                                 $product_title = get_the_title( $product->get_id() );

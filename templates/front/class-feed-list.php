@@ -182,7 +182,7 @@
 
                     <div class="inside">
 
-                        <div class="instagram-wrap row wonka-row">
+                        <div class="instagram-wrap row wonka-insta-row">
 
                             <?php
 
