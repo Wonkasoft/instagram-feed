@@ -30,7 +30,7 @@ if (! class_exists('Insta_Front_Function_Handler')) {
 
             add_shortcode('instagram_shop_feed', array( $this, 'add_instagram_shop_feeds') );
 
-            add_action('woocommerce_after_shop_loop', array( $this, 'add_instagram_shop_feeds') );
+            // add_action('woocommerce_after_shop_loop', array( $this, 'add_instagram_shop_feeds') );
 
             add_action('woocommerce_after_single_product_summary', array( $this, 'instagram_feeds_single_product_page'), 80 );
         }
