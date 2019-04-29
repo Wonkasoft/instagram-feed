@@ -210,7 +210,7 @@
 
                         <div class="instabox-footer">
                             <input type="hidden" value="<?php echo '1'; ?>" name="paged">
-                            <button class="in-load-more" data-product-id="<?php echo $product_id;?>" id="<?php echo $mvalue['tag_id']; ?>"><?php echo __('View More', 'insta_feed'); ?></button>
+                            <button class="in-load-more wonka-btn" data-product-id="<?php echo $product_id;?>" id="<?php echo $mvalue['tag_id']; ?>"><?php echo __('View More', 'insta_feed'); ?></button>
                         </div>
 
                         <?php
