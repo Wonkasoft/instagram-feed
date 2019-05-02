@@ -56,7 +56,7 @@ $white: #ffffff;
             align-items: center;
             justify-content: center;
             color: #ffffff;
-            background: rgba( #0000FF, .9 );
+            background: rgba( #52abf6, .9 );
             top: 0;
             height: 0;
             width: 100%;
@@ -105,8 +105,8 @@ $white: #ffffff;
           padding: .5rem 1rem;
           text-align: center;
           border-radius: 100px;
-          background: rgba( #4646fa, 1 );
-          border: 2px outset #eeeeee;
+          background: rgba( #52abf6, 1 );
+          border: 2px solid #52abf6;
           opacity: 0;
           @include font-size( 1 );
           @include prefix( box-shadow, $box_shadow_4, o moz webkit );
@@ -114,10 +114,10 @@ $white: #ffffff;
           @include prefix( transition, $trans_25, o moz webkit );
 
           &:hover {
-          border: 2px outset #eeeeee;
-          background: #4646fa;
-          color: rgba(255, 255, 255, .8);
-          @include prefix( text-shadow, 1px 1px 3px rgba(#000, .9 ), o moz webkit );
+            background: rgba( #5858e4, 1 );
+            border-color: #5858e4;
+            color: rgba(255, 255, 255, .8);
+            @include prefix( text-shadow, 1px 1px 3px rgba(#000, .9 ), o moz webkit );
           }
         }
       }
