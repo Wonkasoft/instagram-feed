@@ -52,8 +52,15 @@ var $ws = jQuery.noConflict();
                             if( data.insta_products != undefined && data.insta_products ) {
 
                                 $ws(".info-part .insta-tag-products").empty().html(data.insta_products);
-                                document.querySelector(".info-part").classList.add( 'loaded' );
-                                document.querySelector(".slider-part").classList.add( 'loaded' );
+                                if ( document.querySelector( ".info-part" ) ) 
+                                {
+                                    document.querySelector( ".info-part" ).classList.add( 'loaded' );
+                                }
+
+                                if ( document.querySelector( ".slider-part" ) ) 
+                                {
+                                    document.querySelector( ".slider-part" ).classList.add( 'loaded' );
+                                }
                                 /*==========================================================
                                 =            adding span tags for the hash tags            =
                                 ==========================================================*/
@@ -145,8 +152,6 @@ var $ws = jQuery.noConflict();
 
             setTimeout( function() {
                 $ws("#sliderHolder").empty();
-                document.querySelector(".info-part").classList.remove( 'loaded' );
-                document.querySelector(".slider-part").classList.remove( 'loaded' );
             }, 500 );
 
         });
