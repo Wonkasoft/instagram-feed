@@ -83,11 +83,16 @@ var $ws = jQuery.noConflict();
                                 message_el.html( new_message );
                                 /*=====  End of adding span tags for the hash tags  ======*/
                             }
-
+                            /*===== Slick Slider added to the instagram feed =====*/
                             $ws(".insta-modal.slider-wrapper").empty().html(content);
-                            $ws(".insta-modal.owl-carousel").owlCarousel({
-                                navigation:true,
-                                singleItem : true,
+                            $ws( '.insta-modal.slider-wrapper' ).slick({
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                adaptiveHeight: false,
+                                mobileFirst: true,
+                                dots: false,
+                                prevArrow: '<button class="slick-prev" type="button"><i class="far fa-arrow-alt-circle-left"></i></button>',
+                                nextArrow: '<button class="slick-next" type="button"><i class="far fa-arrow-alt-circle-right"></i></button>',
                             });
 
                             $ws(document).find(".wsgrid-squeezy .ws-loader").removeClass('preload').empty();
@@ -101,10 +106,10 @@ var $ws = jQuery.noConflict();
             }
         });
 
-        $ws(".shop.owl-carousel").owlCarousel({
-            navigation:true,
-            items : 3,
-        });
+        // $ws(".shop.owl-carousel").owlCarousel({
+        //     navigation:true,
+        //     items : 3,
+        // });
 
         $ws(".in-load-more").on("click", function() {
 
@@ -158,5 +163,10 @@ var $ws = jQuery.noConflict();
 
     });
 
+
+    if ( document.querySelector('div.wonka-insta-row.wonka-insta-message') )
+    {
+
+    }
 
 })($ws)
