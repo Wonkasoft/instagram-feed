@@ -10,7 +10,7 @@
  * License URI: https://wonkasoft.com/license.html
  * Text Domain: wonkasoft_instafeed
  * WC requires at least: 3.0.0
- * WC tested up to: 3.3.x
+ * WC tested up to: 5.2.x
  */
 
 if (!defined('ABSPATH')) {
@@ -83,7 +83,6 @@ if (!class_exists('Woocommerce_Insta_Feed')) {
     {
         public function __construct()
         {
-
             add_action('insta_feed_init', array($this, 'insta_feed_includes'));
             load_plugin_textdomain( 'insta_feed', false, Insta_Feed_FILE . '/languages' );
         }
