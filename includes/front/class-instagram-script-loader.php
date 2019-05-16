@@ -37,9 +37,20 @@ if (! class_exists('Instagram_Script_Loader')) {
         public function wkcEnqueueScripts_Public()
         {
             wp_enqueue_style('insta-style', Insta_Feed_URL . 'assets/css/style.css');
-            wp_enqueue_style('owl-style', Insta_Feed_URL . 'assets/css/owl.carousel.min.css');
-            wp_enqueue_script('owl-script', Insta_Feed_URL . 'assets/js/owl.carousel.min.js', array( 'jquery' ), Insta_Feed_SCRIPT_VERSION);
-            wp_enqueue_script('insta-script', Insta_Feed_URL . 'assets/js/plugin.js', array( 'jquery' ));
+
+            if ( ! wp_style_is('slick-js-style') )
+            {
+                wp_enqueue_style( 'slick-js-style', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'slick/slick.css' ) );
+            }
+            if ( ! wp_style_is('slick-js-theme-style') )
+            {
+                wp_enqueue_style( 'slick-js-theme-style', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'slick/slick-theme.css' ) );
+            }
+            if ( ! wp_style_is( get_option( "stylesheet" ) . '-slick-js') )
+            {
+                wp_enqueue_script( WONKA_INSTA_FEED_NAME . '-slick-js', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'slick/slick.min.js' ), array( 'jquery' ), 'all', true );
+            }
+            wp_enqueue_script('insta-script', Insta_Feed_URL . 'assets/js/plugin.js', array( 'jquery', WONKA_INSTA_FEED_NAME . '-slick-js' ), time(), true );
             wp_localize_script('insta-script', 'insta_script', array(
                 'insta_admin_ajax' => admin_url('admin-ajax.php'),
                 'insta_api_nonce' => wp_create_nonce('insta-ajaxnonce')
@@ -52,10 +63,10 @@ if (! class_exists('Instagram_Script_Loader')) {
         */
         public function wkcEnqueueScripts_Admin()
         {
-            wp_enqueue_script('select2-js', plugins_url().'/woocommerce/assets/js/select2/select2.min.js',array('jquery'));
+            wp_enqueue_script('select2-js', plugins_url().'/woocommerce/assets/js/select2/select2.min.js',array('jquery'), time(), true);
 	        wp_enqueue_style('select2', plugins_url().'/woocommerce/assets/css/select2.css');
             wp_enqueue_style('admin-style', Insta_Feed_URL . 'assets/css/admin.css', Insta_Feed_SCRIPT_VERSION);
-            wp_enqueue_script('admin-script', Insta_Feed_URL . 'assets/js/admin.js', Insta_Feed_SCRIPT_VERSION);
+            wp_enqueue_script('admin-script', Insta_Feed_URL . 'assets/js/admin.js', Insta_Feed_SCRIPT_VERSION, time(), true);
             wp_localize_script( 'admin-script', 'insta_script', array( 'insta_admin_ajax' => admin_url( 'admin-ajax.php' ), 'insta_api_nonce' => wp_create_nonce('insta-ajaxnonce')) );
 
         }

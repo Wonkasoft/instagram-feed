@@ -19,6 +19,8 @@ if (!defined('ABSPATH')) {
 
 function define_constants(){
 
+    ! defined('WONKA_INSTA_FEED_NAME') && define('WONKA_INSTA_FEED_NAME', 'wonkasoft_instafeed');
+
     ! defined('Insta_Feed_URL') && define('Insta_Feed_URL', plugin_dir_url(__FILE__));
 
     ! defined('Insta_Feed_FILE') && define('Insta_Feed_FILE', plugin_dir_path(__FILE__));

@@ -276,11 +276,11 @@
                                 <div class="inner-content">
 
                                     <div class="info-part">
-                                        <div class="insta-tag-products">{{tagProducts}}</div>
+                                        <div class="insta-tag-products"></div>
                                     </div>
 
                                     <div class="slider-part">
-                                        <div class="insta-modal slider-wrapper owl-carousel">{{sliderItems}}</div>
+                                        <div class="insta-modal slider-wrapper owl-carousel"></div>
                                     </div>
 
                                 </div>
