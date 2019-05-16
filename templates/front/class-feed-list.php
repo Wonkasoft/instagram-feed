@@ -221,7 +221,7 @@
 
             ?>
 
-            <div class="insta-box p-2 w-20" id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
+            <div class="insta-box p-2 w-20" id="wonka-box-<?php echo $data['tag_id']; ?>" data-tag-id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
                 <div class="img-wrap">
                 <?php echo $data['preview']; ?>
 

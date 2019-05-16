@@ -161,17 +161,17 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                 $custom_options = get_post_meta($product_id,'insta_product_meta',true);
                 $visiblity_array = $status_array = array();
 
-                if( !empty( $tag_id ) && !empty($product_id) && !empty($paged) ) {
+                if( ! empty( $tag_id ) && ! empty($product_id) && ! empty($paged) ) {
 
                     $res = $this->is_tag_valid($tag_id);
 
                     if( $res ) {
 
-                        $linked_product = !empty( $res['linked_products'] ) ? maybe_unserialize( $res['linked_products'] ) : '';
+                        $linked_product = ! empty( $res['linked_products'] ) ? maybe_unserialize( $res['linked_products'] ) : '';
 
-                        if( !empty( $linked_product ) && in_array( $product_id, $linked_product ) ) {
+                        if( ! empty( $linked_product ) && in_array( $product_id, $linked_product ) ) {
 
-                            if( !empty( $custom_options ) ) {
+                            if( ! empty( $custom_options ) ) {
 
                                 if( isset( $custom_options['status'] ) ) {
                                     $status_array = $custom_options['status'];
@@ -196,7 +196,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                             $media = $tag_data->insta_get_tag_media( $per_page, $limit);
 
-                            if( !empty( $media ) ) {
+                            if( ! empty( $media ) ) {
 
                                 ob_start();
 

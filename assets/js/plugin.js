@@ -7,14 +7,14 @@ var $ws = jQuery.noConflict();
 
         $ws(".box-head").on("click", function() {
 
-            var tag_id = $ws(this).closest('.insta-box').attr('id');
+            var tag_id = $ws(this).closest('.insta-box').attr('data-tag-id');
             tag_id = parseInt( tag_id );
 
             if( tag_id ) {
                 var slideTemp = '';
                 var sliderHolder = $ws("#sliderHolder");
                 var slidertemplate = $ws("#screenSliderTemplate").html();
-                slideTemp += slidertemplate.replace( "{{id}}", tag_id);
+                slideTemp += slidertemplate.replace( "{{data-tag-id}}", tag_id);
 
                 $ws(sliderHolder).empty().html(slideTemp);
 
