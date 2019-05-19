@@ -106,11 +106,6 @@ var $ws = jQuery.noConflict();
             }
         });
 
-        // $ws(".shop.owl-carousel").owlCarousel({
-        //     navigation:true,
-        //     items : 3,
-        // });
-
         $ws(".in-load-more").on("click", function() {
 
             var tag_id = $ws(this).attr('id');

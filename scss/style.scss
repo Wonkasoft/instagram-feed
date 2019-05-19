@@ -199,114 +199,51 @@ $white: #ffffff;
       }
     }
 
-    .wsgrid-squeezy {
-      width: 100%;
-      height: 100%;
-      margin: 0 auto;
-      position: relative;
-
-    }
 
     .content {
       position: relative;
       width: 100%;
-      height: 500px;
+      height: 600px;
       max-width: 1200px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       border-radius: 8px;
       overflow: hidden;
       @include prefix( box-shadow, $box_shadow_4, o moz webkit );
       @include prefix( transition, $trans_25, o moz webkit );
 
-      .inner-content {
-        position: relative;
+      .wsgrid-squeezy {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
-        flex-direction: column-reverse;
         height: 100%;
         width: 100%;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .inner-content {
+        flex: 0 0 100%;
+        position: relative;
+        height: 100%;
         background-color: $white;
 
         .slider-part {
-          flex: .2 .6 65%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          flex: 0 .65 65%;
           position: relative;
-          height: 100%;
-          width: 100%;
-          max-width: 100%;
           opacity: 0;
+          z-index: 100;
           @include prefix( transition, $trans_25, o moz webkit );
 
           &.loaded {
             opacity: 1;
           }
 
-          .slider-wrapper{
-            height: 100%;
-            width: 100%;
+          .slider-wrapper {
+            flex: 0 0 100%;
+            @include prefix( box-shadow, $box_shadow_5, o moz webkit );
 
-            .owl-wrapper-outer {
-              height: 100%;
-              width: 100%;
-              @include prefix( box-shadow, $box_shadow_5, o moz webkit );
-
-              .owl-wrapper {
-                width: 100% !important;
-                height: 100%;
-                max-width: 100%;
-
-                .owl-item {
-                  width: 100% !important;
-                  height: 100%;
-                  max-width: 100%;
-                  @include prefix( transition, $trans_25, o moz webkit );
-
-                  .item {
-                    height: 100%;
-                    @include prefix( transition, $trans_25, o moz webkit );
-
-                    .box-head{
-                      position: absolute;
-                      width: 100%;
-                      top: 0;
-                      height: 100%;
-                      @include prefix( transition, $trans_25, o moz webkit );
-
-                      span.pic-author{
-                        color: $white;
-                        @include font-size( 1.1 );
-                        position: absolute;
-                        bottom: 15px;
-                        left: 15px;
-                        font-weight: 600;
-                        @include prefix( transition, $trans_25, o moz webkit );
-                      }
-                    }
-                  }
-                }
-              }
+            .item {
+              @include prefix( transition, $trans_25, o moz webkit );
             }
-
-            .owl-controls{
-
-              .owl-buttons {
-
-              }
-
-              .owl-prev{
-                background-image: url('../images/arrow.png');
-
-              }
-              .owl-next{
-                background-image: url('../images/arrow.png');
-              }
-            }
-
           }
           img{
             width: 100%;
@@ -314,11 +251,12 @@ $white: #ffffff;
             object-fit: cover;
           }
         }
+
         .info-part {
           position: relative;
-          flex: 0 0.8 40%;
+          flex: 0 .4 40%;
           padding: 0;
-          height: 100%;
+          height: 26%;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -409,22 +347,26 @@ $white: #ffffff;
               width: 100%;
             }
           }
-
-          ul.products li.product{
-            width: 45%;
-            display: inline-block;
-            float: none;
-            vertical-align: top;
-            margin-right: 4%;
-            margin-bottom: 10px;
-          }
         }
 
         @include media-breakpoint-up( md ) {
-          flex-direction: row-reverse;
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+          .slider-part {
+            flex: 0 1 65%;
+            height: 100%;
+            width: 65%;
+
+            .slider-wrapper {
+              height: 100%;
+            }
+          }
 
           .info-part {
-            flex: 0.1 0.1 43%;
+            flex: 0 1 40%;
+            height: 100%;
 
             .wonka-insta-site-logo {
               flex: 1 100%;
@@ -443,14 +385,9 @@ $white: #ffffff;
               }
             }
           }
+        }
 
-          .slider-part {
-            flex: 0.8 100%;
-
-            .slider-wrapper {
-
-            }
-          }
+        @include media-breakpoint-up( md) {
         }
       }
     }
