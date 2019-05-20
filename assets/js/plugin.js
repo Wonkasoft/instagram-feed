@@ -102,15 +102,15 @@ var $ws = jQuery.noConflict();
                       }
 
                     }
-                })
+                });
             }
         });
 
         $ws(".in-load-more").on("click", function() {
 
-            var tag_id = $ws(this).attr('id');
-            var product_id = $ws(this).data('product-id');
-            var paged = $ws("input[name='paged']").val();
+            var tag_id = $ws( this ).attr('id');
+            var product_id = $ws( this ).data('product-id');
+            var paged = $ws( "input[name='paged']" ).val();
 
             paged = parseInt(paged);
 
