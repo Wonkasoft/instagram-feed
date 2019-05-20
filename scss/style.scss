@@ -265,6 +265,7 @@ $white: #ffffff;
           align-items: center;
           justify-content: center;
           overflow-y: auto;
+          width: 100%;
           opacity: 0;
           background: #fafafa;
           @include prefix( transition, $trans_25, o moz webkit );
@@ -279,6 +280,7 @@ $white: #ffffff;
             justify-content: space-around;
             flex-wrap: wrap;
             height: 100%;
+            width: 100%;
             @include prefix( transition, $trans_25, o moz webkit );
 
             .wonka-insta-site-logo {

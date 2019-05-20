@@ -380,8 +380,6 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                             ob_start();
 
-                            // $product_content .=  woocommerce_product_loop_start();
-
                             while ( $the_query->have_posts() ) {
 
                                 $the_query->the_post();
@@ -401,9 +399,11 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                                 $product_content .= _e( '</div>');
                                 $product_content .= _e( '</div>');
                                 $product_content .= _e( '<div class="wonka-insta-row wonka-insta-message">');
-                                $product_content .= _e( '<div class="col-12"><p>');
-                                $product_content .= _e( $data['insta_pic'][0]['insta_message'] );
-                                $product_content .= _e( '</p></div>');
+                                foreach ( $data['insta_pic'] as $insta_img ) {
+                                    $product_content .= _e( '<div class="col-12" wonka-insta-message="' . $insta_img['id'] . '"><p>');
+                                    $product_content .= _e( $insta_img['insta_message'] );
+                                    $product_content .= _e( '</p></div>');
+                                }
                                 $product_content .= _e( '</div>');
 
                                 $product_content .= _e( '<div class="wonka-insta-row wonka-insta-link">');
@@ -417,50 +417,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                                 $product_content .= _e( 'Shop This Bag', 'wonkasoft_instafeed');
                                 $product_content .= _e( '</a>');
 
-                                // echo '<li class="type-product status-publish product">';
-
-                                    /**
-                                     * Hook: woocommerce_before_shop_loop_item.
-                                     *
-                                     * @hooked woocommerce_template_loop_product_link_open - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_before_shop_loop_item' );
-
-                                    /**
-                                     * Hook: woocommerce_before_shop_loop_item_title.
-                                     *
-                                     * @hooked woocommerce_show_product_loop_sale_flash - 10
-                                     * @hooked woocommerce_template_loop_product_thumbnail - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_before_shop_loop_item_title' );
-
-                                    /**
-                                     * Hook: woocommerce_shop_loop_item_title.
-                                     *
-                                     * @hooked woocommerce_template_loop_product_title - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_shop_loop_item_title' );
-
-                                    /**
-                                     * Hook: woocommerce_after_shop_loop_item_title.
-                                     *
-                                     * @hooked woocommerce_template_loop_rating - 5
-                                     * @hooked woocommerce_template_loop_price - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_after_shop_loop_item_title' );
-
-                                    /**
-                                     * Hook: woocommerce_after_shop_loop_item.
-                                     *
-                                     * @hooked woocommerce_template_loop_product_link_close - 5
-                                     * @hooked woocommerce_template_loop_add_to_cart - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_after_shop_loop_item' );
-
-                                // echo '</li>';
-
                             }
-                            // $product_content .= woocommerce_product_loop_end();
                             $product_content .= _e( '</div>');
                             $product_content .= _e( '</div>');
 
