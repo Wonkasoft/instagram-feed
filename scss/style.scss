@@ -164,7 +164,7 @@ $white: #ffffff;
     width: 100%;
     max-width: 1200px;
     top: 25px;
-    padding: 15px;
+    padding: 16px;
     @include prefix( transition, $trans_25, o moz webkit );
 
     .close-icon {
@@ -390,6 +390,7 @@ $white: #ffffff;
   @include media-breakpoint-up( md ) {
     overflow: hidden;
     align-items: center;
+    top: 0;
 
     .screen-template-wrap {
       height: 75%;
