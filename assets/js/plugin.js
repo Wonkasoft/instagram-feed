@@ -85,7 +85,7 @@ var $ws = jQuery.noConflict();
                             }
                             /*===== Slick Slider added to the instagram feed =====*/
                             $ws(".insta-modal.slider-wrapper").empty().html(content);
-                            if ( $ws("..insta-modal.slider-wrapper").children.length > 1 ) 
+                            if ( $ws(".insta-modal.slider-wrapper").children.length > 1 ) 
                             {
                                 $ws( '.insta-modal.slider-wrapper' ).slick({
                                     slidesToShow: 1,
