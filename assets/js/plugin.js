@@ -90,10 +90,10 @@ var $ws = jQuery.noConflict();
                             var item_height;
                             var insta_item_imgs = $ws( '.insta-modal.slider-wrapper .item img' );
                             var insta_screen_temp_wrap = $ws( '.screen-template-wrap' );
-                            
+
                             insta_item_imgs.each( function() 
                                 {
-                                    if ( window.innerWidth > 768 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
+                                    if ( window.innerWidth > 768 && $ws( this ).height() > 100 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
                                     {
                                         item_height = $ws( this ).height();
                                         insta_screen_temp_wrap.height( item_height - 3 + 'px' );
@@ -136,7 +136,7 @@ var $ws = jQuery.noConflict();
         $ws(".in-load-more").on("click", function() {
 
             var tag_id = $ws( this ).attr('id');
-            var product_id = $ws( this ).data('product-id');
+            var product_id = $ws( this ).data( 'product-id' );
             var paged = $ws( "input[name='paged']" ).val();
 
             paged = parseInt(paged);
@@ -178,17 +178,14 @@ var $ws = jQuery.noConflict();
         $ws(document).on("click", ".close-icon", () => {
 
             setTimeout( function() {
-                $ws("#sliderHolder").empty();
+                $ws( "#sliderHolder" ).empty();
             }, 500 );
 
         });
 
+        if ( document.querySelector( 'main.main-shop-our-instagram' ) )
+        {
+
+        }
     });
-
-
-    if ( document.querySelector('div.wonka-insta-row.wonka-insta-message') )
-    {
-
-    }
-
 })($ws)
