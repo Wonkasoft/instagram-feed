@@ -8,6 +8,7 @@
 $white: #ffffff;
 
 .instagram-feeds{
+
   .instagram-wrap{
     font-size: 0px;
 
@@ -135,6 +136,7 @@ $white: #ffffff;
     }
   }
 }
+
 .instagram-feeds.shop{
   margin: 30px 0px;
 
@@ -394,6 +396,21 @@ $white: #ffffff;
 
     .screen-template-wrap {
       height: 75%;
+    }
+
+    .slick-slider {
+      overflow: hidden;
+
+      &:hover {
+
+        .slick-prev {
+          left: 0;
+        }
+
+        .slick-next {
+          right: 0;
+        }
+      }
     }
   }
 }
