@@ -84,6 +84,20 @@ var $ws = jQuery.noConflict();
                                 /*=====  End of adding span tags for the hash tags  ======*/
                             }
                             /*===== Slick Slider added to the instagram feed =====*/
+                            var item_height;
+                            var insta_item_imgs = $ws( '.insta-modal.slider-wrapper .item img' );
+                            var insta_screen_temp_wrap = $ws( '.screen-template-wrap' );
+                            insta_item_imgs.each( function() 
+                                {
+                                    console.log( $ws( this ) );
+                                    console.log( $ws( this ).height() );
+                                    if ( window.innerWidth > 768 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
+                                    {
+                                        item_height = $ws( this ).height();
+                                        insta_screen_temp_wrap.height( item_height + 'px' );
+                                    }
+                                });
+                            
                             $ws(".insta-modal.slider-wrapper").empty().html(content);
                             $ws( '.insta-modal.slider-wrapper' ).slick({
                                 slidesToShow: 1,
@@ -106,17 +120,6 @@ var $ws = jQuery.noConflict();
                                 asNavFor: '.insta-modal.slider-wrapper',
                             });
 
-                            var item_height;
-                            var insta_items = $ws( '.insta-modal.slider-wrapper .item' );
-                            var insta_screen_temp_wrap = $ws( '.screen-template-wrap' );
-                            insta_items.each( function() 
-                                {
-                                    if ( window.innerWidth > 768 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
-                                    {
-                                        item_height = $ws( this ).height();
-                                        insta_screen_temp_wrap.height( item_height + 'px' );
-                                    }
-                                });
 
                             $ws( document ).find( ".wsgrid-squeezy .ws-loader" ).removeClass( 'preload' ).empty();
 
