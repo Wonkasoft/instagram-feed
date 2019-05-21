@@ -92,8 +92,6 @@ var $ws = jQuery.noConflict();
                             var insta_screen_temp_wrap = $ws( '.screen-template-wrap' );
                             insta_item_imgs.each( function() 
                                 {
-                                    console.log( $ws( this ) );
-                                    console.log( $ws( this ).height() );
                                     if ( window.innerWidth > 768 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
                                     {
                                         item_height = $ws( this ).height();
