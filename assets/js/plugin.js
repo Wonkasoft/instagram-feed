@@ -90,6 +90,7 @@ var $ws = jQuery.noConflict();
                             var item_height;
                             var insta_item_imgs = $ws( '.insta-modal.slider-wrapper .item img' );
                             var insta_screen_temp_wrap = $ws( '.screen-template-wrap' );
+                            
                             insta_item_imgs.each( function() 
                                 {
                                     if ( window.innerWidth > 768 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
@@ -98,6 +99,7 @@ var $ws = jQuery.noConflict();
                                         insta_screen_temp_wrap.height( item_height - 3 + 'px' );
                                     }
                                 });
+
                             $ws( '.insta-modal.slider-wrapper' ).slick({
                                 slidesToShow: 1,
                                 slidesToScroll: 1,
