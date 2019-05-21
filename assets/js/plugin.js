@@ -85,25 +85,28 @@ var $ws = jQuery.noConflict();
                             }
                             /*===== Slick Slider added to the instagram feed =====*/
                             $ws(".insta-modal.slider-wrapper").empty().html(content);
-                            $ws( '.insta-modal.slider-wrapper' ).slick({
-                                slidesToShow: 1,
-                                slidesToScroll: 1,
-                                adaptiveHeight: false,
-                                mobileFirst: true,
-                                dots: false,
-                                prevArrow: '<button class="slick-prev" type="button"><i class="far fa-arrow-alt-circle-left"></i></button>',
-                                nextArrow: '<button class="slick-next" type="button"><i class="far fa-arrow-alt-circle-right"></i></button>',
-                                asNavFor: '.wonka-insta-message',
-                            });
-                            $ws( '.wonka-insta-message' ).slick({
-                                slidesToShow: 1,
-                                slidesToScroll: 1,
-                                adaptiveHeight: true,
-                                mobileFirst: true,
-                                dots: false,
-                                arrows: false,
-                                asNavFor: '.insta-modal.slider-wrapper',
-                            });
+                            if ( $ws("..insta-modal.slider-wrapper").children.length > 1 ) 
+                            {
+                                $ws( '.insta-modal.slider-wrapper' ).slick({
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    adaptiveHeight: true,
+                                    mobileFirst: true,
+                                    dots: false,
+                                    prevArrow: '<button class="slick-prev" type="button"><i class="far fa-arrow-alt-circle-left"></i></button>',
+                                    nextArrow: '<button class="slick-next" type="button"><i class="far fa-arrow-alt-circle-right"></i></button>',
+                                    asNavFor: '.wonka-insta-message',
+                                });
+                                $ws( '.wonka-insta-message' ).slick({
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1,
+                                    adaptiveHeight: true,
+                                    mobileFirst: true,
+                                    dots: false,
+                                    arrows: false,
+                                    asNavFor: '.insta-modal.slider-wrapper',
+                                });
+                            }
 
                             $ws(document).find(".wsgrid-squeezy .ws-loader").removeClass('preload').empty();
 
