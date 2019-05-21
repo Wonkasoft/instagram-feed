@@ -179,6 +179,7 @@ $white: #ffffff;
     justify-content: center;
     width: 100%;
     max-width: 1200px;
+    height: 90%;
     padding: 15px;
     @include prefix( transition, $trans_25, o moz webkit );
 
@@ -203,7 +204,7 @@ $white: #ffffff;
     .content {
       position: relative;
       width: 100%;
-      height: 600px;
+      height: 100%;
       max-width: 1200px;
       border-radius: 8px;
       overflow: hidden;
