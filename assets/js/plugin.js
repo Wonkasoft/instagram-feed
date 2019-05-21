@@ -114,11 +114,11 @@ var $ws = jQuery.noConflict();
                                     if ( window.innerWidth > 768 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
                                     {
                                         item_height = $ws( this ).height();
+                                        insta_screen_temp_wrap.height( item_height + 'px' );
                                     }
                                 });
-                            insta_screen_temp_wrap.height( item_height + 'px' );
 
-                            $ws(document).find(".wsgrid-squeezy .ws-loader").removeClass('preload').empty();
+                            $ws( document ).find( ".wsgrid-squeezy .ws-loader" ).removeClass( 'preload' ).empty();
 
                         }
 
