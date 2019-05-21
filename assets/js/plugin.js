@@ -84,6 +84,9 @@ var $ws = jQuery.noConflict();
                                 /*=====  End of adding span tags for the hash tags  ======*/
                             }
                             /*===== Slick Slider added to the instagram feed =====*/
+
+                            $ws(".insta-modal.slider-wrapper").empty().html(content);
+                            
                             var item_height;
                             var insta_item_imgs = $ws( '.insta-modal.slider-wrapper .item img' );
                             var insta_screen_temp_wrap = $ws( '.screen-template-wrap' );
@@ -97,8 +100,6 @@ var $ws = jQuery.noConflict();
                                         insta_screen_temp_wrap.height( item_height + 'px' );
                                     }
                                 });
-                            
-                            $ws(".insta-modal.slider-wrapper").empty().html(content);
                             $ws( '.insta-modal.slider-wrapper' ).slick({
                                 slidesToShow: 1,
                                 slidesToScroll: 1,
