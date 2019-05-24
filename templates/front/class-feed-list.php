@@ -54,7 +54,7 @@
 
         public function validate_tag_results( $results ) {
 
-            if( empty($results ) ) {
+            if( empty( $results ) ) {
 
                 $message = __( 'Instagrams tags are not available', 'insta_feed' );
 
@@ -113,7 +113,7 @@
 
                         $image = isset( $images ) ? $images : '';
 
-                        $preview = !empty( $image ) ? '<img src="'.$image.'" alt="'.$author.'" >' : 'N/A';
+                        $preview = !empty( $image ) ? '<img src="' . $image . '" alt="' . $author . '" >' : 'N/A';
 
                         array_push( $data, array(
 
@@ -145,7 +145,7 @@
 
                 if( $shop_view === '0' && !empty( $this->view) && $this->view == 'shop') {
 
-                    echo "<div class='slider-wrapper owl-carousel ".$this->view."'>";
+                    echo "<div class='slider-wrapper ".$this->view."'>";
 
                         foreach ( $data as $pdata ) {
 

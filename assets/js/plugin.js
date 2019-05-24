@@ -90,9 +90,21 @@ var $ws = jQuery.noConflict();
                                 slidesToScroll: 1,
                                 adaptiveHeight: false,
                                 mobileFirst: true,
+                                respondTo: 'min',
+                                asNavFor: '.wonka-insta-row.wonka-insta-message',
                                 dots: false,
                                 prevArrow: '<button class="slick-prev" type="button"><i class="far fa-arrow-alt-circle-left"></i></button>',
                                 nextArrow: '<button class="slick-next" type="button"><i class="far fa-arrow-alt-circle-right"></i></button>',
+                            });
+                            $ws( '.wonka-insta-row.wonka-insta-message' ).slick({
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                adaptiveHeight: false,
+                                mobileFirst: true,
+                                respondTo: 'min',
+                                asNavFor: '.insta-modal.slider-wrapper',
+                                dots: false,
+                                arrows: false,
                             });
 
                             $ws(document).find(".wsgrid-squeezy .ws-loader").removeClass('preload').empty();

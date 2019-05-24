@@ -65,7 +65,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                     $insta = new Api\Instagram();
 
 
-                    $result = $insta->getTagMedia( $tag, 20 );
+                    $result = $insta->getTagMedia( $tag, 10 );
                     
 
                     if( !empty( $result ) ) {
@@ -301,16 +301,18 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
          *  get instagram images by tag id
         */
 
-        function insta_images_by_tag_id() {
+        function insta_images_by_tag_id() 
+        {
 
-            if( check_ajax_referer( 'insta-ajaxnonce', 'nonce', false ) ) {
+            if( check_ajax_referer( 'insta-ajaxnonce', 'nonce', false ) ) 
+            {
 
                 $tag_id = isset( $_GET['tag'] ) ? intval( $_GET['tag'] ): '';
                 $is_exist = $this->is_tag_exist( $tag_id );
                 $data = array();
                 $product_content = '';
-                if( $is_exist ) {
-
+                if( $is_exist ) 
+                {
                     $media_obj = new Helper\Tag\Wc_Tag_Data( $tag_id );
                     $offset = 0;
                     $per_page = 100;
@@ -321,152 +323,113 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                     $tag_products = !empty( $tag_products ) ? maybe_unserialize( $tag_products->linked_products ) : '';
 
-                        if ( ! empty( $tag_medias ) ) {
+                    if ( ! empty( $tag_medias ) ) 
+                    {
 
-                            $tagKey = 0;
+                        $tagKey = 0;
 
-                            foreach ($tag_medias as $tkey => $tag_media) {
+                        foreach ($tag_medias as $tkey => $tag_media) 
+                        {
 
-                                if( isset( $tag_media['status'] )  &&  $tag_media['status'] == '0'){
-                                  continue;
-                                }
-
-                                $image_id = $tag_media['image_id'];
-
-                                $author  = $tag_media['insta_username'];
-
-                                $images  = !empty( $tag_media['images'] ) ? maybe_unserialize( $tag_media['images'] ) : '';
-
-                                $image   = isset( $images ) ? $images : '';
-
-                                $insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message']: '';
-
-                                $preview = !empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher"></span></div><img src="'.$image.'" alt="'.$author.'" data-message="' . esc_html( $insta_message ) . '" ></div>' : 'N/A';
-
-                                $data['insta_pic'][$tagKey] = array(
-
-                                  'image_id' => $image_id,
-
-                                  'preview'  => $preview,
-
-                                  'insta_message'  => $insta_message,
-
-                                  'author'   => $author,
-
-                                  'tag_id'   =>  $tag_id
-
-                                );
-
-                                $tagKey++;
-
+                            if( isset( $tag_media['status'] )  &&  $tag_media['status'] == '0')
+                            {
+                              continue;
                             }
+
+                            $image_id = $tag_media['image_id'];
+
+                            $author  = $tag_media['insta_username'];
+
+                            $images  = !empty( $tag_media['images'] ) ? maybe_unserialize( $tag_media['images'] ) : '';
+
+                            $image   = isset( $images ) ? $images : '';
+
+                            $insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message']: '';
+
+                            $preview = !empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher"></span></div><img src="'.$image.'" alt="'.$author.'" data-message="' . esc_html( $insta_message ) . '" ></div>' : 'N/A';
+
+                            $data['insta_pic'][$tagKey] = array(
+
+                              'image_id' => $image_id,
+
+                              'preview'  => $preview,
+
+                              'insta_message'  => $insta_message,
+
+                              'author'   => $author,
+
+                              'tag_id'   =>  $tag_id
+
+                            );
+
+                            $tagKey++;
 
                         }
 
                     }
+
+                }
                     
-                    if( !empty( $tag_products )) {
+                if( !empty( $tag_products )) 
+                {
 
-                        $args = array(
-                            'post_type' => 'product',
-                            'post__in' => $tag_products,
-                            'post_status'=> 'publish',
-                            'posts_per_page' => 4
-                        );
+                    $args = array(
+                        'post_type' => 'product',
+                        'post__in' => $tag_products,
+                        'post_status'=> 'publish',
+                        'posts_per_page' => 4
+                    );
 
-                        $the_query = new \WP_Query($args);
+                    $the_query = new \WP_Query($args);
 
-                        if ( $the_query->have_posts() ) {
+                    if ( $the_query->have_posts() ) 
+                    {
 
-                            ob_start();
+                        ob_start();
 
-                            // $product_content .=  woocommerce_product_loop_start();
+                        while ( $the_query->have_posts() ) {
 
-                            while ( $the_query->have_posts() ) {
+                            $the_query->the_post();
 
-                                $the_query->the_post();
-
-                                global $product;
-                                $logo = get_site_icon_url();
-                                $site_name = strtolower( preg_replace( '/\s+/', '', get_bloginfo( 'name' ) ) );
-                                
-                                // Ensure visibility.
-                                if ( empty( $product ) || ! $product->is_visible() ) {
-                                    return;
-                                }
-                                $product_content .= _e( '<div class="wonka-insta-row wonka-insta-site-logo">');
-                                $product_content .= _e( '<div class="col-12">');
-                                $product_content .= _e( '<img class="wonka-insta-logo-img" src="' . $logo . '" />');
-                                $product_content .= _e( '<div class="wonka-insta-site-info">@' . $site_name . '</div>');
-                                $product_content .= _e( '</div>');
-                                $product_content .= _e( '</div>');
-                                $product_content .= _e( '<div class="wonka-insta-row wonka-insta-message">');
-                                $product_content .= _e( '<div class="col-12"><p>');
-                                $product_content .= _e( $data['insta_pic'][0]['insta_message'] );
-                                $product_content .= _e( '</p></div>');
-                                $product_content .= _e( '</div>');
-
-                                $product_content .= _e( '<div class="wonka-insta-row wonka-insta-link">');
-                                $product_content .= _e( '<div class="col-12">');
-
-                                $product_title = get_the_title( $product->get_id() );
-                                $url = get_permalink( $product->get_id(), false );
-
-                                $product_content .= _e( '<h4 class="wonka-insta-title">' . $product_title . '</h4>' );
-                                $product_content .= _e( '<a href="' . $url . '" class="wonka-btn">');
-                                $product_content .= _e( 'Shop This Bag', 'wonkasoft_instafeed');
-                                $product_content .= _e( '</a>');
-
-                                // echo '<li class="type-product status-publish product">';
-
-                                    /**
-                                     * Hook: woocommerce_before_shop_loop_item.
-                                     *
-                                     * @hooked woocommerce_template_loop_product_link_open - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_before_shop_loop_item' );
-
-                                    /**
-                                     * Hook: woocommerce_before_shop_loop_item_title.
-                                     *
-                                     * @hooked woocommerce_show_product_loop_sale_flash - 10
-                                     * @hooked woocommerce_template_loop_product_thumbnail - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_before_shop_loop_item_title' );
-
-                                    /**
-                                     * Hook: woocommerce_shop_loop_item_title.
-                                     *
-                                     * @hooked woocommerce_template_loop_product_title - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_shop_loop_item_title' );
-
-                                    /**
-                                     * Hook: woocommerce_after_shop_loop_item_title.
-                                     *
-                                     * @hooked woocommerce_template_loop_rating - 5
-                                     * @hooked woocommerce_template_loop_price - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_after_shop_loop_item_title' );
-
-                                    /**
-                                     * Hook: woocommerce_after_shop_loop_item.
-                                     *
-                                     * @hooked woocommerce_template_loop_product_link_close - 5
-                                     * @hooked woocommerce_template_loop_add_to_cart - 10
-                                     */
-                                    // $product_content .= do_action( 'woocommerce_after_shop_loop_item' );
-
-                                // echo '</li>';
-
+                            global $product;
+                            $logo = get_site_icon_url();
+                            $site_name = strtolower( preg_replace( '/\s+/', '', get_bloginfo( 'name' ) ) );
+                            
+                            // Ensure visibility.
+                            if ( empty( $product ) || ! $product->is_visible() ) {
+                                return;
                             }
-                            // $product_content .= woocommerce_product_loop_end();
+                            $product_content .= _e( '<div class="wonka-insta-row wonka-insta-site-logo">');
+                            $product_content .= _e( '<div class="col-12">');
+                            $product_content .= _e( '<img class="wonka-insta-logo-img" src="' . $logo . '" />');
+                            $product_content .= _e( '<div class="wonka-insta-site-info">@' . $site_name . '</div>');
                             $product_content .= _e( '</div>');
+                            $product_content .= _e( '</div>');
+                            $product_content .= _e( '<div class="wonka-insta-row wonka-insta-message">');
+                            foreach ($data['insta_pic'] as $insta_img) :
+                                $product_content .= _e( '<div class="wonka-insta-message-container" data-image-id="' . $insta_img['image_id'] . '"><p>');
+                                $product_content .= _e( $insta_img['insta_message'] );
+                                $product_content .= _e( '</p></div>');
+                            endforeach;
                             $product_content .= _e( '</div>');
 
-                            $data['insta_products'] = ob_get_clean();
+                            $product_content .= _e( '<div class="wonka-insta-row wonka-insta-link">');
+                            $product_content .= _e( '<div class="col-12">');
+
+                            $product_title = get_the_title( $product->get_id() );
+                            $url = get_permalink( $product->get_id(), false );
+
+                            $product_content .= _e( '<h4 class="wonka-insta-title">' . $product_title . '</h4>' );
+                            $product_content .= _e( '<a href="' . $url . '" class="wonka-btn">');
+                            $product_content .= _e( 'Shop This Bag', 'wonkasoft_instafeed');
+                            $product_content .= _e( '</a>');
                         }
+                        $product_content .= _e( '</div>');
+                        $product_content .= _e( '</div>');
+
+                        $data['insta_products'] = ob_get_clean();
                     }
+                }
 
                     
 
