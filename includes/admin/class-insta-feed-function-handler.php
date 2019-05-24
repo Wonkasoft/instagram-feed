@@ -35,9 +35,33 @@ if (! class_exists('Insta_Feed_Function_Handler')) {
          */
         public function insta_feed_add_dashboard_menu()
         {
-            $insta_hook = add_menu_page( __('Instagram Shop Feeds', 'insta_feed'), __('Instagram Shop Feeds', 'insta_feed'), 'manage_options', 'insta-feed', array( $this, 'insta_feed_tag_template'), Insta_Feed_URL.'assets/images/instagram.png', 55 );
-            add_submenu_page( __('insta-feed', 'insta_feed'), __('Add Instagram Tags', 'insta_feed'), __('Add Instagram Tags', 'insta_feed'), 'manage_options', 'woo-insta-tag', array( $this, 'insta_feed_tag_template') );
-            add_submenu_page( __('insta-feed', 'insta_feed'), __('Settings', 'insta_feed'), __('Settings', 'insta_feed'), 'manage_options', 'insta-setting', array($this, 'insta_feed_settings_template'), 1, 1);
+            $insta_hook = add_menu_page( 
+              __('Instagram Shop Feeds', 'insta_feed'), 
+              __('Instagram Shop Feeds', 'insta_feed'), 
+              'manage_options', 
+              'insta-feed', 
+              array( $this, 'insta_feed_tag_template'), 
+              Insta_Feed_URL.'assets/images/instagram.png', 
+              55 );
+            add_submenu_page( 
+              __('insta-feed', 'insta_feed'), 
+              __('Add Instagram Tags', 
+                'insta_feed'), 
+              __('Add Instagram Tags', 
+                'insta_feed'), 
+              'manage_options', 
+              'woo-insta-tag', 
+              array( $this, 'insta_feed_tag_template')
+               );
+            add_submenu_page( 
+              __('insta-feed', 'insta_feed'), 
+              __('Settings', 'insta_feed'), 
+              __('Settings', 'insta_feed'), 
+              'manage_options', 
+              'insta-setting', 
+              array($this, 'insta_feed_settings_template'), 
+              1, 
+              1);
             add_action( "load-$insta_hook", array( $this , 'insta_add_options' ) );
         }
 

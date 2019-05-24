@@ -75,7 +75,7 @@ if( ! class_exists ( 'WC_List_Insta_Tags' ) ){
 
 				$orderby = ( ! empty( $_REQUEST['orderby'] ) ) ? $_REQUEST['orderby'] : 'tag_id';
 
-				$order = ( !empty( $_REQUEST['order'] ) ) ? $_REQUEST['order'] : 'asc';
+				$order = ( ! empty( $_REQUEST['order'] ) ) ? $_REQUEST['order'] : 'asc';
 
 				$result = strcmp( $a[$orderby], $b[$orderby] );
 
@@ -123,9 +123,9 @@ if( ! class_exists ( 'WC_List_Insta_Tags' ) ){
 
 				'linked_products'    => __( 'Linked Products', 'insta_feed' ),
 
-        'priority'  => __( 'Priority', 'insta_feed' ),
+        		'priority'  => __( 'Priority', 'insta_feed' ),
 
-        'status'    => __( 'Status', 'insta_feed' )
+        		'status'    => __( 'Status', 'insta_feed' )
 
 			);
 
@@ -133,7 +133,7 @@ if( ! class_exists ( 'WC_List_Insta_Tags' ) ){
 
 		function column_default( $item, $column_name ){
 
-			switch( $column_name ){
+			switch( $column_name ) {
 
 				case 'tag_id':
 
@@ -141,7 +141,7 @@ if( ! class_exists ( 'WC_List_Insta_Tags' ) ){
 
 				case 'linked_products':
 
-        case 'priority':
+        		case 'priority':
 
 				case 'status':
 

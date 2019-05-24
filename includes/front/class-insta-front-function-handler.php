@@ -48,7 +48,7 @@ if (! class_exists('Insta_Front_Function_Handler')) {
             $tag_id = '';
             $product_id = $product->get_id();
 
-            if( !empty( $results) ) {
+            if( ! empty( $results ) ) {
 
                 foreach ($results as $rkey => $rvalue) {
 
@@ -70,27 +70,27 @@ if (! class_exists('Insta_Front_Function_Handler')) {
 
             }
 
-            if( $bool && !empty($tag_id)) {
+            if( $bool && ! empty( $tag_id ) ) {
 
-                $tag_data = new Tag\Wc_Tag_Data($tag_id);
+                $tag_data = new Tag\Wc_Tag_Data( $tag_id );
 
                 $offset = 0;
 
                 $count = $tag_data->insta_tag_media_count();
 
-                $per_page = get_option('posts_per_page');
+                $per_page = get_option( 'posts_per_page' );
 
-                $per_page = !empty($per_page)? $per_page:8;
+                $per_page = ! empty( $per_page ) ? $per_page:8;
 
                 $limit = $offset * $per_page;
 
                 $tag_name = $tag_data->insta_get_tag_name_by_tag_id();
 
-                $media = $tag_data->insta_get_tag_media( $per_page, $limit);
+                $media = $tag_data->insta_get_tag_media( $per_page, $limit );
 
                 $pdata = new Front\Instagram_Product_Data();
 
-                $pdata->generate_instagram_product_template($product_id, $per_page, $media, $tag_name->tag_name);
+                $pdata->generate_instagram_product_template( $product_id, $per_page, $media, $tag_name->tag_name );
             }
 
         }
@@ -115,8 +115,9 @@ if (! class_exists('Insta_Front_Function_Handler')) {
             } else {
                 $view = 'insta_feed';
             }
-            $obj = new Front\Feed_List($view);
+            $obj = new Front\Feed_List( $view );
             $obj->get_insta_tag_template();
+
         }
 
 

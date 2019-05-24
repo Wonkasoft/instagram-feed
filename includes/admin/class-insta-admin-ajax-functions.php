@@ -389,8 +389,6 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                         while ( $the_query->have_posts() ) {
 
-                            $the_query->the_post();
-
                             global $product;
                             $logo = get_site_icon_url();
                             $site_name = strtolower( preg_replace( '/\s+/', '', get_bloginfo( 'name' ) ) );
@@ -399,6 +397,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                             if ( empty( $product ) || ! $product->is_visible() ) {
                                 return;
                             }
+
                             $product_content .= _e( '<div class="wonka-insta-row wonka-insta-site-logo">');
                             $product_content .= _e( '<div class="col-12">');
                             $product_content .= _e( '<img class="wonka-insta-logo-img" src="' . $logo . '" />');

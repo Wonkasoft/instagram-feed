@@ -84,50 +84,61 @@ var $ws = jQuery.noConflict();
                                 /*=====  End of adding span tags for the hash tags  ======*/
                             }
                             /*===== Slick Slider added to the instagram feed =====*/
+
                             $ws(".insta-modal.slider-wrapper").empty().html(content);
+                            
+                            var item_height;
+                            var insta_item_imgs = $ws( '.insta-modal.slider-wrapper .item img' );
+                            var insta_screen_temp_wrap = $ws( '.screen-template-wrap' );
+
+                            insta_item_imgs.each( function() 
+                                {
+                                    if ( window.innerWidth > 768 && $ws( this ).height() > 100 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
+                                    {
+                                        item_height = $ws( this ).height();
+                                        insta_screen_temp_wrap.height( item_height - 3 + 'px' );
+                                    }
+                                });
+
                             $ws( '.insta-modal.slider-wrapper' ).slick({
                                 slidesToShow: 1,
                                 slidesToScroll: 1,
-                                adaptiveHeight: false,
+                                adaptiveHeight: true,
                                 mobileFirst: true,
-                                respondTo: 'min',
                                 asNavFor: '.wonka-insta-row.wonka-insta-message',
                                 dots: false,
                                 prevArrow: '<button class="slick-prev" type="button"><i class="far fa-arrow-alt-circle-left"></i></button>',
                                 nextArrow: '<button class="slick-next" type="button"><i class="far fa-arrow-alt-circle-right"></i></button>',
+                                asNavFor: '.wonka-insta-message',
                             });
+
                             $ws( '.wonka-insta-row.wonka-insta-message' ).slick({
                                 slidesToShow: 1,
                                 slidesToScroll: 1,
-                                adaptiveHeight: false,
+                                adaptiveHeight: true,
                                 mobileFirst: true,
-                                respondTo: 'min',
                                 asNavFor: '.insta-modal.slider-wrapper',
                                 dots: false,
                                 arrows: false,
                             });
 
-                            $ws(document).find(".wsgrid-squeezy .ws-loader").removeClass('preload').empty();
+
+                            $ws( document ).find( ".wsgrid-squeezy .ws-loader" ).removeClass( 'preload' ).empty();
 
                         }
 
                       }
 
                     }
-                })
+                });
             }
         });
 
-        // $ws(".shop.owl-carousel").owlCarousel({
-        //     navigation:true,
-        //     items : 3,
-        // });
-
         $ws(".in-load-more").on("click", function() {
 
-            var tag_id = $ws(this).attr('id');
-            var product_id = $ws(this).data('product-id');
-            var paged = $ws("input[name='paged']").val();
+            var tag_id = $ws( this ).attr('id');
+            var product_id = $ws( this ).data( 'product-id' );
+            var paged = $ws( "input[name='paged']" ).val();
 
             paged = parseInt(paged);
 
@@ -168,17 +179,14 @@ var $ws = jQuery.noConflict();
         $ws(document).on("click", ".close-icon", () => {
 
             setTimeout( function() {
-                $ws("#sliderHolder").empty();
+                $ws( "#sliderHolder" ).empty();
             }, 500 );
 
         });
 
+        if ( document.querySelector( 'main.main-shop-our-instagram' ) )
+        {
+
+        }
     });
-
-
-    if ( document.querySelector('div.wonka-insta-row.wonka-insta-message') )
-    {
-
-    }
-
 })($ws)

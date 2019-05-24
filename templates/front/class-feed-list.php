@@ -268,21 +268,19 @@
 
             <template id="screenSliderTemplate">
                 <div class="screens-template">
-                    <div class="screen-template-wrap" active-client="{{id}}">
+                    <div class="screen-template-wrap" active-client="{{data-tag-id}}">
                         <span class="close-icon"></span>
                         <div class="content">
                             <div class="wsgrid-squeezy">
                                 <div class="ws-loader"></div>
                                 <div class="inner-content">
+                                    <div class="slider-part">
+                                        <div class="insta-modal slider-wrapper"></div>
+                                    </div>
 
                                     <div class="info-part">
                                         <div class="insta-tag-products"></div>
                                     </div>
-
-                                    <div class="slider-part">
-                                        <div class="insta-modal slider-wrapper owl-carousel"></div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

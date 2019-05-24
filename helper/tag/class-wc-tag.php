@@ -206,9 +206,9 @@ if (! class_exists('Wc_Tag')) {
 
             if( !empty( $results ) ) {
 
-                if( !empty( $linked_products ) ) {
+                // if( !empty( $linked_products ) ) {
 
-                    $linked_pro = wp_list_pluck( $linked_products, 'linked_products' );
+                    // $linked_pro = wp_list_pluck( $linked_products, 'linked_products' );
 
                     foreach ($linked_pro as $lkey => $lvalue) {
 
@@ -223,7 +223,7 @@ if (! class_exists('Wc_Tag')) {
                     $arr = !empty( $arr ) ? array_merge_recursive($arr):'';
                     $linked_arr = call_user_func_array('array_merge', $arr);
 
-                }
+                // }
 
                 foreach( $results as $key => $value ) {
 

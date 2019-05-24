@@ -9,8 +9,8 @@ $ws = jQuery.noConflict();
     $ws("#_insta_linked_products").select2();
     $ws("#_hashtag_visiblity").select2();
     $ws(".img-visiblity").select2();
-
-    $ws("#instagram-thickbox-btn").on( "click", function() {
+    $ws("#instagram-thickbox-btn").on( "click", function( e ) {
+      console.log( e );
       var hasTag = $ws(this).data("tag");
       $ws.ajax({
         url: insta_script.insta_admin_ajax,
@@ -18,6 +18,7 @@ $ws = jQuery.noConflict();
         data: "action=get_insta_images&tag=" + hasTag + "&nonce=" + insta_script.insta_api_nonce,
         success: function(result) {
           if (result != 0) {
+            console.log(result);
             $ws('.thickbox-body-wrap').empty();
             $ws('.thickbox-body-wrap').append(result);
             $ws('.thickbox-body-wrap').removeClass('pre-loader');
