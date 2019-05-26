@@ -138,7 +138,7 @@ $white: #ffffff;
 }
 
 .instagram-feeds.shop{
-  margin: 30px 0px;
+  // margin: 30px 0px;
 
 }
 
@@ -202,6 +202,7 @@ $white: #ffffff;
         align-items: flex-start;
         justify-content: space-between;
         height: 100%;
+        min-height: 450px;
         width: 100%;
         margin: 0 auto;
         position: relative;
@@ -218,7 +219,7 @@ $white: #ffffff;
         background-color: $white;
 
         .slider-part {
-          flex: 0 .65 65%;
+          flex: 0 .60 60%;
           position: relative;
           opacity: 0;
           width: 100%;
@@ -257,7 +258,7 @@ $white: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
-          overflow-y: auto;
+          padding: 15px;
           width: 100%;
           opacity: 0;
           background: #fafafa;
@@ -303,10 +304,15 @@ $white: #ffffff;
             }
 
             .wonka-insta-message {
+              position: relative;
               flex: 1 1 100%;
 
-              .wonka-insta-hash-tag {
-                color: #8c8c8c;
+              .wonka-insta-message-container {
+                width: 100%;
+
+                &:focus {
+                  outline: 0;
+                }
               }
             }
           }
@@ -354,9 +360,9 @@ $white: #ffffff;
           flex-direction: row;
 
           .slider-part {
-            flex: 0 1 65%;
+            flex: 0 1 60%;
             height: 100%;
-            width: 65%;
+            width: 60%;
 
             .slider-wrapper {
               height: 100%;
@@ -366,6 +372,7 @@ $white: #ffffff;
           .info-part {
             flex: 0 1 40%;
             height: 100%;
+            width: 40%;
 
             .wonka-insta-site-logo {
               flex: 1 100%;

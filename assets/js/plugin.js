@@ -28,6 +28,7 @@ var $ws = jQuery.noConflict();
                     },
                     beforeSend : function() {
                         $ws(document).find(".wsgrid-squeezy .ws-loader").addClass('preload').empty().append("<div class='wonka-spinner wonka-round'></div>");
+                        $ws( 'body' ).css( { 'overflow': 'hidden' } );
                     },
                     success: function(result) {
 
@@ -91,25 +92,15 @@ var $ws = jQuery.noConflict();
                             var insta_item_imgs = $ws( '.insta-modal.slider-wrapper .item img' );
                             var insta_screen_temp_wrap = $ws( '.screen-template-wrap' );
 
-                            insta_item_imgs.each( function() 
-                                {
-                                    if ( window.innerWidth > 768 && $ws( this ).height() > 100 && $ws( this ).height() < insta_screen_temp_wrap.height() ) 
-                                    {
-                                        item_height = $ws( this ).height();
-                                        insta_screen_temp_wrap.height( item_height - 3 + 'px' );
-                                    }
-                                });
-
                             $ws( '.insta-modal.slider-wrapper' ).slick({
                                 slidesToShow: 1,
                                 slidesToScroll: 1,
-                                adaptiveHeight: true,
+                                adaptiveHeight: false,
                                 mobileFirst: true,
                                 asNavFor: '.wonka-insta-row.wonka-insta-message',
                                 dots: false,
                                 prevArrow: '<button class="slick-prev" type="button"><i class="far fa-arrow-alt-circle-left"></i></button>',
                                 nextArrow: '<button class="slick-next" type="button"><i class="far fa-arrow-alt-circle-right"></i></button>',
-                                asNavFor: '.wonka-insta-message',
                             });
 
                             $ws( '.wonka-insta-row.wonka-insta-message' ).slick({
@@ -180,6 +171,7 @@ var $ws = jQuery.noConflict();
 
             setTimeout( function() {
                 $ws( "#sliderHolder" ).empty();
+                $ws( 'body' ).css( { 'overflow': 'unset' } );
             }, 500 );
 
         });
