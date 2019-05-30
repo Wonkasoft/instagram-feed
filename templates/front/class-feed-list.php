@@ -73,13 +73,14 @@
         public function setup_class_tag_data( $results ) {
 
             $data = array();
+            
+            foreach ( $results as $result ) {
 
-            foreach ($results as $key => $value) {
-
-                $this->tag_data = $this->insta_get_tag_data_by_tag_id( $value['id']);
+                $this->tag_data = $this->insta_get_tag_data_by_tag_id( $result['id'] );
 
                 if( !empty( $this->tag_data ) ) {
 
+                    $this->tag_data['id'] = $result['id'];
                     $this->insta_hashtag = $this->tag_data['hashtag'];
                     $this->linked_products = $this->tag_data['linked_products'];
 
@@ -95,7 +96,7 @@
                     if( !$check )
                         continue;
 
-                    $media_obj = new Helper\Tag\Wc_Tag_Data( $value['id'] );
+                    $media_obj = new Helper\Tag\Wc_Tag_Data( $this->tag_data['id'] );
 
                     $tag_media = $media_obj->insta_get_only_one_tag_media();
 
@@ -127,7 +128,7 @@
 
                             'count'   => $count['count'],
 
-                            'tag_id'   =>  $value['id'],
+                            'tag_id'   =>  $this->tag_data['id'],
 
                             'tag_name' => $this->insta_hashtag,
 
@@ -138,14 +139,13 @@
                 }
             }
 
-
             if( ! empty( $data ) ) {
 
                 $shop_view = get_option('_insta_shop_view');
 
                 if( $shop_view === '0' && !empty( $this->view) && $this->view == 'shop') {
 
-                    echo "<div class='slider-wrapper ".$this->view."'>";
+                    echo "<div class='slider-wrapper " . $this->view . "'>";
 
                         foreach ( $data as $pdata ) {
 
@@ -168,15 +168,22 @@
             }
         }
 
-        function get_insta_tag_template()
-        {
+        function get_insta_tag_template( $atts )
+        {   
+            $post_to_display = ( ! empty ( $atts ) ) ? $atts['posts_to_display']: '';
             if( ! is_front_page() || ! is_home() ) :
           ?>
           <h2 class="text-center">#Aperabags</h2>
           <?php
             endif;
+            if ( ! is_front_page() || ! is_home() ) : ?>
+                <div id="wrapper" class="insta-shop-page">
+            <?php else: ?>
+                <div id="wrapper">
+            <?php
+            endif;
           ?>
-            <div id="wrapper">
+
 
                 <div id="dashboard_right_now" class="instagram instagram-feeds <?php echo $this->view; ?>">
 
@@ -186,7 +193,7 @@
 
                             <?php
 
-                            $results = $this->insta_get_tag_data();
+                            $results = $this->insta_get_tag_data( $post_to_display );
 
                             $bool = $this->validate_tag_results( $results );
 
@@ -206,6 +213,13 @@
 
                         </div>
 
+                        <?php if ( count( (array)$results )-1 < $results['count'] ) : ?>
+                           <div class="instagram-wrap row wonka-insta-row"> 
+                                <button type="button" class="fetch-more-posts"><i class="fa fa-plus"></i></button>
+                           </div>
+                        <?php
+                        endif;
+                        ?>
                     </div>
 
 
@@ -221,7 +235,7 @@
 
             ?>
 
-            <div class="insta-box p-2 w-20" id="wonka-box-<?php echo $data['tag_id']; ?>" data-tag-id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
+            <div class="insta-box wonka-insta-box" id="wonka-box-<?php echo $data['tag_id']; ?>" data-tag-id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
                 <div class="img-wrap">
                     <?php echo $data['preview']; ?>
 

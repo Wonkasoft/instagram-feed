@@ -34,14 +34,24 @@ if (! class_exists('Wc_Tag')) {
             $this->table_products = $this->wpdb->prefix . 'posts';
         }
 
-        public function insta_get_tag_data()
+        public function insta_get_tag_data( $per_page = null )
         {
 
-            $this->table_name = $this->wpdb->prefix.'instagram_tags';
+            $this->table_name = $this->wpdb->prefix . 'instagram_tags';
 
-            $results = $this->wpdb->get_results( "Select * from $this->table_name ORDER BY priority ASC", ARRAY_A);
+            $results = $this->wpdb->get_results( "SELECT * FROM $this->table_name ORDER BY priority ASC", ARRAY_A);
 
-            if( !empty( $results ) ) {
+            if ( ! empty ( $per_page ) ) :
+                $limited_posts = array();
+                $limited_posts['count'] = count( (array)$results );
+                for ($i=0; $i < $per_page; $i++) { 
+                    $limited_posts[] = $results[$i];
+                }
+            endif;
+
+            if ( ! empty ( $results ) && ! empty ( $per_page ) ) {
+                return $limited_posts;
+            } elseif ( ! empty ( $results ) ) {
                 return $results;
             } else {
                 return '';

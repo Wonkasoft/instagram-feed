@@ -50,11 +50,11 @@ if (! class_exists('Instagram_Script_Loader')) {
             {
                 wp_enqueue_script( WONKA_INSTA_FEED_NAME . '-slick-js', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'slick/slick.min.js' ), array( 'jquery' ), 'all', true );
             }
-            wp_enqueue_script('insta-script', Insta_Feed_URL . 'assets/js/plugin.js', array( 'jquery', WONKA_INSTA_FEED_NAME . '-slick-js' ), time(), true );
-            wp_localize_script('insta-script', 'insta_script', array(
+            wp_enqueue_script('wonka-insta-script', Insta_Feed_URL . 'assets/js/plugin.js', array( 'jquery', WONKA_INSTA_FEED_NAME . '-slick-js' ), time(), true );
+            wp_localize_script('wonka-insta-script', 'WONKA_INSTAGRAM_AJAX', array(
                 'insta_admin_ajax' => admin_url('admin-ajax.php'),
                 'insta_api_nonce' => wp_create_nonce('insta-ajaxnonce')
-            ));
+            ) );
 
         }
 
@@ -67,7 +67,10 @@ if (! class_exists('Instagram_Script_Loader')) {
 	        wp_enqueue_style('select2', plugins_url().'/woocommerce/assets/css/select2.css');
             wp_enqueue_style('admin-style', Insta_Feed_URL . 'assets/css/admin.css', Insta_Feed_SCRIPT_VERSION);
             wp_enqueue_script('admin-script', Insta_Feed_URL . 'assets/js/admin.js', Insta_Feed_SCRIPT_VERSION, time(), true);
-            wp_localize_script( 'admin-script', 'insta_script', array( 'insta_admin_ajax' => admin_url( 'admin-ajax.php' ), 'insta_api_nonce' => wp_create_nonce('insta-ajaxnonce')) );
+            wp_localize_script( 'admin-script', 'WONKA_INSTAGRAM_AJAX', array( 
+                'insta_admin_ajax' => admin_url( 'admin-ajax.php' ), 
+                'insta_api_nonce' => wp_create_nonce('insta-ajaxnonce')
+            ) );
 
         }
 

@@ -80,7 +80,7 @@ if (! class_exists('Insta_Front_Function_Handler')) {
 
                 $per_page = get_option( 'posts_per_page' );
 
-                $per_page = ! empty( $per_page ) ? $per_page:8;
+                $per_page = ! empty( $per_page ) ? $per_page: 5;
 
                 $limit = $offset * $per_page;
 
@@ -108,15 +108,16 @@ if (! class_exists('Insta_Front_Function_Handler')) {
          /**
         * add instagram feeds via shortcode
         */
-        public function add_instagram_shop_feeds()
+        public function add_instagram_shop_feeds( $atts )
         {
             if( is_shop() ) {
                 $view = 'shop';
             } else {
                 $view = 'insta_feed';
             }
+            
             $obj = new Front\Feed_List( $view );
-            $obj->get_insta_tag_template();
+            $obj->get_insta_tag_template( $atts );
 
         }
 

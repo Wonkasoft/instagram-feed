@@ -13,6 +13,7 @@ use Wc_Insta_Feed\Helper;
 use Wc_Insta_Feed\Api;
 use Wc_Insta_Feed\Templates\Admin\Tag;
 use Wc_Insta_Feed\Inc\WC_Insta_Errors;
+use Wc_Insta_Feed\Templates\Front;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -153,145 +154,12 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
         public function insta_load_more_images() {
 
-            if( check_ajax_referer('insta-ajaxnonce', 'nonce', false)) {
+            if( check_ajax_referer('insta-ajaxnonce', 'nonce', false) ) 
+            {
+                $obj = new Front\Feed_List( $view );
+                $obj->get_insta_tag_template( $atts );
 
-                $tag_id = isset($_GET['tag_id']) ? intval($_GET['tag_id']) : '';
-                $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : '';
-                $paged = isset($_GET['paged']) ? intval($_GET['paged']) : '';
-                $custom_options = get_post_meta($product_id,'insta_product_meta',true);
-                $visiblity_array = $status_array = array();
-
-                if( ! empty( $tag_id ) && ! empty($product_id) && ! empty($paged) ) {
-
-                    $res = $this->is_tag_valid($tag_id);
-
-                    if( $res ) {
-
-                        $linked_product = ! empty( $res['linked_products'] ) ? maybe_unserialize( $res['linked_products'] ) : '';
-
-                        if( ! empty( $linked_product ) && in_array( $product_id, $linked_product ) ) {
-
-                            if( ! empty( $custom_options ) ) {
-
-                                if( isset( $custom_options['status'] ) ) {
-                                    $status_array = $custom_options['status'];
-                                }
-
-                                if( isset( $custom_options['visblity'] ) ) {
-                                    $visiblity_array = $custom_options['visblity'];
-                                }
-                            }
-
-                            $tag_data = new Helper\Tag\Wc_Tag_Data($tag_id);
-
-                            $offset = $paged;
-
-                            $count = $tag_data->insta_tag_media_count();
-
-                            $per_page = get_option('posts_per_page');
-
-                            $per_page = !empty($per_page)? intval($per_page):8;
-
-                            $limit = $offset * $per_page;
-
-                            $media = $tag_data->insta_get_tag_media( $per_page, $limit);
-
-                            if( ! empty( $media ) ) {
-
-                                ob_start();
-
-                                foreach ($media as $mkey => $mvalue) {
-
-                                    $image_id = !empty($mvalue['image_id']) ? $mvalue['image_id'] : '';
-
-                                    // image is disbled
-                                    if( !empty( $status_array ) && isset( $status_array[$image_id ] ) &&  $status_array[$image_id ] == '0' )  {
-                                        continue;
-                                    }
-
-                                    if( !empty( $visiblity_array ) && isset( $visiblity_array[$image_id ] ) &&  !in_array( '1', $visiblity_array[$image_id ] ) )  {
-                                        continue;
-                                    }
-
-                                    $images = !empty( $mvalue ) ? maybe_unserialize( $mvalue['images'] ) : '';
-
-                                    $image = isset( $images ) ? $images : '';
-
-                                    $author   = $mvalue['insta_username'];
-
-                                    $insta_message   = $mvalue['insta_message'];
-
-                                    $preview = !empty( $image ) ? '<img src="'.$image.'" alt="'.$author.'" data-message="' . $insta_message . '" >' : 'N/A';
-
-
-                                    ?>
-
-                                    <div class="insta-box" id="<?php echo $mvalue['tag_id']; ?>" data-image-id="<?php echo $mvalue['image_id']; ?>" data-message="<?php _e( $insta_message ); ?>">
-
-                                        <?php echo $preview; ?>
-
-                                        <div class="box-head">
-
-                                            <!-- <span class="pic-author" title="publisher"><?php echo $author; ?></span> -->
-
-                                        </div>
-
-                                    </div>
-
-                                    <?php
-
-                                }
-
-                                $list = ob_get_clean();
-
-                                $response = array(
-                                    'error' => false,
-                                    'message' => $list,
-                                );
-
-                            } else {
-
-
-                                $response = array(
-                                    'error' => false,
-                                    'message' => '',
-                                );
-
-                            }
-
-
-                        } else {
-
-                            $message = __( 'Tag mismatched, please try again', 'insta_feed' );
-
-                            $response = array(
-                                'error' => true,
-                                'message' => $message,
-                            );
-                        }
-
-
-                    } else {
-
-                        $message = __( 'Tag mismatched, please try again', 'insta_feed' );
-
-                        $response = array(
-                            'error' => true,
-                            'message' => $message,
-                        );
-                    }
-
-                } else {
-
-                    $message = __( 'Tag mismatched, please try again', 'insta_feed' );
-
-                    $response = array(
-                        'error' => true,
-                        'message' => $message,
-                    );
-                }
-
-                wp_send_json($response);
+                wp_send_json( $obj );
                 wp_die();
             }
 
@@ -301,7 +169,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
          *  get instagram images by tag id
         */
 
-        function insta_images_by_tag_id() 
+        public function insta_images_by_tag_id() 
         {
 
             if( check_ajax_referer( 'insta-ajaxnonce', 'nonce', false ) ) 
@@ -380,7 +248,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
                         'posts_per_page' => 4
                     );
 
-                    $the_query = new \WP_Query($args);
+                    $the_query = new \WP_Query( $args );
 
                     if ( $the_query->have_posts() ) 
                     {
@@ -451,7 +319,7 @@ if (! class_exists('Insta_Admin_Ajax_Functions')) {
 
                 }
 
-                wp_send_json($response);
+                wp_send_json( $response );
                 wp_die();
             }
 

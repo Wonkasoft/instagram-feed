@@ -8,11 +8,13 @@
 
 namespace Wc_Insta_Feed\Helper\Tag; 
 
-if (!defined('ABSPATH')) {
+if (!defined('ABSPATH')) 
+{
     exit;
 }
 
-if (! class_exists('Wc_Tag_Data')) {
+if (! class_exists('Wc_Tag_Data')) 
+{
     
     /**
      *get Instagram tag data
@@ -27,7 +29,7 @@ if (! class_exists('Wc_Tag_Data')) {
         public $table_media = ''; 
         
 
-        public function __construct($tag_id)
+        public function __construct( $tag_id )
         {
             global $wpdb;
             
@@ -114,9 +116,8 @@ if (! class_exists('Wc_Tag_Data')) {
             
         }
 
-        public function update_insta_tag_status( $action, $image_id ) {
-             
-            
+        public function update_insta_tag_status( $action, $image_id ) 
+        {    
             switch ($action) {
               case 'enable':
                 # code...
@@ -153,7 +154,8 @@ if (! class_exists('Wc_Tag_Data')) {
             return $response;
         }
 
-        public function insta_get_tag_media_by_search( $search_query) {
+        public function insta_get_tag_media_by_search( $search_query) 
+        {
  
             $results = $this->wpdb->get_results( $this->wpdb->prepare( "Select * from $this->table_media where insta_username like %s AND tag_id=%d ", '%' . sanitize_title_for_query( $search_query ) . '%', $this->tag_id ), ARRAY_A );
            
@@ -202,7 +204,7 @@ if (! class_exists('Wc_Tag_Data')) {
         public function insta_get_tag_data_by_tag_id( $tag_id )
         {       
  
-            $this->table_name = $this->wpdb->prefix.'instagram_tags';
+            $this->table_name = $this->wpdb->prefix . 'instagram_tags';
             
             $results = $this->wpdb->get_row( $this->wpdb->prepare( "Select * from $this->table_name where id=%d", intval( $tag_id ) ) );
 
@@ -215,7 +217,6 @@ if (! class_exists('Wc_Tag_Data')) {
                     'status'    => $results->status,
                     'linked_products' => !empty( $results->linked_products ) ? maybe_unserialize($results->linked_products) : '',
                 );
-
                 
                 return $new_arr;
 
