@@ -10,6 +10,7 @@ browserSync = require('browser-sync').create(),
 json = require('json-file'),
 themeName = json.read('./package.json').get('name'),
 siteName = json.read('./package.json').get('siteName'),
+local = json.read('./package.json').get('localhost'),
 themeDir = '../' + themeName,
 plumberErrorHandler = { errorHandler: notify.onError({
 
@@ -27,14 +28,14 @@ sass.compiler = require('node-sass');
 // Static server
 gulp.task('browser-sync', function() {
 	browserSync.init({
-		proxy: 'https://localhost/' + siteName,
+		proxy: local + siteName,
 		port: 4000
 	});
 });
 
 gulp.task('sass', function () {
 
-	return gulp.src('./scss/style.scss')
+	return gulp.src( './sass/style.scss' )
 
 	.pipe(sourcemaps.init())
 
@@ -44,11 +45,11 @@ gulp.task('sass', function () {
 
 	.pipe(cleanCSS())
 
-	.pipe(concat('style.css'))
+	.pipe(concat('wonkasoft-instafeed-public.css'))
 
 	.pipe(sourcemaps.write('./maps'))
 
-	.pipe(gulp.dest('./assets/css/'))
+	.pipe(gulp.dest('./public/css'))
 
 	.pipe(browserSync.stream());
 
@@ -56,7 +57,7 @@ gulp.task('sass', function () {
 
 gulp.task('sass-admin', function () {
 
-	return gulp.src('./scss/admin-style.scss')
+	return gulp.src('./sass/admin-style.scss')
 
 	.pipe(sourcemaps.init())
 
@@ -66,11 +67,11 @@ gulp.task('sass-admin', function () {
 
 	.pipe(cleanCSS())
 
-	.pipe(concat('admin.css'))
+	.pipe(concat('wonkasoft-instafeed-admin.css'))
 
 	.pipe(sourcemaps.write('./maps'))
 
-	.pipe(gulp.dest('./assets/css/'))
+	.pipe(gulp.dest('./admin/css'))
 
 	.pipe(browserSync.stream());
 
@@ -80,9 +81,8 @@ gulp.task('sass-admin', function () {
 
 gulp.task('watch', function() {
 
-	gulp.watch('**/*.scss', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
-	gulp.watch('**/*.php', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
-	gulp.watch('**/*.js', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
+	gulp.watch('**/sass/*.scss', gulp.series(gulp.parallel('sass', 'sass-admin'))).on('change', browserSync.reload);
+	gulp.watch('**/*.php').on('change', browserSync.reload);
 
 });
 

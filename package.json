@@ -4,7 +4,11 @@
   "description": "=== Wonkasoft InstaFeed Extension for WooCommerce ===",
   "main": "gulp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp serve",
+    "gulp": "gulp",
+    "watch": "gulp watch",
+    "build": "gulp build"
   },
   "author": "wonkasoft",
   "license": "ISC",
@@ -12,7 +16,7 @@
     "browser-sync": "^2.26.4",
     "debug": "^4.1.1",
     "fs-extra": "^7.0.1",
-    "gulp": "^4.0.1",
+    "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-cli": "^2.2.0",
     "gulp-concat": "^2.6.1",
@@ -30,5 +34,6 @@
     "tar": ">=4.4.2",
     "path": "^0.12.7"
   },
-  "siteName": "aperabags.com"
+  "siteName": "plugin-playground.dev",
+  "localhost": "https://listers.dev/"
 }

@@ -1,118 +1,165 @@
 <?php
-
-namespace Wc_Insta_Feed\Api;
-
 /**
  * Instagram API class
  *
  * API Documentation: http://instagram.com/developer/
  *
+ * @package Wonkasoft_Instafeed
  * @author Wonkasoft
  * @copyright Wonkasoft
  * @version 1.0
  */
 
-class Instagram
-{
+defined( 'ABSPATH' ) || exit;
 
-    /**
-     * Get info about a tag
-     *
-     * @param string $name Valid tag name
-     *
-     * @return mixed
-     */
-    public function getTag($name)
-    {
-        return $this->_makeCall('tags/' . $name);
-    }
+/**
+ * This is the Instagram API class for fetching feeds.
+ */
+class Instagram extends Wonkasoft_Instafeed_Admin {
 
-    /**
-     * Get a recently tagged media.
-     *
-     * @param string $name Valid tag name
-     * @param int $limit Limit of returned results
-     *
-     * @return mixed
-     */
-    public function getTagMedia( $name, $limit = 0 )
-    {
-        $params = array();
+	/**
+	 * Will be set with access token.
+	 *
+	 * @var string
+	 */
+	public $access_token = '';
 
-        if ($limit > 0) {
-            $params['count'] = $limit;
-        }
+	/**
+	 * Will be set with api params.
+	 *
+	 * @var string
+	 */
+	public $params = '';
 
-        return $this->_makeCall( $name );
-    }
+	/**
+	 * This is the contructor of the class.
+	 */
+	public function __construct() {
+		parent::__construct();
+		$this->access_token = $this->get_instafeed_access_token();
+		$this->params = array(
+			'count' => 10,
+			'tag' => null,
+		);
+	}
 
-    /**
-     * The call operator.
-     *
-     * @param string $function API resource path
-     * @param bool $auth Whether the function requires an access token
-     * @param array $params Additional request parameters
-     * @param string $method Request type GET|POST
-     *
-     * @return mixed
-     *
-     * @throws \MetzWeb\Instagram\InstagramException
-     */
-    protected function _makeCall($function, $auth = false, $params = null, $method = 'GET')
-    {
+	/**
+	 * Get info about a tag
+	 *
+	 * @param array $data contains tag data.
+	 * @return null
+	 */
+	public function set_the_tag( $data ) {
+		$this->params['tag'] = preg_replace( '/([#])/', '', $data['tag'] );
+		$this->params['tag_id'] = $data['tag_id'];
+		$this->params['priority'] = $data['priority'];
+		$this->params['visibility'] = $data['visibility'];
+		$this->params['status'] = $data['status'];
+		return;
+	}
 
-        $hashtag = trim( strtolower( $function ) );
-        $url    = 'https://instagram.com/explore/tags/' . str_replace( '#', '', $hashtag );
+	/**
+	 * Get info about a tag
+	 *
+	 * @param array $ids contains array of ids to setup.
+	 *
+	 * @return
+	 */
+	public function set_ids_array( $ids ) {
+		if ( ! empty( $ids ) ) :
+			$this->params['ids'] = $ids;
+		endif;
+		return;
+	}
 
-        $insta_url = wp_remote_get( $url );
+	/**
+	 * Get a recently tagged media.
+	 *
+	 * @param string $name Valid tag name
+	 * @param int    $limit Limit of returned results
+	 *
+	 * @return mixed
+	 */
+	public function get_the_tag_media( $limit = 20 ) {
 
-  			if ( is_wp_error( $insta_url ) ) {
-  				return;
-  			}
+		if ( $limit > 0 ) {
+			$this->params['count'] = $limit;
+		}
 
-  			if ( 200 !== wp_remote_retrieve_response_code( $insta_url ) ) {
-  				return;
-  			}
+		return $this->_makeCall();
+	}
 
-  			$mix_content      = explode( 'window._sharedData = ', $insta_url['body'] );
-  			$content_json  = explode( ';</script>', $mix_content[1] );
-  			$content_array = json_decode( $content_json[0], true );
+	/**
+	 * The call operator.
+	 *
+	 * @return mixed
+	 */
+	protected function _makeCall() {
 
-        if ( ! $content_array ) {
-  				return;
-  			}
+		$url    = 'https://api.instagram.com/v1/users/self/media/recent?access_token=' . $this->access_token;
 
-  			if ( isset( $content_array['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'] ) ) {
-  				$insta_info = $content_array['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'];
-  			} elseif ( isset( $content_array['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'] ) ) {
-  				$insta_info = $content_array['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'];
-  			} else {
-  				return;
-  			}
+		$args = array(
+			'Content-Type' => 'application/json; charset=utf-8',
+		);
 
-  			if ( ! is_array( $insta_info ) ) {
-  				return;
-  			}
+		$insta_url = wp_safe_remote_get( $url, $args );
 
-  			$instagram = array();
-  			foreach ( $insta_info as $insta_value ) {
+		if ( is_wp_error( $insta_url ) ) {
+			return;
+		}
 
-  				$id = '';
-  				if ( ! empty( $insta_value['node']['id'] ) ) {
-  					$id = $insta_value['node']['id'];
-  				}
+		if ( 200 !== wp_remote_retrieve_response_code( $insta_url ) ) {
+			return;
+		}
 
-          $author = (isset($insta_value['node']['shortcode'])) ? $insta_value['node']['shortcode'] : '';
+		$ig_data = json_decode( wp_remote_retrieve_body( $insta_url ) );
 
-          $instagram[] = array(
-  					'id' => $id,
-            'author'=> $hashtag,
-  					'url'=> preg_replace( '/^https?\:/i', '', $insta_value['node']['display_url'] ),
-            'insta_message'=> $insta_value['node']['edge_media_to_caption']['edges'][0]['node']['text'],
-  				);
+		$instagram = array(
+			'full_name' => $ig_data->data[0]->user->full_name,
+			'profile_picture_link'  => $ig_data->data[0]->user->profile_picture,
+			'image_obj'    => array(),
+		);
 
-  			}
+		if ( array_key_exists( 'tag', $this->params ) ) :
+			foreach ( $this->params as $key => $value ) {
+				if ( 'tag' === $key ) :
+					$instagram['tag'] = $value;
+				endif;
+				if ( 'priority' === $key ) :
+					$instagram['priority'] = $value;
+				endif;
 
-        return json_encode($instagram);
-    }
+				if ( 'visibility' === $key ) :
+					$instagram['visibility'] = $value;
+				endif;
+
+				if ( 'status' === $key ) :
+					$instagram['status'] = $value;
+				endif;
+			}
+		endif;
+
+		if ( ! empty( $this->params['ids'] ) ) :
+			for ( $i = 0; $i < count( (array) $ig_data->data ); $i++ ) {
+				if ( in_array( $ig_data->data[ $i ]->id, $this->params['ids'] ) ) :
+					array_push( $instagram['image_obj'], $ig_data->data[ $i ] );
+				endif;
+			}
+
+			$instagram = json_decode( json_encode( $instagram ), true );
+
+			return json_encode( $instagram );
+			else :
+				for ( $i = 0; $i < count( (array) $ig_data->data ); $i++ ) {
+					if ( in_array( $this->params['tag'], $ig_data->data[ $i ]->tags ) ) :
+						array_push( $instagram['image_obj'], $ig_data->data[ $i ] );
+				  endif;
+				}
+
+				$instagram = json_decode( json_encode( $instagram ), true );
+
+				wp_send_json_success( $instagram );
+			endif;
+
+	}
 }
