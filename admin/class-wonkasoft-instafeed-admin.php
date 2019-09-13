@@ -340,9 +340,6 @@ class Wonkasoft_Instafeed_Admin {
 				'label' => array(
 					'for'   => array(),
 				),
-				'span'  => array(
-					'class' => array(),
-				),
 				'i' => array(
 					'class' => array(),
 					'tool-tip'  => array(),
@@ -376,6 +373,7 @@ class Wonkasoft_Instafeed_Admin {
 				'span'  => array(
 					'id'    => array(),
 					'style' => array(),
+					'class' => array(),
 				),
 			)
 		);
