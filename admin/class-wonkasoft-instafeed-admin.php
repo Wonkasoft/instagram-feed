@@ -312,7 +312,21 @@ class Wonkasoft_Instafeed_Admin {
 		endif;
 
 		if ( ! empty( $field['description'] ) && false !== $field['desc_tip'] ) {
-			$output .= '<span class="description">' . wp_kses_post( $field['description'] ) . '</span>';
+			$output .= '<span class="description">' . wp_kses(
+				$field['description'],
+				array(
+					'a' => array(
+						'id'    => array(),
+						'href'  => array(),
+						'data-redirect' => array(),
+						'data-client'   => array(),
+					),
+					'span'  => array(
+						'id'    => array(),
+						'style' => array(),
+					),
+				)
+			) . '</span>';
 		}
 
 		$output .= '</p>';

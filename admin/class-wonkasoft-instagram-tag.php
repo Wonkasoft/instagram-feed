@@ -220,7 +220,7 @@ class Wonkasoft_Instagram_Tag {
 					'status'            => $status,
 					'insta_image_obj'   => json_encode( $value ),
 				),
-				$format,
+				$format
 			);
 		}
 
