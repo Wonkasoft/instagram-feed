@@ -367,6 +367,16 @@ class Wonkasoft_Instafeed_Admin {
 					'type' => array(),
 					'value' => array(),
 				),
+				'a' => array(
+					'id'    => array(),
+					'href'  => array(),
+					'data-redirect' => array(),
+					'data-client'   => array(),
+				),
+				'span'  => array(
+					'id'    => array(),
+					'style' => array(),
+				),
 			)
 		);
 
