@@ -157,26 +157,29 @@ class Wonkasoft_Instagram_Tag {
 		);
 
 		$cleaning = $this->instadb->get_results( "SELECT * FROM $this->table_instagram_tags_media", ARRAY_A );
-		foreach ( $cleaning as $key => $value ) {
-			if ( false === get_post_status( $value['tag_id'] ) ) :
-				if ( false !== get_post_status( $value['image_id'] ) ) :
-					wp_delete_post( $value['image_id'], true );
-				endif;
-				$this->instadb->delete(
-					$this->table_instagram_tags_media,
-					array(
-						'tag_id'    => $value['tag_id'],
-					)
-				);
-			endif;
-		}
 
-		$this->instadb->delete(
-			$this->table_instagram_tags_media,
-			array(
-				'tag_id'    => $this->tag_id,
-			)
-		);
+		if ( ! empty( $cleaning ) ) :
+			foreach ( $cleaning as $key => $value ) {
+				if ( false === get_post_status( $value['tag_id'] ) ) :
+					if ( false !== get_post_status( $value['image_id'] ) ) :
+						wp_delete_post( $value['image_id'], true );
+					endif;
+					$this->instadb->delete(
+						$this->table_instagram_tags_media,
+						array(
+							'tag_id'    => $value['tag_id'],
+						)
+					);
+				endif;
+			}
+
+			$this->instadb->delete(
+				$this->table_instagram_tags_media,
+				array(
+					'tag_id'    => $this->tag_id,
+				)
+			);
+		endif;
 
 		$args = array(
 			'posts_per_page' => -1,
@@ -216,7 +219,7 @@ class Wonkasoft_Instagram_Tag {
 					'insta_image'       => $media_upload->url,
 					'insta_message'     => $value->caption->text,
 					'priority'          => $this->tag_data->priority,
-					'visibility'         => $this->tag_data->visibility,
+					'visibility'        => $this->tag_data->visibility,
 					'status'            => $status,
 					'insta_image_obj'   => json_encode( $value ),
 				),

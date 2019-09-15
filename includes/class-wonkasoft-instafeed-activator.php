@@ -51,7 +51,7 @@ class Wonkasoft_Instafeed_Activator {
 			insta_image longtext NOT NULL, 
 			insta_message longtext NOT NULL, 
 			priority int(10) NOT NULL, 
-			visiblity longtext NOT NULL, 
+			visibility longtext NOT NULL, 
 			status boolean NOT NULL, 
 			insta_image_obj longtext NOT NULL, 
 			PRIMARY KEY (id)

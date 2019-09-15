@@ -34,6 +34,6 @@
     "tar": ">=4.4.2",
     "path": "^0.12.7"
   },
-  "siteName": "plugin-playground.dev",
+  "siteName": "aperabags.com",
   "localhost": "https://listers.dev/"
 }
