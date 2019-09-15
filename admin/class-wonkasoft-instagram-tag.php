@@ -233,7 +233,7 @@ class Wonkasoft_Instagram_Tag {
 	 * This is a private function that uploads the instagram images into the media center.
 	 *
 	 * @param  string $url     contains the image url.
-	 * @param  string $tag_id contains the tag ID.
+	 * @param  string $tag_id  contains the tag ID.
 	 * @return string          returns
 	 */
 	private function upload_image( $url, $tag_id ) {

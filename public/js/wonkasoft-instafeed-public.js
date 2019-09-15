@@ -24,17 +24,19 @@
 	                    tag : tag_id,
 	                    security : WONKA_INSTAGRAM_AJAX.insta_api_nonce,
 	                },
-	                beforeSend : function() {
+	                beforeSend : function() 
+	                {
 	                    $(document).find(".wsgrid-squeezy .ws-loader").addClass('preload').empty().append("<div class='wonka-spinner wonka-round'></div>");
 	                    $( 'body' ).css( { 'overflow': 'hidden' } );
 	                },
-	                success: function( result ) {
+	                success: function( result ) 
+	                {
 	                  var content = '';
 
 	                  if( result.error != undefined )  {
 
 	                    if( result.error ) {
-
+	                    	console.log( result.error );
 	                    } else {
 
 	                        var data = result.data;
@@ -121,30 +123,40 @@
 	        }
 	    });
 	    
-	    // if ( document.querySelector( '.fetch-more-posts' ) ) 
-	    // {
-	    //     $(".fetch-more-posts").on("click", function() 
-	    //     {
+	    if ( document.querySelector( '.fetch-more-posts' ) ) 
+	    {
+	        $(".fetch-more-posts").on("click", function() 
+	        {
 
-	    //         var current_displayed_images = document.querySelectorAll( '.wonka-insta-box' );
+	            var current_displayed_images = document.querySelectorAll( '.wonka-insta-box' );
+	            if ( document.querySelector( '#wonkasoft-instafeed-feed' ) ) 
+	            {
+	            	var view = document.querySelector( '#wonkasoft-instafeed-feed' ).getAttribute( 'data-view' );
+	            }
 
-	    //         $.ajax(
-	    //         {
-	    //             url: WONKA_INSTAGRAM_AJAX.insta_admin_ajax,
-	    //             type: 'GET',
-	    //             data: 
-	    //             {
-	    //                 action : "insta_load_more_images",
-	    //                 posts_to_display : ( current_displayed_images.length + 10 ),
-	    //                 nonce : WONKA_INSTAGRAM_AJAX.insta_api_nonce,
-	    //             },
-	    //             success: function( result ) 
-	    //             {
-	    //                 console.log( result );
-	    //             }
-	    //         });
-	    //     });
-	    // }
+	            $.ajax(
+	            {
+	                url: WONKA_INSTAGRAM_AJAX.insta_admin_ajax,
+	                type: 'GET',
+	                data: 
+	                {
+	                    action : "insta_load_more_images",
+	                    posts_per_page : ( current_displayed_images.length + 10 ),
+	                    view : view,
+	                    security : WONKA_INSTAGRAM_AJAX.insta_api_nonce
+	                },
+	                success: function( result ) 
+	                {
+	                  if ( result.data ) 
+	                  {
+	                  	console.log( result.data );
+	                  	var content = document.querySelector( 'article div.entry-content' );
+	                  	content.innerHTML = result.data;
+	                  }
+	                }
+	            });
+	        });
+	    }
 
 	    $(document).on("click", ".close-icon", () => {
 
@@ -154,11 +166,6 @@
 	        }, 500 );
 
 	    });
-
-	    if ( document.querySelector( 'main.main-shop-our-instagram' ) )
-	    {
-	        
-	    }
 	});
 
 })( jQuery );

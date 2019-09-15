@@ -132,7 +132,7 @@ class Wonkasoft_Public_Ajax_Functions {
 
 		} else {
 
-			$message = __( 'No media found regarding this tag', 'insta_feed' );
+			$message = __( 'No media found regarding this tag', 'Wonkasoft_Instafeed' );
 
 			$response = array(
 				'error' => true,
@@ -144,5 +144,30 @@ class Wonkasoft_Public_Ajax_Functions {
 		wp_send_json( $response );
 		wp_die();
 
+	}
+
+	/**
+	 * This functions loads more images to the instagram shop page.
+	 *
+	 * @return json returns response in json format.
+	 */
+	public function insta_load_more_images() {
+
+		check_ajax_referer( 'insta-ajaxnonce', 'security', true ) || die( 'your nonce failed!' );
+
+		$posts_per_page = ( isset( $_GET['posts_per_page'] ) ) ? array( 'posts_per_page' => wp_kses_post( wp_unslash( $_GET['posts_per_page'] ) ) ) : 10;
+		$view = ( isset( $_GET['view'] ) ) ? wp_kses_post( wp_unslash( $_GET['view'] ) ) : 'insta_feed';
+
+		$response = array(
+			'data'  => '',
+		);
+
+		ob_start();
+		$new_feed_list = new Feed_List( $view );
+		$data = $new_feed_list->get_insta_tag_template( $posts_per_page );
+		$response['data'] = trim( ob_get_clean(), "\n\t" );
+
+		wp_send_json( $response );
+		wp_die();
 	}
 }

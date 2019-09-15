@@ -721,6 +721,27 @@ class Wonkasoft_Instafeed_Admin {
 	}
 
 	/**
+	 * This function will check to make sure that posts are only left in the database that have an existing parent post.
+	 */
+	public function wonkasoft_instagram_tags_posts_trashed( $post_id ) {
+		$table = $this->wonkadb->prefix . 'instagram_tags_media';
+		$results = $this->wonkadb->get_results( "SELECT * FROM $table WHERE tag_id = $post_id", ARRAY_A );
+		foreach ( $results as $key => $value ) {
+			if ( 'trash' === get_post_status( $value['tag_id'] ) ) :
+				$this->wonkadb->update(
+					$table,
+					array(
+						'status'    => 0,
+					),
+					array(
+						'tag_id'    => $post_id,
+					)
+				);
+			endif;
+		}
+	}
+
+	/**
 	 * Decide which columns to activate the sorting functionality on
 	 *
 	 * @return array $sortable, the array of columns that can be sorted by the user

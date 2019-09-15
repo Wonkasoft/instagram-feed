@@ -76,7 +76,7 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 		foreach ( $results['posts'] as $key => $result ) {
 
-			if ( $atts['posts_to_display'] - 1 === $key ) :
+			if ( $atts['posts_per_page'] === $key ) :
 				break;
 			endif;
 
@@ -161,19 +161,18 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 	/**
 	 * This begins the shortcode build.
 	 *
-	 * @param  [type] $atts [description]
-	 * @return [type]       [description]
+	 * @param  array $atts contains an array of the atts passed in.
 	 */
 	public function get_insta_tag_template( $atts ) {
 
 		$atts = shortcode_atts(
 			array(
-				'posts_to_display'  => 10,
+				'posts_per_page'  => 10,
 			),
 			$atts
 		);
 
-		$posts_to_display = ( ! empty( $atts ) ) ? $atts['posts_to_display'] : '';
+		$posts_per_page = ( ! empty( $atts ) ) ? $atts['posts_per_page'] : '';
 		if ( ! is_front_page() || ! is_home() ) :
 			?>
 		<div class="header-tag-container">
@@ -188,7 +187,7 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 			<div id="wrapper">
 		<?php endif; ?>
 
-				<div id="wonkasoft-instafeed-feed" class="instagram instagram-feeds <?php echo $this->view; ?>">
+				<div id="wonkasoft-instafeed-feed" class="instagram instagram-feeds <?php echo $this->view; ?>" data-view="<?php echo $this->view; ?>">
 
 					<div class="inside">
 
@@ -196,7 +195,7 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 							<?php
 
-							$results = $this->insta_get_per_tag_data( $posts_to_display );
+							$results = $this->insta_get_per_tag_data( $posts_per_page );
 
 							$bool = $this->validate_tag_results( $results );
 
@@ -218,10 +217,10 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 					<?php
 
 					if ( ! empty( $results ) ) :
-						if ( $atts['posts_to_display'] < $results['count'] ) :
+						if ( $atts['posts_per_page'] < $results['count'] ) :
 							?>
 							<div class="instagram-wrap row wonka-insta-row"> 
-								<button type="button" class="wonka-btn fetch-more-posts"><i class="fas fa-plus"></i></button>
+								<button type="button" class="fetch-more-posts"><i class="fas fa-plus"></i></button>
 							</div>
 							<?php
 						endif;

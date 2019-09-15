@@ -36,7 +36,6 @@
 					xhr.onreadystatechange = function() {
 					    if (this.readyState == 4 && this.status == 200) {
 					     var response = JSON.parse( this.responseText );
-					     console.log( response );
 					     var image_obj = response.data.image_obj;
 					     $( '.profile-info-container' ).empty();
 					     var profile_data = '<img src="' + response.data.profile_picture_link + '" class="profile-img"><span class="profile-name">' + response.data.full_name + '</span>';
@@ -106,7 +105,6 @@
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
              var response = JSON.parse( this.responseText );
-             console.log( response );
              $(".import-images").attr( 'disabled', false );
              document.querySelector( 'div.submitter .button-primary' ).click();
             }

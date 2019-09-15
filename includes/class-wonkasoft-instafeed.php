@@ -208,6 +208,7 @@ class Wonkasoft_Instafeed {
 		$this->loader->add_action( 'manage_instagram_tags_posts_custom_column', $plugin_admin, 'wonkasoft_instafeed_table_columns_default', 10, 2 );
 		$this->loader->add_filter( 'manage_edit-instagram_tags_sortable_columns', $plugin_admin, 'wonkasoft_instafeed_table_sortable_columns' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'wonkasoft_instafeed_instagram_tag_save_post', 10 );
+		$this->loader->add_action( 'wp_trash_post', $plugin_admin, 'wonkasoft_instagram_tags_posts_trashed', 10 );
 		$this->loader->add_action( 'delete_post', $plugin_admin, 'wonkasoft_instagram_tags_posts_clean', 10 );
 		$this->loader->add_action( 'wp_ajax_nopriv_get_instagram_images', $plugin_admin_ajax, 'get_instagram_images' );
 		$this->loader->add_action( 'wp_ajax_get_instagram_images', $plugin_admin_ajax, 'get_instagram_images' );
@@ -232,6 +233,8 @@ class Wonkasoft_Instafeed {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_nopriv_insta_images_by_tag_id', $plugin_public_ajax, 'insta_images_by_tag_id' );
 		$this->loader->add_action( 'wp_ajax_insta_images_by_tag_id', $plugin_public_ajax, 'insta_images_by_tag_id' );
+		$this->loader->add_action( 'wp_ajax_nopriv_insta_load_more_images', $plugin_public_ajax, 'insta_load_more_images' );
+		$this->loader->add_action( 'wp_ajax_insta_load_more_images', $plugin_public_ajax, 'insta_load_more_images' );
 
 	}
 
