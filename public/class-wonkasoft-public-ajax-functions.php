@@ -48,7 +48,7 @@ class Wonkasoft_Public_Ajax_Functions {
 
 				$insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message'] : '';
 
-				$preview = ! empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="pic-author" title="publisher"></span></div><img src="' . $image . '" data-message="' . esc_html( $insta_message ) . '" /></div>' : 'N/A';
+				$preview = ! empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="insta-tag" title="' . $insta_hashtag . '"></span></div><img src="' . $image . '" data-message="' . esc_html( $insta_message ) . '" /></div>' : 'N/A';
 
 				$data['insta_pic'][] = array(
 
