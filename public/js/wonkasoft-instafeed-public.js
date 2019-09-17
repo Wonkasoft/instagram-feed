@@ -137,7 +137,6 @@
 
 	    	                    $(".insta-modal.slider-wrapper").empty().html( content );
 	    	                    
-	    	                    var item_height;
 	    	                    var insta_item_imgs = $( '.insta-modal.slider-wrapper .item img' );
 	    	                    var insta_screen_temp_wrap = $( '.screen-template-wrap' );
 

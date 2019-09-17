@@ -281,6 +281,19 @@ div.header-tag-container {
             .item {
               @include prefix( transition, $trans_25, o moz webkit );
             }
+
+            .slick-list {
+              height: 100%;
+
+              .slick-track {
+                height: 100%;
+              }
+            }
+
+            .slick-current {
+              height: 100%;
+            }
+
           }
 
           img{
