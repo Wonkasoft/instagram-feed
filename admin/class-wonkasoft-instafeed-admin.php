@@ -60,9 +60,9 @@ class Wonkasoft_Instafeed_Admin {
 	public function __construct( $plugin_name = WONKASOFT_INSTAFEED_SLUG, $version = WONKASOFT_INSTAFEED_VERSION ) {
 
 		global $wpdb;
-		$this->wonkadb = $wpdb;
+		$this->wonkadb     = $wpdb;
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -240,7 +240,7 @@ class Wonkasoft_Instafeed_Admin {
 	 * Add the admin settings display.
 	 */
 	public function wonkasoft_instafeed_settings_display() {
-		include_once( plugin_dir_path( __FILE__ ) . 'partials/wonkasoft-instafeed-admin-display.php' );
+		include_once plugin_dir_path( __FILE__ ) . 'partials/wonkasoft-instafeed-admin-display.php';
 	}
 
 	/**
@@ -249,7 +249,7 @@ class Wonkasoft_Instafeed_Admin {
 	 * @since 1.0.0 [<Adding of action links>]
 	 */
 	public function wonkasoft_instafeed_add_action_links() {
-		include_once( plugin_dir_path( __FILE__ ) . 'partials/wonkasoft-instafeed-add-action-links.php' );
+		include_once plugin_dir_path( __FILE__ ) . 'partials/wonkasoft-instafeed-add-action-links.php';
 	}
 
 	/**
@@ -259,11 +259,11 @@ class Wonkasoft_Instafeed_Admin {
 	 */
 	public function wc_wonkasoft_instafeed_field( $field ) {
 
-		$field['type']         = isset( $field['type'] ) ? $field['type'] : 'input';
+		$field['type'] = isset( $field['type'] ) ? $field['type'] : 'input';
 		if ( 'select' === $field['type'] ) :
-			$field['class']       = isset( $field['class'] ) ? $field['class'] : 'select form-control short';
+			$field['class'] = isset( $field['class'] ) ? $field['class'] : 'select form-control short';
 		else :
-			$field['class']       = isset( $field['class'] ) ? $field['class'] : 'form-control short';
+			$field['class'] = isset( $field['class'] ) ? $field['class'] : 'form-control short';
 		endif;
 		$field['placeholder']   = isset( $field['placeholder'] ) ? ' placeholder="' . $field['placeholder'] . '" ' : '';
 		$field['style']         = isset( $field['style'] ) ? $field['style'] : '';
@@ -271,12 +271,12 @@ class Wonkasoft_Instafeed_Admin {
 		$field['value']         = isset( $field['value'] ) ? $field['value'] : '';
 		$field['name']          = isset( $field['name'] ) ? $field['name'] : $field['id'];
 		$field['desc_tip']      = isset( $field['desc_tip'] ) ? $field['desc_tip'] : false;
-		$field['desc_help']      = isset( $field['desc_help'] ) ? $field['desc_help'] : false;
-		$styles_set = ( ! empty( $field['style'] ) ) ? ' style="' . esc_attr( $field['style'] ) . '" ' : '';
+		$field['desc_help']     = isset( $field['desc_help'] ) ? $field['desc_help'] : false;
+		$styles_set             = ( ! empty( $field['style'] ) ) ? ' style="' . esc_attr( $field['style'] ) . '" ' : '';
 
 		// Custom attribute handling.
 		$custom_attributes = array();
-		$output = '';
+		$output            = '';
 
 		if ( ! empty( $field['custom_attributes'] ) && is_array( $field['custom_attributes'] ) ) {
 			foreach ( $field['custom_attributes'] as $attribute => $value ) {
@@ -315,13 +315,13 @@ class Wonkasoft_Instafeed_Admin {
 			$output .= '<span class="description">' . wp_kses(
 				$field['description'],
 				array(
-					'a' => array(
-						'id'    => array(),
-						'href'  => array(),
+					'a'    => array(
+						'id'            => array(),
+						'href'          => array(),
 						'data-redirect' => array(),
 						'data-client'   => array(),
 					),
-					'span'  => array(
+					'span' => array(
 						'id'    => array(),
 						'style' => array(),
 					),
@@ -334,43 +334,43 @@ class Wonkasoft_Instafeed_Admin {
 		echo wp_kses(
 			$output,
 			array(
-				'p' => array(
+				'p'      => array(
 					'class' => array(),
 				),
-				'label' => array(
-					'for'   => array(),
+				'label'  => array(
+					'for' => array(),
 				),
-				'i' => array(
-					'class' => array(),
-					'tool-tip'  => array(),
-					'title' => array(),
+				'i'      => array(
+					'class'    => array(),
+					'tool-tip' => array(),
+					'title'    => array(),
 				),
 				'select' => array(
 					'class' => array(),
-					'id'  => array(),
-					'name' => array(),
+					'id'    => array(),
+					'name'  => array(),
 					'style' => array(),
 					'value' => array(),
 				),
 				'option' => array(
-					'value' => array(),
-					'selected'  => array(),
+					'value'    => array(),
+					'selected' => array(),
 				),
-				'input' => array(
+				'input'  => array(
 					'class' => array(),
-					'id'  => array(),
-					'name' => array(),
+					'id'    => array(),
+					'name'  => array(),
 					'style' => array(),
-					'type' => array(),
+					'type'  => array(),
 					'value' => array(),
 				),
-				'a' => array(
-					'id'    => array(),
-					'href'  => array(),
+				'a'      => array(
+					'id'            => array(),
+					'href'          => array(),
 					'data-redirect' => array(),
 					'data-client'   => array(),
 				),
-				'span'  => array(
+				'span'   => array(
 					'id'    => array(),
 					'style' => array(),
 					'class' => array(),
@@ -381,7 +381,7 @@ class Wonkasoft_Instafeed_Admin {
 	}
 
 	/**
-	 * Adds the shortcode into wordpress.
+	 * Adds the shortcode into WordPress.
 	 *
 	 * @since 1.0.0
 	 */
@@ -424,27 +424,27 @@ class Wonkasoft_Instafeed_Admin {
 		);
 
 		$args = array(
-			'label'                 => __( 'Instafeed', 'Wonkasoft_Instafeed' ),
-			'description'           => __( 'Instafeed information pages.', 'Wonkasoft_Instafeed' ),
-			'labels'                => $labels,
-			'supports'              => array( 'thumbnail', 'comments' ),
-			'register_meta_box_cb'  => array( $this, 'add_instagram_tags_meta_boxes' ),
-			'taxonomies'            => array( 'meta_data' ),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 150,
-			'menu_icon'             => WONKASOFT_INSTAFEED_IMG_PATH . '/instagram.png',
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => false,
-			'can_export'            => true,
-			'has_archive'           => true,
-			'exclude_from_search'   => true,
-			'publicly_queryable'    => true,
-			'query_var'             => 'instagram_tags',
-			'capability_type'       => 'post',
-			'show_in_rest'          => true,
+			'label'                => __( 'Instafeed', 'Wonkasoft_Instafeed' ),
+			'description'          => __( 'Instafeed information pages.', 'Wonkasoft_Instafeed' ),
+			'labels'               => $labels,
+			'supports'             => array( 'thumbnail', 'comments' ),
+			'register_meta_box_cb' => array( $this, 'add_instagram_tags_meta_boxes' ),
+			'taxonomies'           => array( 'meta_data' ),
+			'hierarchical'         => false,
+			'public'               => true,
+			'show_ui'              => true,
+			'show_in_menu'         => true,
+			'menu_position'        => 150,
+			'menu_icon'            => WONKASOFT_INSTAFEED_IMG_PATH . '/instagram.png',
+			'show_in_admin_bar'    => true,
+			'show_in_nav_menus'    => false,
+			'can_export'           => true,
+			'has_archive'          => true,
+			'exclude_from_search'  => true,
+			'publicly_queryable'   => true,
+			'query_var'            => 'instagram_tags',
+			'capability_type'      => 'post',
+			'show_in_rest'         => true,
 		);
 
 		register_post_type( 'instagram_tags', $args );
@@ -464,7 +464,7 @@ class Wonkasoft_Instafeed_Admin {
 	 * This parses the instagram_tags post type hashtag settings.
 	 */
 	public function wsif_hashtag_setup_settings() {
-		$post_id = get_the_ID();
+		$post_id           = get_the_ID();
 		$post_tag_template = new Wonkasoft_Insta_Feed( $post_id );
 		$post_tag_template->get_insta_add_tag_template();
 	}
@@ -523,10 +523,10 @@ class Wonkasoft_Instafeed_Admin {
 			$this->wonkadb->update(
 				$table,
 				array(
-					'status'        => $str_status,
+					'status' => $str_status,
 				),
 				array(
-					'tag_id'        => $post_id,
+					'tag_id' => $post_id,
 				)
 			);
 		endif;
@@ -542,19 +542,19 @@ class Wonkasoft_Instafeed_Admin {
 
 		return $columns = array(
 
-			'cb'                            => '<input type="checkbox" />',
+			'cb'                 => '<input type="checkbox" />',
 
-			'tag_id'                    => __( 'Tag ID', 'Wonkasoft_Instafeed' ),
+			'tag_id'             => __( 'Tag ID', 'Wonkasoft_Instafeed' ),
 
-			'tag_name'              => __( 'Tag Name', 'Wonkasoft_Instafeed' ),
+			'tag_name'           => __( 'Tag Name', 'Wonkasoft_Instafeed' ),
 
-			'linked_products'   => __( 'Linked Products', 'Wonkasoft_Instafeed' ),
+			'linked_products'    => __( 'Linked Products', 'Wonkasoft_Instafeed' ),
 
-			'hashtag_visibility'   => __( 'Hashtag Visibility', 'Wonkasoft_Instafeed' ),
+			'hashtag_visibility' => __( 'Hashtag Visibility', 'Wonkasoft_Instafeed' ),
 
-			'priority'                  => __( 'Priority', 'Wonkasoft_Instafeed' ),
+			'priority'           => __( 'Priority', 'Wonkasoft_Instafeed' ),
 
-			'status'                    => __( 'Status', 'Wonkasoft_Instafeed' ),
+			'status'             => __( 'Status', 'Wonkasoft_Instafeed' ),
 
 		);
 	}
@@ -568,11 +568,11 @@ class Wonkasoft_Instafeed_Admin {
 	public function wonkasoft_instafeed_table_columns_default( $column, $post_id ) {
 		global $post;
 
-		$tag_obj = new Wonkasoft_Instagram_Tag( $post_id );
+		$tag_obj   = new Wonkasoft_Instagram_Tag( $post_id );
 		$error_obj = new WC_Insta_Errors();
-		$results = $tag_obj->insta_get_tag_data_by_tag_id();
+		$results   = $tag_obj->insta_get_tag_data_by_tag_id();
 
-		$str_options = array(
+		$str_options     = array(
 			'hashtag',
 			'priority',
 			'fetch_qty',
@@ -643,7 +643,7 @@ class Wonkasoft_Instafeed_Admin {
 				if ( 'trash' === $post->post_status ) :
 					$actions = $get_actions->row_actions(
 						array(
-							'Restore'  => sprintf( '<a href="%s" aria-label="Restore “%s” from the Trash">Restore</a>', wp_nonce_url( admin_url( 'post.php?post=' . $post_id . '&action=untrash' ), 'untrash-post_' . $post_id ), $post_id ),
+							'Restore'            => sprintf( '<a href="%s" aria-label="Restore “%s” from the Trash">Restore</a>', wp_nonce_url( admin_url( 'post.php?post=' . $post_id . '&action=untrash' ), 'untrash-post_' . $post_id ), $post_id ),
 							'Delete Permanently' => sprintf( '<a href="%s" aria-label="Delete “%s” Permanently">Delete&nbsp;Permanently</a>', esc_url( get_delete_post_link( $post_id, '', true ) ), $post_id ),
 						),
 						false
@@ -651,9 +651,9 @@ class Wonkasoft_Instafeed_Admin {
 				else :
 					$actions = $get_actions->row_actions(
 						array(
-							'Edit'  => sprintf( '<a href="%s" aria-label="Edit “%s”">Edit</a>', get_edit_post_link( $post_id, 'display' ), $post_id ),
-							'Quick Edit'    => sprintf( '<button type="button" class="button-link editinline" aria-label="Quick edit “%s” inline" aria-expanded="false">Quick&nbsp;Edit</button>', $post_id ),
-							'Trash' => sprintf( '<a href="%s" aria-label="Trash “%s”">Trash</a>', esc_url( get_delete_post_link( $post_id ) ), $post_id ),
+							'Edit'       => sprintf( '<a href="%s" aria-label="Edit “%s”">Edit</a>', get_edit_post_link( $post_id, 'display' ), $post_id ),
+							'Quick Edit' => sprintf( '<button type="button" class="button-link editinline" aria-label="Quick edit “%s” inline" aria-expanded="false">Quick&nbsp;Edit</button>', $post_id ),
+							'Trash'      => sprintf( '<a href="%s" aria-label="Trash “%s”">Trash</a>', esc_url( get_delete_post_link( $post_id ) ), $post_id ),
 						),
 						false
 					);
@@ -705,7 +705,7 @@ class Wonkasoft_Instafeed_Admin {
 	 * This function will check to make sure that posts are only left in the database that have an existing parent post.
 	 */
 	public function wonkasoft_instagram_tags_posts_clean( $post_id ) {
-		$table = $this->wonkadb->prefix . 'instagram_tags_media';
+		$table   = $this->wonkadb->prefix . 'instagram_tags_media';
 		$results = $this->wonkadb->get_results( "SELECT * FROM $table WHERE tag_id = $post_id", ARRAY_A );
 		foreach ( $results as $key => $value ) {
 			if ( false !== get_post_status( $value['image_id'] ) ) :
@@ -714,7 +714,7 @@ class Wonkasoft_Instafeed_Admin {
 			$this->wonkadb->delete(
 				$table,
 				array(
-					'tag_id'    => $value['tag_id'],
+					'tag_id' => $value['tag_id'],
 				)
 			);
 		}
@@ -724,17 +724,17 @@ class Wonkasoft_Instafeed_Admin {
 	 * This function will check to make sure that posts are only left in the database that have an existing parent post.
 	 */
 	public function wonkasoft_instagram_tags_posts_trashed( $post_id ) {
-		$table = $this->wonkadb->prefix . 'instagram_tags_media';
+		$table   = $this->wonkadb->prefix . 'instagram_tags_media';
 		$results = $this->wonkadb->get_results( "SELECT * FROM $table WHERE tag_id = $post_id", ARRAY_A );
 		foreach ( $results as $key => $value ) {
 			if ( 'trash' === get_post_status( $value['tag_id'] ) ) :
 				$this->wonkadb->update(
 					$table,
 					array(
-						'status'    => 0,
+						'status' => 0,
 					),
 					array(
-						'tag_id'    => $post_id,
+						'tag_id' => $post_id,
 					)
 				);
 			endif;
@@ -749,10 +749,10 @@ class Wonkasoft_Instafeed_Admin {
 	public function wonkasoft_instafeed_table_sortable_columns( $cols ) {
 
 		return $cols = array(
-			'tag_id'         => array( 'tag_id', true ),
-			'tag_name'         => array( 'tag_name', true ),
-			'priority'         => array( 'priority', true ),
-			'status'           => array( 'status', true ),
+			'tag_id'   => array( 'tag_id', true ),
+			'tag_name' => array( 'tag_name', true ),
+			'priority' => array( 'priority', true ),
+			'status'   => array( 'status', true ),
 		);
 	}
 

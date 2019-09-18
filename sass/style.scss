@@ -25,7 +25,7 @@ div.header-tag-container {
 .insta-shop-page {
 
   .instagram-wrap {
-    justify-content: center;
+    justify-content: flex-start;
 
     &:last-child {
       position: relative;
@@ -175,7 +175,7 @@ div.header-tag-container {
       }
 
       @include media-breakpoint-up( md ) {
-        flex: 1 0 20%;
+        flex: 0 0 20%;
       }
     }
   }
