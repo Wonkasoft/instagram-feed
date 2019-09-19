@@ -55,7 +55,6 @@
 	    function image_clicking()
 	    {
 	    	$(".box-head").on("click", function() {
-
 	    	    var tag_id = $(this).closest('.insta-box').attr('data-tag-id');
 	    	    tag_id = parseInt( tag_id );
 

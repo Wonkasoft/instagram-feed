@@ -250,8 +250,8 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 				'div'  => array(
 					'class'         => array(),
 					'id'            => array(),
-					'data_tag_id'   => array(),
-					'data_image_id' => array(),
+					'data-tag-id'   => array(),
+					'data-image-id' => array(),
 				),
 				'span' => array(
 					'class' => array(),
