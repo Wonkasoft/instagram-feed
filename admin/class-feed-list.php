@@ -216,7 +216,7 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 					<?php
 
-					if ( ! empty( $results ) ) :
+					if ( ! empty( $results ) || ! is_front_page() || ! is_home() ) :
 						if ( $atts['posts_per_page'] < $results['count'] ) :
 							?>
 							<div class="instagram-wrap row wonka-insta-row"> 
