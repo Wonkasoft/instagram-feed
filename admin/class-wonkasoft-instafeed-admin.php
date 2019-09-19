@@ -386,6 +386,7 @@ class Wonkasoft_Instafeed_Admin {
 	 * @since 1.0.0
 	 */
 	public function wonkasoft_instafeed_init_loader() {
+
 		add_shortcode( 'wonkasoft_instafeed_feed', array( $this, 'add_wonkasoft_instagram_shop_feeds' ) );
 		add_shortcode( 'wonkasoft_shop_feed', array( $this, 'add_wonkasoft_instagram_shop_feeds' ) );
 
@@ -767,7 +768,9 @@ class Wonkasoft_Instafeed_Admin {
 			$view = 'insta_feed';
 		}
 
-		$obj = new Feed_List( $view );
-		$obj->get_insta_tag_template( $atts );
+		if ( is_page() || is_home() || is_front_page() ) {
+			$obj = new Feed_List( $view );
+			$obj->get_insta_tag_template( $atts );
+		}
 	}
 }

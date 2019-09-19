@@ -96,13 +96,13 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 					$count = $results['count'];
 
-					$image_id  = $result['image_id'];
+					$image_id = $result['image_id'];
 
-					$hashtag   = $result['insta_hashtag'];
+					$hashtag = $result['insta_hashtag'];
 
-					$insta_message   = $result['insta_message'];
+					$insta_message = $result['insta_message'];
 
-					$images     = ! empty( $result['insta_image'] ) ? maybe_unserialize( $result['insta_image'] ) : '';
+					$images = ! empty( $result['insta_image'] ) ? maybe_unserialize( $result['insta_image'] ) : '';
 
 					$image = isset( $images ) ? $images : '';
 
@@ -112,17 +112,17 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 						$data,
 						array(
 
-							'image_id' => $image_id,
+							'image_id'      => $image_id,
 
-							'preview'  => $preview,
+							'preview'       => $preview,
 
-							'insta_message'   => $insta_message,
+							'insta_message' => $insta_message,
 
-							'count'   => $count,
+							'count'         => $count,
 
-							'tag_id'   => $result['tag_id'],
+							'tag_id'        => $result['tag_id'],
 
-							'tag_name' => $hashtag,
+							'tag_name'      => $hashtag,
 
 						)
 					);
@@ -167,7 +167,7 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 		$atts = shortcode_atts(
 			array(
-				'posts_per_page'  => 10,
+				'posts_per_page' => 10,
 			),
 			$atts
 		);
@@ -234,20 +234,34 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 	public function generate_media_list_html( $data ) {
 
-		?>
+		$output = '';
 
-		<div class="insta-box wonka-insta-box" id="wonka-box-<?php echo $data['tag_id']; ?>" data-tag-id="<?php echo $data['tag_id']; ?>" data-image-id="<?php echo $data['image_id']; ?>">
-			<div class="img-wrap">
-				<?php echo $data['preview']; ?>
+		$output .= '<div class="insta-box wonka-insta-box" id="wonka-box-' . $data['tag_id'] . '" data-tag-id="' . $data['tag_id'] . '" data-image-id="' . $data['image_id'] . '">';
+		$output .= '<div class="img-wrap">';
+		$output .= $data['preview'];
+		$output .= '<div class="box-head">';
+		$output .= '</div>';
+		$output .= '</div><!-- .img-wrap -->';
+		$output .= '</div>';
 
-				<div class="box-head">
-					<!-- <span class="pic-author" title="hashtag"><?php // echo $data['tag_name']; ?></span> -->
-				</div>
-			</div><!-- .img-wrap -->
-		</div>
-
-		<?php
-
+		echo wp_kses(
+			$output,
+			array(
+				'div'  => array(
+					'class'         => array(),
+					'id'            => array(),
+					'data_tag_id'   => array(),
+					'data_image_id' => array(),
+				),
+				'span' => array(
+					'class' => array(),
+					'title' => array(),
+				),
+				'img'  => array(
+					'src' => array(),
+				),
+			)
+		);
 	}
 
 	/**
