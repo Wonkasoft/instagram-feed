@@ -49,7 +49,7 @@ class Wonkasoft_Instafeed_Public {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -72,7 +72,7 @@ class Wonkasoft_Instafeed_Public {
 		 * class.
 		 */
 		global $wp_styles;
-		$slick_css_load = true;
+		$slick_css_load      = true;
 		$slick_themecss_load = true;
 		foreach ( $wp_styles->queue as $style ) {
 			if ( 'slick-js-style' === $style ) :
@@ -114,6 +114,7 @@ class Wonkasoft_Instafeed_Public {
 		 */
 		global $wp_scripts;
 		$slick_js_load = true;
+
 		foreach ( $wp_scripts->queue as $script ) {
 			if ( 'slick-js' === $script ) :
 				$slick_js_load = false;
@@ -135,7 +136,7 @@ class Wonkasoft_Instafeed_Public {
 				'WONKA_INSTAGRAM_AJAX',
 				array(
 					'insta_admin_ajax' => admin_url( 'admin-ajax.php' ),
-					'insta_api_nonce' => wp_create_nonce( 'insta-ajaxnonce' ),
+					'insta_api_nonce'  => wp_create_nonce( 'insta-ajaxnonce' ),
 				)
 			);
 	}

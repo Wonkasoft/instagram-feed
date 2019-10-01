@@ -106,7 +106,7 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 					$image = isset( $images ) ? $images : '';
 
-					$preview = ! empty( $image ) ? '<img src="' . $image . '">' : 'N/A';
+					$preview = ! empty( $image ) ? '<img src="' . esc_url( wp_get_attachment_image_src( $image_id, 'custom_products_size' )[0] ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image_id, 'custom_products_size' ) ) . '" />' : 'N/A';
 
 					array_push(
 						$data,
@@ -135,9 +135,9 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 			$shop_view = get_option( '_insta_shop_view' );
 
-			if ( $shop_view === '0' && ! empty( $this->view ) && $this->view == 'shop' ) {
+			if ( '0' === $shop_view && ! empty( $this->view ) && 'shop' === $this->view ) {
 
-				echo "<div class='slider-wrapper " . $this->view . "'>";
+				echo "<div class='slider-wrapper " . esc_attr( $this->view ) . "'>";
 
 				foreach ( $data as $pdata ) {
 
