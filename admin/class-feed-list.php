@@ -106,7 +106,7 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 
 					$image = isset( $images ) ? $images : '';
 
-					$preview = ! empty( $image ) ? '<img src="' . esc_url( wp_get_attachment_image_src( $image_id, 'custom_products_size' )[0] ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image_id, 'custom_products_size' ) ) . '" />' : 'N/A';
+					$preview = ! empty( $image ) ? '<img srcset="' . esc_attr( wp_get_attachment_image_srcset( $image_id, 'custom_products_size' ) ) . '" />' : 'N/A';
 
 					array_push(
 						$data,
