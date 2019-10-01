@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 class Wonkasoft_Public_Ajax_Functions {
 
 	/**
-	 *  get instagram images by tag id
+	 * Get instagram images by tag id
 	 */
 	public function insta_images_by_tag_id() {
 
@@ -25,7 +25,7 @@ class Wonkasoft_Public_Ajax_Functions {
 
 		$tag_id = isset( $_GET['tag'] ) ? intval( $_GET['tag'] ) : '';
 
-		$data = array();
+		$data            = array();
 		$product_content = '';
 
 			$media_obj = new Wonkasoft_Instagram_Tag( $tag_id );
@@ -40,27 +40,27 @@ class Wonkasoft_Public_Ajax_Functions {
 
 				$image_id = $tag_media['image_id'];
 
-				$insta_hashtag  = $tag_media['insta_hashtag'];
+				$insta_hashtag = $tag_media['insta_hashtag'];
 
-				$images  = ! empty( $tag_media['insta_image'] ) ? maybe_unserialize( $tag_media['insta_image'] ) : '';
+				$images = ! empty( $tag_media['insta_image'] ) ? maybe_unserialize( $tag_media['insta_image'] ) : '';
 
-				$image   = isset( $images ) ? $images : '';
+				$image = isset( $images ) ? $images : '';
 
 				$insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message'] : '';
 
-				$preview = ! empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="insta-tag" title="' . $insta_hashtag . '"></span></div><img src="' . $image . '" data-message="' . esc_html( $insta_message ) . '" /></div>' : 'N/A';
+				$preview = ! empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="insta-tag" title="' . $insta_hashtag . '"></span></div><img src="' . esc_url( wp_get_attachment_image_src( $image_id, 'custom_products_size' )[0] ) . '" data-message="' . esc_html( $insta_message ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image_id, 'custom_products_size' ) ) . '" /></div>' : 'N/A';
 
 				$data['insta_pic'][] = array(
 
-					'image_id' => $image_id,
+					'image_id'      => $image_id,
 
-					'preview'  => $preview,
+					'preview'       => $preview,
 
-					'insta_message'  => $insta_message,
+					'insta_message' => $insta_message,
 
-					'insta_hashtag'   => $insta_hashtag,
+					'insta_hashtag' => $insta_hashtag,
 
-					'tag_id'   => $tag_id,
+					'tag_id'        => $tag_id,
 
 				);
 
@@ -70,9 +70,9 @@ class Wonkasoft_Public_Ajax_Functions {
 		if ( ! empty( $tag_products ) ) {
 
 			$args = array(
-				'post_type' => 'product',
-				'post__in' => $tag_products,
-				'post_status' => 'publish',
+				'post_type'      => 'product',
+				'post__in'       => $tag_products,
+				'post_status'    => 'publish',
 				'posts_per_page' => 4,
 			);
 
@@ -84,7 +84,7 @@ class Wonkasoft_Public_Ajax_Functions {
 					$the_query->the_post();
 					global $product;
 
-					$logo = get_site_icon_url();
+					$logo      = get_site_icon_url();
 					$site_name = strtolower( preg_replace( '/\s+/', '', get_bloginfo( 'name' ) ) );
 
 					// Ensure visibility.
@@ -109,7 +109,7 @@ class Wonkasoft_Public_Ajax_Functions {
 					$product_content .= '<div class="col-12">';
 
 					$product_title = get_the_title( $product->get_id() );
-					$url = get_permalink( $product->get_id(), false );
+					$url           = get_permalink( $product->get_id(), false );
 
 					$product_content .= '<h4 class="wonka-insta-title">' . $product_title . '</h4>';
 					$product_content .= '<a href="' . $url . '" class="wonka-btn">';
@@ -127,7 +127,7 @@ class Wonkasoft_Public_Ajax_Functions {
 
 			$response = array(
 				'error' => false,
-				'data' => $data,
+				'data'  => $data,
 			);
 
 		} else {
@@ -136,7 +136,7 @@ class Wonkasoft_Public_Ajax_Functions {
 
 			$response = array(
 				'error' => true,
-				'data' => $data,
+				'data'  => $data,
 			);
 
 		}
@@ -148,23 +148,21 @@ class Wonkasoft_Public_Ajax_Functions {
 
 	/**
 	 * This functions loads more images to the instagram shop page.
-	 *
-	 * @return json returns response in json format.
 	 */
 	public function insta_load_more_images() {
 
 		check_ajax_referer( 'insta-ajaxnonce', 'security', true ) || die( 'your nonce failed!' );
 
 		$posts_per_page = ( isset( $_GET['posts_per_page'] ) ) ? array( 'posts_per_page' => wp_kses_post( wp_unslash( $_GET['posts_per_page'] ) ) ) : 10;
-		$view = ( isset( $_GET['view'] ) ) ? wp_kses_post( wp_unslash( $_GET['view'] ) ) : 'insta_feed';
+		$view           = ( isset( $_GET['view'] ) ) ? wp_kses_post( wp_unslash( $_GET['view'] ) ) : 'insta_feed';
 
 		$response = array(
-			'data'  => '',
+			'data' => '',
 		);
 
 		ob_start();
-		$new_feed_list = new Feed_List( $view );
-		$data = $new_feed_list->get_insta_tag_template( $posts_per_page );
+		$new_feed_list    = new Feed_List( $view );
+		$data             = $new_feed_list->get_insta_tag_template( $posts_per_page );
 		$response['data'] = trim( ob_get_clean(), "\n\t" );
 
 		wp_send_json( $response );
