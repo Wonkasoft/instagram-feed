@@ -183,6 +183,12 @@ class Wonkasoft_Instafeed_Admin {
 	 * Register Option Settings
 	 */
 	public function insta_register_settings() {
+		/**
+		 * This is for custom image sizes for faster image parsing.
+		 *
+		 * @since 1.0.0
+		 */
+		add_image_size( 'wonkasoft_instafeed_size', 256, 234, false );
 
 		register_setting( 'insta-settings-group', '_instafeed_posts_limit' );
 		register_setting( 'insta-settings-group', '_instafeed_shop_view' );
