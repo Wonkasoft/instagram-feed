@@ -258,7 +258,9 @@ class Feed_List extends Wonkasoft_Instagram_Tag {
 					'title' => array(),
 				),
 				'img'  => array(
-					'src' => array(),
+					'src'    => array(),
+					'srcset' => array(),
+					'class'  => array(),
 				),
 			)
 		);
