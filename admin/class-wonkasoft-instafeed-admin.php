@@ -188,7 +188,7 @@ class Wonkasoft_Instafeed_Admin {
 		 *
 		 * @since 1.0.0
 		 */
-		add_image_size( 'wonkasoft_instafeed_size', 256, 234, false );
+		add_image_size( 'wonkasoft_instafeed_size', 284, 234, false );
 
 		register_setting( 'insta-settings-group', '_instafeed_posts_limit' );
 		register_setting( 'insta-settings-group', '_instafeed_shop_view' );

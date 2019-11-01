@@ -95,10 +95,10 @@ class Wonkasoft_Instagram_Tag {
 	public function __construct( $tag_id = null ) {
 		global $wpdb;
 
-		$this->instadb = $wpdb;
-		$this->tag_id = $tag_id;
-		$this->current_user = get_current_user_id();
-		$this->table_posts = $this->instadb->prefix . 'posts';
+		$this->instadb                    = $wpdb;
+		$this->tag_id                     = $tag_id;
+		$this->current_user               = get_current_user_id();
+		$this->table_posts                = $this->instadb->prefix . 'posts';
 		$this->table_instagram_tags_media = $this->instadb->prefix . 'instagram_tags_media';
 	}
 
@@ -113,7 +113,7 @@ class Wonkasoft_Instagram_Tag {
 		$results = $this->instadb->get_results( "SELECT * FROM $this->table_instagram_tags_media GROUP BY tag_id ORDER BY priority ASC", ARRAY_A );
 
 		if ( ! empty( $results ) ) :
-			$limited_posts = array();
+			$limited_posts          = array();
 			$limited_posts['count'] = count( (array) $results );
 			for ( $i = 0; $i < $per_page; $i++ ) {
 				if ( array_key_exists( $i, $results ) ) :
@@ -140,11 +140,11 @@ class Wonkasoft_Instagram_Tag {
 	 * @param array  $tag_data contains an array of the current tag to insert to db.
 	 */
 	public function insert_instagram_tag_records_to_db( $tag_id, $tag, $tag_data ) {
-		$this->tag_id = $tag_id;
-		$this->tag = $tag;
+		$this->tag_id   = $tag_id;
+		$this->tag      = $tag;
 		$this->tag_data = $tag_data;
-		$status = maybe_unserialize( get_post_meta( $this->tag_id, '_hashtag_staus', true ) );
-		$format = array(
+		$status         = maybe_unserialize( get_post_meta( $this->tag_id, '_hashtag_staus', true ) );
+		$format         = array(
 			'%d',
 			'%s',
 			'%s',
@@ -167,7 +167,7 @@ class Wonkasoft_Instagram_Tag {
 					$this->instadb->delete(
 						$this->table_instagram_tags_media,
 						array(
-							'tag_id'    => $value['tag_id'],
+							'tag_id' => $value['tag_id'],
 						)
 					);
 				endif;
@@ -176,15 +176,15 @@ class Wonkasoft_Instagram_Tag {
 			$this->instadb->delete(
 				$this->table_instagram_tags_media,
 				array(
-					'tag_id'    => $this->tag_id,
+					'tag_id' => $this->tag_id,
 				)
 			);
 		endif;
 
 		$args = array(
 			'posts_per_page' => -1,
-			'post_type'     => array( 'attachment', 'revision', 'instagram_tags' ),
-			'post_status'   => array( 'inherit', 'auto-draft', 'publish' ),
+			'post_type'      => array( 'attachment', 'revision', 'instagram_tags' ),
+			'post_status'    => array( 'inherit', 'auto-draft', 'publish' ),
 		);
 
 		$parent = new WP_Query( $args );
@@ -193,7 +193,7 @@ class Wonkasoft_Instagram_Tag {
 			while ( $parent->have_posts() ) {
 				$parent->the_post();
 				$cur_post = get_post();
-				$post_id = get_the_ID();
+				$post_id  = get_the_ID();
 				if ( false === get_post_status( $cur_post->post_parent ) ) :
 					wp_delete_post( $post_id, true );
 				endif;
@@ -213,15 +213,15 @@ class Wonkasoft_Instagram_Tag {
 			$this->instadb->insert(
 				$this->table_instagram_tags_media,
 				array(
-					'tag_id'            => $this->tag_id,
-					'image_id'          => $media_upload->id,
-					'insta_hashtag'     => $this->tag,
-					'insta_image'       => $media_upload->url,
-					'insta_message'     => $value->caption->text,
-					'priority'          => $this->tag_data->priority,
-					'visibility'        => $this->tag_data->visibility,
-					'status'            => $status,
-					'insta_image_obj'   => json_encode( $value ),
+					'tag_id'          => $this->tag_id,
+					'image_id'        => $media_upload->id,
+					'insta_hashtag'   => $this->tag,
+					'insta_image'     => $media_upload->url,
+					'insta_message'   => $value->caption->text,
+					'priority'        => $this->tag_data->priority,
+					'visibility'      => $this->tag_data->visibility,
+					'status'          => $status,
+					'insta_image_obj' => json_encode( $value ),
 				),
 				$format
 			);
@@ -245,7 +245,7 @@ class Wonkasoft_Instagram_Tag {
 				$error = $attachment_id->get_error_messages();
 				return $error;
 			} else {
-				$image['id'] = $attachment_id;
+				$image['id']  = $attachment_id;
 				$image['url'] = wp_get_attachment_url( $attachment_id );
 			}
 		}
@@ -344,14 +344,14 @@ class Wonkasoft_Instagram_Tag {
 		if ( ! empty( $results ) ) {
 
 			$new_arr = array(
-				'hashtag'   => ( ! empty( $results['_insta_hashtag'] ) ) ? $results['_insta_hashtag'] : array( '' ),
-				'priority'  => ( ! empty( $results['_hashtag_priority'] ) ) ? $results['_hashtag_priority'] : array( 10 ),
-				'fetch_qty'  => ( ! empty( $results['_hashtag_image_qty'] ) ) ? $results['_hashtag_image_qty'] : array( 20 ),
-				'visibility' => ( ! empty( $results['_hashtag_visibility'] ) ) ? maybe_unserialize( $results['_hashtag_visibility'] ) : array( '' ),
-				'status'    => ( ! empty( $results['_hashtag_status'] ) ) ? $results['_hashtag_status'] : array( '0' ),
+				'hashtag'         => ( ! empty( $results['_insta_hashtag'] ) ) ? $results['_insta_hashtag'] : array( '' ),
+				'priority'        => ( ! empty( $results['_hashtag_priority'] ) ) ? $results['_hashtag_priority'] : array( 10 ),
+				'fetch_qty'       => ( ! empty( $results['_hashtag_image_qty'] ) ) ? $results['_hashtag_image_qty'] : array( 20 ),
+				'visibility'      => ( ! empty( $results['_hashtag_visibility'] ) ) ? maybe_unserialize( $results['_hashtag_visibility'] ) : array( '' ),
+				'status'          => ( ! empty( $results['_hashtag_status'] ) ) ? $results['_hashtag_status'] : array( '0' ),
 				'linked_products' => ( ! empty( $results['_insta_linked_products'] ) ) ? maybe_unserialize( $results['_insta_linked_products'] ) : array( '' ),
-				'visibility_list'   => $this->visibility_list,
-				'statuses_list' => $this->statuses_list,
+				'visibility_list' => $this->visibility_list,
+				'statuses_list'   => $this->statuses_list,
 			);
 
 			return $new_arr;
@@ -374,13 +374,13 @@ class Wonkasoft_Instagram_Tag {
 		// Get 10 most recent product IDs in date descending order.
 		$query = new WC_Product_Query(
 			array(
-				'limit' => -1,
+				'limit'       => -1,
 				'post_status' => 'publish',
-				'return' => 'ids',
+				'return'      => 'ids',
 			)
 		);
 
-		$products = $query->get_products();
+		$products       = $query->get_products();
 		$products_array = array();
 		foreach ( $products as $key => $value ) {
 			$products_array[ $value ] = wc_get_product( $value )->get_name();
