@@ -131,7 +131,7 @@ if ( ! class_exists( 'Wonkasoft_List_Instatag_Data' ) ) {
 		public function column_default( $item, $column_name ) {
 			switch ( $column_name ) {
 				case 'preview':
-					echo '<div class="insta-preview-image" data-id="' . $item->id . '"><img srcset="' . wp_get_attachment_image_srcset( $item->images->thumbnail->id, 'thumbnail', true ) . '" /></div>';
+					echo '<div class="insta-preview-image" data-id="' . $item->id . '"><img src="' . wp_get_attachment_image_src( $item->images->thumbnail->id, 'thumbnail', true ) . '" srcset="' . wp_get_attachment_image_srcset( $item->images->thumbnail->id, 'thumbnail', true ) . '" /></div>';
 					break;
 				case 'insta_message':
 					echo '<span class="insta-preview-msg">' . $item->caption->text . '</span>';

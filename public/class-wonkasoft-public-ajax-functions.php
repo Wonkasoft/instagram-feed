@@ -48,7 +48,7 @@ class Wonkasoft_Public_Ajax_Functions {
 
 				$insta_message = ( ! empty( $tag_media['insta_message'] ) ) ? $tag_media['insta_message'] : '';
 
-				$preview = ! empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="insta-tag" title="' . $insta_hashtag . '"></span></div><img data-message="' . esc_html( $insta_message ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image_id, 'wonkasoft_instafeed_size' ) ) . '" /></div>' : 'N/A';
+				$preview = ! empty( $image ) ? '<div class="item screens"><div class="box-head"><span class="insta-tag" title="' . $insta_hashtag . '"></span></div><img data-message="' . esc_html( $insta_message ) . '" src="' . esc_attr( wp_get_attachment_image_src( $image_id, 'wonkasoft_instafeed_size' ) ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image_id, 'wonkasoft_instafeed_size' ) ) . '" /></div>' : 'N/A';
 
 				$data['insta_pic'][] = array(
 
