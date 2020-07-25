@@ -71,27 +71,33 @@ class Wonkasoft_Instafeed_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		global $wp_styles;
-		$slick_css_load      = true;
-		$slick_themecss_load = true;
-		foreach ( $wp_styles->queue as $style ) {
-			if ( 'slick-js-style' === $style ) :
-				$slick_css_load = false;
-			endif;
-			if ( 'slick-js-theme-style' === $style ) :
-				$slick_themecss_load = false;
-			endif;
-		}
 
-		if ( $slick_css_load ) {
-			wp_enqueue_style( 'slick-js-style', str_replace( array( 'http:', 'https:' ), '', WONKASOFT_INSTAFEED_URL . 'includes/slick/slick.css' ), array(), '1.8.0', 'all' );
-		}
+		global $post;
+		$page_slug = $post->post_name;
+		if ( 'instagram-feeds' === $page_slug ) :
 
-		if ( $slick_themecss_load ) {
-			wp_enqueue_style( 'slick-js-theme-style', str_replace( array( 'http:', 'https:' ), '', WONKASOFT_INSTAFEED_URL . 'includes/slick/slick-theme.css' ), array(), '1.8.0', 'all' );
-		}
+			global $wp_styles;
+			$slick_css_load      = true;
+			$slick_themecss_load = true;
+			foreach ( $wp_styles->queue as $style ) {
+				if ( 'slick-js-style' === $style ) :
+					$slick_css_load = false;
+				endif;
+				if ( 'slick-js-theme-style' === $style ) :
+					$slick_themecss_load = false;
+				endif;
+			}
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wonkasoft-instafeed-public.css', array(), $this->version, 'all' );
+			if ( $slick_css_load ) {
+				wp_enqueue_style( 'slick-js-style', str_replace( array( 'http:', 'https:' ), '', WONKASOFT_INSTAFEED_URL . 'includes/slick/slick.css' ), array(), '1.8.0', 'all' );
+			}
+
+			if ( $slick_themecss_load ) {
+				wp_enqueue_style( 'slick-js-theme-style', str_replace( array( 'http:', 'https:' ), '', WONKASOFT_INSTAFEED_URL . 'includes/slick/slick-theme.css' ), array(), '1.8.0', 'all' );
+			}
+
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wonkasoft-instafeed-public.css', array(), $this->version, 'all' );
+		endif;
 	}
 
 	/**
@@ -112,33 +118,39 @@ class Wonkasoft_Instafeed_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		global $wp_scripts;
-		$slick_js_load = true;
 
-		foreach ( $wp_scripts->queue as $script ) {
-			if ( 'slick-js' === $script ) :
-				$slick_js_load = false;
+		global $post;
+		$page_slug = $post->post_name;
+
+		if ( 'instagram-feeds' === $page_slug ) :
+			global $wp_scripts;
+			$slick_js_load = true;
+
+			foreach ( $wp_scripts->queue as $script ) {
+				if ( 'slick-js' === $script ) :
+					$slick_js_load = false;
+				endif;
+			}
+
+			if ( $slick_js_load ) {
+				wp_enqueue_script( WONKASOFT_INSTAFEED_SLUG . '-slick-js', str_replace( array( 'http:', 'https:' ), '', WONKASOFT_INSTAFEED_URL . 'includes/slick/slick.min.js' ), array( 'jquery' ), $this->version, true );
+			}
+
+			if ( $slick_js_load ) :
+					wp_enqueue_script( $this->plugin_name . '-public-js', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'js/wonkasoft-instafeed-public.js' ), array( 'jquery', WONKASOFT_INSTAFEED_SLUG . '-slick-js' ), $this->version, true );
+				else :
+					wp_enqueue_script( $this->plugin_name . '-public-js', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'js/wonkasoft-instafeed-public.js' ), array( 'jquery', 'slick-js' ), $this->version, true );
+				endif;
+
+				wp_localize_script(
+					$this->plugin_name . '-public-js',
+					'WONKA_INSTAGRAM_AJAX',
+					array(
+						'insta_admin_ajax' => admin_url( 'admin-ajax.php' ),
+						'insta_api_nonce'  => wp_create_nonce( 'insta-ajaxnonce' ),
+					)
+				);
 			endif;
-		}
-
-		if ( $slick_js_load ) {
-			wp_enqueue_script( WONKASOFT_INSTAFEED_SLUG . '-slick-js', str_replace( array( 'http:', 'https:' ), '', WONKASOFT_INSTAFEED_URL . 'includes/slick/slick.min.js' ), array( 'jquery' ), $this->version, true );
-		}
-
-		if ( $slick_js_load ) :
-				wp_enqueue_script( $this->plugin_name . '-public-js', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'js/wonkasoft-instafeed-public.js' ), array( 'jquery', WONKASOFT_INSTAFEED_SLUG . '-slick-js' ), $this->version, true );
-			else :
-				wp_enqueue_script( $this->plugin_name . '-public-js', str_replace( array( 'http:', 'https:' ), '', plugin_dir_url( __FILE__ ) . 'js/wonkasoft-instafeed-public.js' ), array( 'jquery', 'slick-js' ), $this->version, true );
-			endif;
-
-			wp_localize_script(
-				$this->plugin_name . '-public-js',
-				'WONKA_INSTAGRAM_AJAX',
-				array(
-					'insta_admin_ajax' => admin_url( 'admin-ajax.php' ),
-					'insta_api_nonce'  => wp_create_nonce( 'insta-ajaxnonce' ),
-				)
-			);
 	}
 
 }
